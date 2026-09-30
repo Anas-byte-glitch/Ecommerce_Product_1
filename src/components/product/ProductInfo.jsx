@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { site } from '../../config/site'
 import { useCartStore } from '../../store/cartStore'
 import { formatPrice } from '../../utils/formatPrice'
@@ -15,22 +15,13 @@ export default function ProductInfo({ product }) {
   const [size, setSize] = useState(product.sizes[0])
   const [quantity, setQuantity] = useState(1)
   const [guideOpen, setGuideOpen] = useState(false)
-  const [added, setAdded] = useState(false)
   const addItem = useCartStore((s) => s.addItem)
-  const openCart = useCartStore((s) => s.openCart)
+  const openDrawer = useCartStore((s) => s.openDrawer)
   const onSale = product.compareAtPrice && product.compareAtPrice > product.price
-
-  // Brief "Added" confirmation on the button (interim until the Phase 5 drawer is visible).
-  useEffect(() => {
-    if (!added) return
-    const t = setTimeout(() => setAdded(false), 1500)
-    return () => clearTimeout(t)
-  }, [added])
 
   const addToCart = () => {
     addItem(product.slug, size, quantity)
-    openCart()
-    setAdded(true)
+    openDrawer() // the cart drawer is the confirmation
   }
 
   return (
@@ -71,7 +62,7 @@ export default function ProductInfo({ product }) {
       <div className="flex w-full gap-4">
         <QuantityStepper value={quantity} onChange={setQuantity} />
         <Button variant="primary" onClick={addToCart} className="flex-1">
-          <span aria-live="polite">{added ? 'Added' : 'Add to Cart'}</span>
+          Add to Cart
         </Button>
       </div>
 

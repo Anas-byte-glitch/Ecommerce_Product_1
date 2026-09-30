@@ -7,7 +7,10 @@ export const site = {
   year: 2025,
   currency: 'USD',
   locale: 'en-US',
+  // Cart shipping: free from this subtotal up, otherwise a flat rate (placeholder amount).
+  // No taxes, no discount codes.
   freeShippingThreshold: 100,
+  flatShipping: 8,
   email: 'support@atlas.com',
 
   // The template renders no prices on product cards. We show a small muted price under the
