@@ -1,15 +1,22 @@
 import { Minus, Plus } from 'lucide-react'
+import { cn } from '../../utils/cn'
 
 // 150×56 grey stepper (radius 4, faint border) with two 40px white buttons around the count
-// (Jost 16/600). Minimum 1.
-export default function QuantityStepper({ value, onChange, min = 1, max = 99 }) {
-  const btn =
-    'flex size-10 cursor-pointer items-center justify-center bg-white text-black transition-colors hover:bg-black/3 disabled:cursor-not-allowed disabled:text-black/32 disabled:hover:bg-white'
+// (Jost 16/600). `size="sm"`: 112×40 with 32px buttons (cart lines). Minimum 1.
+export default function QuantityStepper({ value, onChange, min = 1, max = 10, size = 'md', label }) {
+  const small = size === 'sm'
+  const btn = cn(
+    small ? 'size-8' : 'size-10',
+    'flex cursor-pointer items-center justify-center bg-white text-black transition-colors hover:bg-black/3 disabled:cursor-not-allowed disabled:text-black/32 disabled:hover:bg-white',
+  )
   return (
     <div
       role="group"
-      aria-label="Quantity"
-      className="flex h-14 w-[150px] shrink-0 items-center justify-between rounded-sm bg-surface px-1.5 ring-1 ring-[rgba(231,236,229,0.64)] ring-inset"
+      aria-label={label ?? 'Quantity'}
+      className={cn(
+        'flex shrink-0 items-center justify-between rounded-sm bg-surface ring-1 ring-[rgba(231,236,229,0.64)] ring-inset',
+        small ? 'h-10 w-28 px-1' : 'h-14 w-[150px] px-1.5',
+      )}
     >
       <button
         type="button"

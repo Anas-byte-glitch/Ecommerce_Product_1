@@ -15,6 +15,12 @@ const variants = {
     'h-10 gap-2 rounded-full border border-muted bg-white px-[19px] font-jost text-body leading-[1.1] font-medium text-slate',
   // "Add to Cart": solid black block.
   primary: 'h-14 gap-2 bg-black px-6 text-body font-normal text-white hover:bg-[#424242]',
+  // Outlined companion to `primary` (cart "View cart"): same 56px block, white, 1px black border.
+  secondary:
+    'h-14 gap-2 border border-black bg-white px-6 text-body font-normal text-black hover:bg-black/3',
+  // Cart-drawer empty state ("shop now" on the reference): white, no border, radius 4, Jost label.
+  plain:
+    'h-10 gap-2 rounded-sm bg-white px-5 font-jost text-body leading-[1.1] font-medium text-slate',
   // "Follow us on Instagram": small dark tag-like button.
   dark: 'gap-2 rounded-sm bg-black px-3 py-1 text-body text-white hover:bg-slate',
   // Footer "Subscribe".
@@ -26,6 +32,7 @@ const variants = {
 const pillIcon = {
   'outline-light': 'size-4 text-white',
   light: 'size-[18px] text-black',
+  plain: 'size-[18px] text-black',
 }
 
 export default function Button({
