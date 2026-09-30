@@ -201,7 +201,7 @@ Placeholder images live in `public/images/products/*.svg` (neutral solid blocks,
 - Exact easing/duration of Framer appear animations and the mobile-menu open animation.
 - Cart count badge styling (the slot exists but is empty on the template with an empty cart) —
   we use a 16px black circle with 10px/600 white number.
-- Home product grids: verified (§15.2). Shop-page grid columns still to be measured in Phase 3.
+- Home product grids: verified (§15.2). Shop grids: verified (§16.4).
 
 ## 14. Deliberate deviations (Phase 2)
 
@@ -298,3 +298,52 @@ Why Customers Love Us → Instagram strip → (sticky footer). Total `<main>` he
   #000 87.5%, transparent 100%)`.
 - "Follow us on Instagram" (`dark` button, 188×32) is absolutely centered on the whole block
   (padding included): top 50% / left 50% / translate −50%.
+
+## 16. Shop pages `/shop/all`, `/shop/hoodies`, `/shop/shirts` (measured Phase 3)
+
+All three exist on the reference (HTTP 200) and share one layout. `<title>` is the same
+site-wide title on every page ("Atlas: Shopify Ecommerce Framer Template"), so we set no per-page title.
+No appear animations, no re-animation on tab/sort change, **no pagination / "load more"** (all
+products render). No badges on shop cards.
+
+### 16.1 Layout
+- Section padding: top **100px** at every breakpoint (under the fixed navbar); bottom **100 / 80 / 64px**;
+  gutters 40 / 32 / 16 (`Container`).
+- Header (same as home section headers): H2-style title 42/38/32 → 16px → subtitle max 320px, centered.
+  We render it as an `<h1>`.
+- Header → toolbar **64px**; toolbar → grid **32px**.
+- Toolbar: desktop/tablet one row, `space-between` (tabs left, sort right, vertically centered);
+  phone stacked, **gap 16px**, left-aligned (tabs row 26px, then sort 24px).
+
+### 16.2 Category tabs
+- Plain text links (no pill/background/border): **Jost 20 / 18 / 16px, lh 1.6** (`lead`), **gap 16px**,
+  weight 400. Active `#000`, inactive `muted #6d6d6d`, hover → `#000`. Row has `overflow: auto`
+  (never overflows at 390px: 136px wide). Links go to `/shop/<cat>` without the query string.
+- **Reference bug not copied:** its tablet/phone variants hard-code "Shirts" as active (e.g. on /shop/all
+  at 1000px "All" is grey and "Shirts" black; on /shop/hoodies both "Hoodies" and "Shirts" are black).
+  We always highlight the current category.
+
+### 16.3 Sort control
+- **Native `<select>`** (appearance auto, font 12px) with **opacity 0**, absolutely stretched over a
+  styled label, `cursor: pointer`. The open list is therefore the browser/OS menu — no custom panel,
+  no open/close animation. Hovering changes nothing.
+- Label: "Sort by" 16/24 `rgba(0,0,0,.32)` → **6px** → current option 16/24 `slate #33383c` → **8px** →
+  a 20×20 icon slot. The slot renders **empty** on the reference (broken icon component); we show a
+  lucide `ChevronDown` 20px stroke 1.5 there (deliberate deviation). Whole control 24px high,
+  right-aligned (its width follows the label: 159px for "Relevance").
+- Options / values: Relevance `relevance`, A-Z `title_asc`, Z-A `title_desc`, Price (lowest first)
+  `price_asc`, Price (highest first) `price_desc`, Newest `newest`, Best Selling `best_selling`.
+- Choice is kept in the URL: `?sort=<value>` (Relevance → no param). The reference updates the URL but
+  **does not actually reorder** its products (sorting isn't wired up in the template demo); ours sorts.
+- Focus: keyboard focus on the invisible select draws a 2px black outline around the label.
+
+### 16.4 Product grid
+- `/shop/hoodies`, `/shop/shirts`: **4 / 2 / 1 columns, gap 24px** (both axes). Cards 322 / 456 / 358px
+  wide (image 4:5, e.g. 322×403).
+- `/shop/all`: **3 / 2 / 1 columns, gap 16px row / 8px column** (like home). Cards 448 / 464 / 358px.
+- Card as §15.2 (hover swap + zoom), no badges.
+- Product counts: all 9, hoodies 4, shirts 5. Relevance order = reference /shop/all order:
+  Classic comfort hoodie, Zipper hoodie, Fleece hoodie black, Chill vibes tee, Black atlas tee,
+  White atlas graphic tee, Cream atlas graphic tee, Red atlas tee, Fleece hoodie white.
+- Page heights with prices off match the reference exactly (e.g. 1355 / 2301 / 2978 for shirts), except
+  /shop/hoodies at 1440×900: 900 vs 885px because our `<main>` has `min-h-screen`.
