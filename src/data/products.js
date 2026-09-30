@@ -1,4 +1,6 @@
 // Product catalogue. Slugs and names match the Atlas template URLs (/atlas/:slug).
+// Array order = "Relevance" order = the reference's /shop/all order.
+// salesRank: lower = better seller (drives "Best Selling").
 // Prices are placeholders: the reference template does not render prices.
 // Images are local neutral placeholders (4:5, 800×1000) in public/images/products.
 
@@ -23,6 +25,7 @@ export const products = [
     featured: true,
     isNew: false,
     bestSeller: false,
+    salesRank: 6,
     createdAt: '2025-01-10',
   },
   {
@@ -40,6 +43,7 @@ export const products = [
     featured: true,
     isNew: false,
     bestSeller: true,
+    salesRank: 1,
     createdAt: '2025-01-18',
   },
   {
@@ -57,24 +61,8 @@ export const products = [
     featured: false,
     isNew: true,
     bestSeller: false,
+    salesRank: 7,
     createdAt: '2025-03-02',
-  },
-  {
-    slug: 'fleece-hoodie-white',
-    name: 'Fleece hoodie white',
-    category: 'hoodies',
-    price: 75,
-    compareAtPrice: null,
-    badge: 'New in',
-    images: img('fleece-hoodie-white'),
-    sizes: SIZES,
-    colors: ['White'],
-    description:
-      'The fleece hoodie in crisp off-white. Soft hand-feel, ribbed cuffs and a hood that holds its shape.',
-    featured: true,
-    isNew: true,
-    bestSeller: false,
-    createdAt: '2025-03-05',
   },
 
   // ── Shirts ─────────────────────────────────────────────────
@@ -93,6 +81,7 @@ export const products = [
     featured: false,
     isNew: false,
     bestSeller: true,
+    salesRank: 2,
     createdAt: '2025-01-22',
   },
   {
@@ -110,6 +99,7 @@ export const products = [
     featured: false,
     isNew: false,
     bestSeller: true,
+    salesRank: 3,
     createdAt: '2025-02-01',
   },
   {
@@ -127,6 +117,7 @@ export const products = [
     featured: false,
     isNew: false,
     bestSeller: true,
+    salesRank: 4,
     createdAt: '2025-02-08',
   },
   {
@@ -144,6 +135,7 @@ export const products = [
     featured: false,
     isNew: true,
     bestSeller: true,
+    salesRank: 5,
     createdAt: '2025-02-20',
   },
   {
@@ -161,7 +153,28 @@ export const products = [
     featured: true,
     isNew: true,
     bestSeller: false,
+    salesRank: 8,
     createdAt: '2025-03-10',
+  },
+
+  // ── Hoodie listed last on the reference's /shop/all ─────────
+  {
+    slug: 'fleece-hoodie-white',
+    name: 'Fleece hoodie white',
+    category: 'hoodies',
+    price: 75,
+    compareAtPrice: null,
+    badge: 'New in',
+    images: img('fleece-hoodie-white'),
+    sizes: SIZES,
+    colors: ['White'],
+    description:
+      'The fleece hoodie in crisp off-white. Soft hand-feel, ribbed cuffs and a hood that holds its shape.',
+    featured: true,
+    isNew: true,
+    bestSeller: false,
+    salesRank: 9,
+    createdAt: '2025-03-05',
   },
 ]
 
@@ -177,6 +190,33 @@ export const getProductsByCategory = (category) =>
 export const getBestSellers = () => products.filter((p) => p.bestSeller)
 export const getNewArrivals = () => products.filter((p) => p.isNew)
 export const getFeatured = () => products.filter((p) => p.featured)
+
+// Shop sort options. Values are the reference's `?sort=` query values.
+export const SORT_OPTIONS = [
+  { value: 'relevance', label: 'Relevance' },
+  { value: 'title_asc', label: 'A-Z' },
+  { value: 'title_desc', label: 'Z-A' },
+  { value: 'price_asc', label: 'Price (lowest first)' },
+  { value: 'price_desc', label: 'Price (highest first)' },
+  { value: 'newest', label: 'Newest' },
+  { value: 'best_selling', label: 'Best Selling' },
+]
+
+const byName = (a, b) => a.name.localeCompare(b.name)
+const comparators = {
+  title_asc: byName,
+  title_desc: (a, b) => byName(b, a),
+  price_asc: (a, b) => a.price - b.price,
+  price_desc: (a, b) => b.price - a.price,
+  newest: (a, b) => b.createdAt.localeCompare(a.createdAt),
+  best_selling: (a, b) => a.salesRank - b.salesRank,
+}
+
+// Returns a new array; unknown sort / "relevance" keeps catalogue order (the sort is stable).
+export const sortProducts = (list, sort) => {
+  const compare = comparators[sort]
+  return compare ? [...list].sort(compare) : [...list]
+}
 
 export const getRelatedProducts = (slug, limit = 4) => {
   const product = getProductBySlug(slug)
