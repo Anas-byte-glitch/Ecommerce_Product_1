@@ -8,7 +8,11 @@ Chromium at 1440px (desktop), 1000px (tablet) and 390px (phone). Values below ar
 CSS tokens in the page source, and were cross-checked against screenshots. Anything that could not
 be measured is marked **(unverified)**.
 
-> Always read this file before styling anything. Tokens live in `src/index.css` (`@theme`).
+> Always read this file before styling anything.
+>
+> The reference template relies on Shopify for cart and checkout; this project intentionally does not
+> (standalone frontend store with a local, persisted cart). Copy the reference's look, never its
+> commerce plumbing. Tokens live in `src/index.css` (`@theme`).
 
 ---
 
@@ -302,7 +306,7 @@ Why Customers Love Us → Instagram strip → (sticky footer). Total `<main>` he
 ## 16. Shop pages `/shop/all`, `/shop/hoodies`, `/shop/shirts` (measured Phase 3)
 
 All three exist on the reference (HTTP 200) and share one layout. `<title>` is the same
-site-wide title on every page ("Atlas: Shopify Ecommerce Framer Template"), so we set no per-page title.
+site-wide template title on every page, so we set no per-page title.
 No appear animations, no re-animation on tab/sort change, **no pagination / "load more"** (all
 products render). No badges on shop cards.
 
@@ -351,9 +355,8 @@ products render). No badges on shop cards.
 ## 17. Product page `/atlas/:slug` (measured Phase 4)
 
 `<title>` on the reference: "<product name> - My Framer Site" → we set "<name> - <site.name>".
-All 9 products share one structure: 2 gallery images, sizes (listed **L, S, M** — Shopify variant
-order; we list S, M, L and preselect the first, as the reference preselects its first), no badge, no
-price. Descriptions are the reference copy (in `products.js`). `<main>` stacks the sections with a
+All 9 products share one structure: 2 gallery images, sizes S, M, L (first one preselected), no badge,
+no price. Descriptions are the reference copy (in `products.js`). `<main>` stacks the sections with a
 **10px gap**. Page heights with prices off match exactly: **3949 / 6485 / 6694px**.
 
 ### 17.1 Layout & gallery
@@ -372,17 +375,15 @@ price. Descriptions are the reference copy (in `products.js`). `<main>` stacks t
 - **Size**: label 14/14 `muted` (normal tracking) → 8px → option tiles 8px apart: h 40, px 20, radius 4,
   1px `black/8` border, white, text 12px black (reference renders the browser default sans-serif; we use
   Inter). Selected: black bg, black border, white text. Hover: bg `rgba(0,0,0,.03)`, border black.
-  Reference buttons are `role="radio"`; ours are native radios (arrow keys). Selecting a size on the
-  reference appends `?variant=<shopify id>` to the URL — not replicated (no variant ids).
+  Ours are native radios (arrow keys).
 - **Size Guide**: 18/25.2 black text with a 1px black underline (86×26). Opens a drawer (§17.4).
 - **Quantity + Add to Cart** row, gap 16: stepper **150×56**, bg `surface`, radius 4, 1px border
   `rgba(231,236,229,.64)`, padding 0 6px, two **40×40 white** buttons, count Jost 16/16 w600.
-  On the reference both buttons are permanently disabled and render **blank**; ours work (min 1, max 99)
-  and show 16px minus/plus icons (deviation). Add to Cart: `primary` button filling the rest (334 / 534 /
+  Minus / plus show 16px icons; quantity min 1, max 99. Add to Cart: `primary` button filling the rest (334 / 534 /
   192px wide).
-- **Add to Cart on the reference does nothing visible** (no drawer, no badge, no redirect, no request).
-  Ours adds `{slug, size, quantity}` to the persisted cart, updates the navbar badge, and the label reads
-  "Added" for 1.5s (deviation).
+- **Add to Cart** adds `{slug, size, quantity}` to the persisted cart (same slug + size merges the
+  quantity), updates the navbar badge and opens the cart drawer (`openCart()` in the store; drawer UI is
+  Phase 5). Until the drawer exists the label also reads "Added" for 1.5s.
 - 1px rule → **trust tiles**: grid 2 columns (1 on phone), gap 16; tile bg `surface`, radius 4,
   padding 12, gap 16; icon 24px black stroke 1.5; title 16/24 `slate`; line 14/19.6 w500 `muted`
   (normal tracking). Icons: reference Phosphor-style bag, repeat, truck, medal → lucide `Lock`, `Repeat`,

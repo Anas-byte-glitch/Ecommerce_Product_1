@@ -15,6 +15,12 @@ research → `docs/DESIGN_NOTES.md`, project setup, design tokens, routing, Navb
 Footer, product data. Phases 2 (Home), 3 (Shop) and 4 (Product page + minimal cart store) are done. Later phases:
 5 Cart (drawer, wiring the navbar badge), 6 About / Contact / Return policy, 7 polish & QA.
 
+## No Shopify behaviour
+
+The reference template is a Shopify-backed Framer site. This project is a standalone frontend store:
+never mimic Shopify plumbing (variant IDs, `?variant=` URLs, disabled cart controls, Shopify wording).
+Cart = local zustand store; Add to Cart adds the line, opens the drawer and updates the badge.
+
 ## Golden rule
 
 **Always read `docs/DESIGN_NOTES.md` before styling anything.** Every size, colour, spacing and
@@ -59,7 +65,8 @@ src/
   assets/placeholders/    hero, category-*, story, essentials, instagram-1..6 (neutral SVGs, imported)
   pages/                  Home, Shop, ProductDetail, About, Contact, ReturnPolicy, NotFound
   store/cartStore.js      zustand cart, persisted ("atlas-cart"): items [{slug,size,quantity}],
-                          addItem(slug, size, qty) merges slug+size, selectCartCount
+                          addItem(slug, size, qty) merges slug+size, selectCartCount;
+                          isOpen / openCart / closeCart (drawer state, not persisted)
   utils/                  formatPrice.js, cn.js
   index.css               Tailwind import + @theme tokens + base styles
 public/images/products/   placeholder SVGs: <slug>-1.svg (main), <slug>-2.svg (hover/alt), 4:5
