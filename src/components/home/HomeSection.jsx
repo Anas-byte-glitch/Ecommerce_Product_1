@@ -1,6 +1,6 @@
 import { cn } from '../../utils/cn'
 import Container from '../ui/Container'
-import SectionHeader from './SectionHeader'
+import SectionHeader from '../ui/SectionHeader'
 
 // Standard home section: vertical padding + gutters, header → 64px → content.
 // Product sections use 64/80/120px padding; "Why Customers Love Us" uses 64/80/100px.
