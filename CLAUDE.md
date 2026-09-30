@@ -12,7 +12,7 @@ placeholders.
 
 The build is split into 7 phases. Phase 1 (this foundation) is done:
 research → `docs/DESIGN_NOTES.md`, project setup, design tokens, routing, Navbar, MobileMenu,
-Footer, product data. Later phases: 2 Home, 3 Shop + ProductCard/Grid, 4 Product page,
+Footer, product data. Phase 2 (Home page, all sections) is done. Later phases: 3 Shop + ProductCard/Grid, 4 Product page,
 5 Cart (drawer, wiring the navbar badge), 6 About / Contact / Return policy, 7 polish & QA.
 
 ## Golden rule
@@ -40,12 +40,17 @@ npm run lint      # oxlint
 ```
 src/
   config/site.js          brand name, year, nav + footer links, categories  (single source of truth)
-  data/                   products.js (+ query helpers), faqs.js, reviews.js, team.js
+  data/                   products.js (+ query helpers incl. getProductsBySlugs), perks.js, faqs.js,
+                          reviews.js, team.js
   components/layout/      Layout, Navbar, NavItem, MobileMenu, CartButton, Logo, Footer,
                           NewsletterForm, ScrollToTop, PagePlaceholder
   components/ui/          Container, Button, Badge, Accordion, Reveal
-  components/product/     ProductCard, ProductGrid, ... (Phase 3+)
-  components/home/        Home page sections (Phase 2)
+  components/product/     ProductCard (4:5 image, hover swap/zoom, badge, optional price),
+                          ProductGrid (1-col grid, add md:/lg: columns via className)
+  components/home/        Hero, NowTrending, CategoryCards(+CategoryCard), NewThisSeason, BrandStory,
+                          EverydayEssentials, WhyCustomersLoveUs, InstagramStrip; shared pieces:
+                          SectionHeader, HomeSection (padding + header), ProductRow (titled grid)
+  assets/placeholders/    hero, category-*, story, essentials, instagram-1..6 (neutral SVGs, imported)
   pages/                  Home, Shop, ProductDetail, About, Contact, ReturnPolicy, NotFound
   store/cartStore.js      zustand cart (persisted to localStorage as "atlas-cart")
   utils/                  formatPrice.js, cn.js
@@ -90,7 +95,14 @@ pathname change.
 - Prices: always render through `formatPrice()`.
 - Buttons: use `<Button variant=…>` (`outline-light`, `light`, `primary`, `dark`, `subscribe`);
   pass `to` for internal links, `href` for external. Badges: `<Badge>Sale</Badge>`.
-- Scroll-in animation: wrap in `<Reveal>`. Respect reduced motion.
+- Scroll-in animation: wrap in `<Reveal>` (props: `y`, `scale`, `delay`, `duration`, `ease`,
+  `transition`). Respect reduced motion. Only add one where the reference has an appear effect.
+- Scroll-linked image effects use CSS scroll-driven animations, not JS: put `zoom-timeline` on the
+  clipping frame and `zoom-on-scroll` on the image layer inside it (scale 1.2 → 1); `tilt-timeline` /
+  `tilt-on-scroll` for the brand-story banner. They no-op without browser support or with reduced motion.
+- Marquee: `animate-marquee` on a `w-max` list containing 3 copies of the items (translates −1/3).
+- `site.showPrices` toggles card prices (the template has none — documented deviation).
+- Home section vertical padding: `HomeSection` (64/80/120, or `compact` for 64/80/100).
 - Accessibility: real `<button>`/`<a>`, labels for inputs (`sr-only` if hidden), `aria-*` on toggles.
 - Small, meaningful commits; `npm run build` must pass before each commit.
 
@@ -126,5 +138,9 @@ const browser = await chromium.launch({
 ```
 
 Measure at 1440 / 1000 / 390px widths with `getComputedStyle` + `getBoundingClientRect`.
-The local dev server can't go through that proxy — use a second browser without the proxy for
-`localhost`.
+For `localhost` use the same launch but add `bypass: 'localhost,127.0.0.1'` to `proxy` and
+`--proxy-bypass-list=<-loopback>;localhost;127.0.0.1` to `args`: the local page must still reach Google
+Fonts through the proxy, otherwise fallback fonts make every text width wrong.
+Tips: the reference names its layers (`data-framer-name`) — query by those; its appear effects are in
+the `__framer__appearAnimationsContent` JSON in the page source; compare by text content (same string →
+same box) and with `showPrices: false` for exact heights.

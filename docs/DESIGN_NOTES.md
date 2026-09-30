@@ -82,8 +82,8 @@ the "1" quantity label.
 
 | Value   | Token          | Used for |
 | ------- | -------------- | -------- |
-| 0       | —              | Product images, badges, "Add to Cart" button, nav |
-| 4px     | `rounded-sm`   | Inputs, subscribe button, size options, PDP perk cards, "Follow us on Instagram" |
+| 0       | —              | Badges, "Add to Cart" button, nav |
+| 4px     | `rounded-sm`   | Product card images, collection tiles, Instagram tiles, inputs, subscribe button, size options, PDP perk cards, "Follow us on Instagram" |
 | 8px     | `rounded-md`   | Large editorial images (Everyday Essentials) |
 | 12px    | `rounded-lg`   | Nav inner wrapper (tablet/phone) |
 | 999px   | `rounded-full` | Pill buttons (shop all / shop now / our story), PDP thumbnails (60px circles) |
@@ -168,10 +168,11 @@ the "1" quantity label.
 
 - Nav link underline: see §7.
 - Product card: hover crossfades to the second image (first image opacity 1 → 0) and the second image
-  **scales ~1.05** (334→351px). (Implementation in Phase 3.)
+  **scales ~1.05** (334→351px). See §15.2.
 - Pill buttons: arrow rotate 45°.
-- Framer "appear" animations on scroll exist (sections fade/slide in) — exact curves **(unverified)**;
-  use `Reveal` (motion: opacity 0 → 1, y 24 → 0, ~0.6s ease-out, once).
+- Framer "appear" animations: on the home page **only the hero** has them (values read from
+  `__framer__appearAnimationsContent`, see §15.1). Other sections have scroll-*linked* effects instead (§15).
+  `Reveal` default (opacity 0 → 1, y 24 → 0, 0.6s) remains for pages where we choose to add one.
 - Mobile menu open/close timing **(unverified)**; we use ~300ms height/opacity transition.
 
 ## 11. Images (aspect ratios observed)
@@ -183,7 +184,7 @@ the "1" quantity label.
 | PDP main images     | 536×670 | 4:5 |
 | Related items       | 322×403 | 4:5 |
 | PDP thumbnails      | 60×60, radius 999px | 1:1 |
-| Hero                | 1440×900 (full viewport) | 16:10 |
+| Hero                | 1440×900 (100vh; source 3:2, cover) | — |
 | Everyday Essentials editorial | 868×759, radius 8px | ~8:7 |
 
 Placeholder images live in `public/images/products/*.svg` (neutral solid blocks, 4:5).
@@ -200,4 +201,100 @@ Placeholder images live in `public/images/products/*.svg` (neutral solid blocks,
 - Exact easing/duration of Framer appear animations and the mobile-menu open animation.
 - Cart count badge styling (the slot exists but is empty on the template with an empty cart) —
   we use a 16px black circle with 10px/600 white number.
-- Tablet/phone product-grid column counts and spacing are to be re-measured in Phase 3.
+- Home product grids: verified (§15.2). Shop-page grid columns still to be measured in Phase 3.
+
+## 14. Deliberate deviations (Phase 2)
+
+- **Prices on product cards.** The template shows no prices. `ProductCard` renders a 14px `muted` price
+  (plus struck-through compare-at price when on sale) 4px under the name, controlled by
+  `site.showPrices` in `src/config/site.js` (default `true`). With `showPrices: false` the home page
+  matches the reference height exactly; with prices on, each card row is 19.6px taller.
+- **"shop all" (hero)** links to `/shop/all`; the reference links to `/`.
+- **Whole card is one link.** On the reference only the image is a link (the name is plain text), so hover
+  triggers only over the image. We wrap image + name in one `<Link>` (one tab stop, bigger target); hover
+  therefore also triggers over the name.
+- Images are local neutral SVG placeholders (`src/assets/placeholders/`, `public/images/products/`).
+
+## 15. Home page (measured Phase 2 at 1440 / 1000 / 390, viewport height 900)
+
+Section order: Hero → Now Trending → Collections → New this season → Brand story → Everyday Essentials →
+Why Customers Love Us → Instagram strip → (sticky footer). Total `<main>` height with prices off:
+**6705 / 7720 / 11446px** — identical in our build.
+
+### 15.1 Hero
+- Height: desktop **100vh**, tablet **aspect-ratio 1.29667** (1000 → 771px), phone **88vh**; always
+  **min-height 700px**. Sits under the fixed navbar (starts at y=0). Image `object-fit: cover`.
+- Overlay gradient: desktop `linear-gradient(transparent 0%, rgba(0,0,0,.4) 38.21%, rgba(0,0,0,.6) 100%)`;
+  tablet/phone `linear-gradient(rgba(0,0,0,.4) 0%, rgba(0,0,0,.36) 72.44%, rgba(0,0,0,.6) 100%)`.
+- Copy is bottom-aligned. Padding: desktop 80 top/bottom, 40 left (content max 600px); tablet 70/60,
+  left 40 + inner 32 → text at x=72; phone 80/80, left 16 + inner 16 + content 40px each side, text
+  **centered** (the block is therefore 8px right of true center, as on the reference).
+- Stack: H1 → 16px → lead (max-width 360px) → 24px → `outline-light` "shop all" (119×40).
+- Appear effects (Framer data): image opacity 0 → 1 + **scale 1.2 → 1**, spring (bounce 0, 0.8s),
+  **delay 1s**. H1 / lead / button: opacity 0 → 1 + **y 20 → 0**, tween 1s,
+  ease `cubic-bezier(.12,.23,.5,1)`, delays **2.0 / 2.1 / 2.2s**.
+
+### 15.2 Product sections (Now Trending, New this season) & ProductCard
+- Section padding **120 / 80 / 64px** vertical, container gutters 40 / 32 / 16. Header → grid gap **64px**.
+- Header: H2 (42/38/32, lh 1.1) → 16px → subtitle 16/24 `muted`, max-width 320px, centered.
+- **Static grid** at every breakpoint (no slider, arrows, drag or auto-scroll): **4 / 2 / 1 columns**,
+  gap **16px row / 8px column**. Card widths 334 / 464 / 358px. Now Trending's 5th card wraps to row 2.
+- Card: image **4:5, radius 4px**, bg `surface-2` → 16px → text block (min 28px: name 16/24 w500 black;
+  the reference reserves a 4px gap + empty slot under it) .
+- Badge: bottom-left, 10px inset (§9). Now Trending shows "Sale" on all 5; **New this season and
+  Everyday Essentials show no badges.**
+- Hover (measured over time): top image opacity 1 → 0 in ~200ms; the underlying alternate image grows
+  334×418 → **351×438 (×1.05)** in ~200–300ms (spring, tiny overshoot). We use 200ms opacity +
+  300ms `ease-out-soft` scale.
+
+### 15.3 Collections (Shirts / Hoodies)
+- Full-bleed (no gutters), **8px gap**; side by side on tablet/desktop, stacked on phone.
+- Tile aspect **1.1429 (≈8:7)**: 716×626 / 496×434 / 390×341. Radius 4px, overflow clipped.
+- Overlay `linear-gradient(#000 0%, rgba(0,0,0,.2) 32.69%)` (black at the top fading to 20%).
+- Text: desktop/tablet title top-left and `light` "shop now" bottom-left (`space-between`), inset
+  top/bottom **20 / 16px**, left **40 / 32px**. Phone: title and button stacked at the bottom, **gap 24px**,
+  inset 16px. Title 32/30/24px, lh 1.3, w500, white (`heading-tile`).
+- **No hover effect** on the tile (checked image, overlay filter, button — nothing changes except the
+  pill arrow rotation).
+- **Scroll-linked zoom:** image scale **1.2 → 1** linearly while the tile goes from "top enters viewport
+  bottom" to "bottom enters viewport bottom" (motion offset `["start end","end end"]`). Image box is
+  101% of the tile. Implemented with CSS scroll-driven animation (`zoom-timeline` / `zoom-on-scroll`,
+  `animation-range: entry`).
+
+### 15.4 Brand story banner
+- Image band (no plain-colour band), height **70vh** at all breakpoints (630px @900).
+- Image layer is **110%** of the band (inset −5%) with a scroll-linked effect over the band's whole pass
+  through the viewport (`["start end","end start"]` = `cover`): `perspective(2000px) scale(1.2)
+  rotateX(10deg)`, opacity **0.8** → flat, scale 1, opacity 1. Progress is non-linear (fast start);
+  keyframes fitted from readings: 10% → .85, 30% → .55, 50% → .24, 70% → .10, 90% → .04 of the start
+  offset (`tilt-settle` in `index.css`). Our readings match the reference within ~3px at every sampled scroll.
+- No overlay. Copy: H2 32/30/24 lh 1.3 white, max-width 600px. Bottom padding **20px**, gutters 40
+  (desktop **and tablet**) / 16 + 16 inner padding (phone).
+- Desktop: heading left, `outline-light` "our story" right, bottom-aligned. Tablet: button under the
+  heading, **gap 16px**; phone **gap 10px**.
+
+### 15.5 Everyday Essentials
+- Same section/header spacing as 15.2 (120/80/64). Below the header: **image | 2×2 grid, gap 40px**,
+  two equal halves (660 + 660 @1440; 448 + 448 @1000). The image stretches to the grid height
+  (919 / 654px), radius **8px**, same scroll-linked 1.2 → 1 zoom as 15.3.
+- Grid: 2 columns (cards 326 / 220px), gap 16 / 8. Phone: image full width with
+  **aspect-ratio 0.650909** (358×550), 40px, then a 1-column list.
+
+### 15.6 Why Customers Love Us
+- Section padding **100 / 80 / 64px**; header as 15.2, then 64px.
+- Desktop: one row of 4 equal columns, **gap 24px**, 1px `black/8` **vertical** rules between them
+  (full row height). Tablet: 2×2 grid, gap 24px, equal row heights, **no rules**. Phone: stacked, gap 24px,
+  1px **horizontal** rules between items.
+- Item: icon 24px → 24px → title (22/20/18px, lh 1.2, w500 black) → 10px → text 16/24 `muted`.
+- Icons on the reference are **Phosphor (regular)**: Truck, Headset, ClockCounterClockwise,
+  ShieldCheck; stroke 1.5, colour `rgba(0,0,0,.8)`. We use lucide `Truck`, `Headset`, `RotateCcw`,
+  `ShieldCheck` at 24px / stroke 1.5 / `text-black/80`.
+
+### 15.7 Instagram strip
+- Container padding-top **100 / 80 / 64px**, no bottom padding (footer follows).
+- **Auto-scrolling marquee**, right → left at **100px/s**, linear, **no pause on hover**, no arrows.
+  Tiles **360×380** (same at every breakpoint), radius 4px, 16px apart (376px pitch). Loop of 6 images
+  (2256px). Edges faded with `mask-image: linear-gradient(to right, transparent 0%, #000 12.5%,
+  #000 87.5%, transparent 100%)`.
+- "Follow us on Instagram" (`dark` button, 188×32) is absolutely centered on the whole block
+  (padding included): top 50% / left 50% / translate −50%.
