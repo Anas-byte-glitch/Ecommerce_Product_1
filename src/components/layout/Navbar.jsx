@@ -11,16 +11,16 @@ import NavItem from './NavItem'
 // Phone: 72px, shadow, logo left + cart + hamburger. Tablet/desktop: 64px, bottom border,
 // links left / logo centred / cart right.
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
-
-  // Close the menu whenever the route changes.
-  useEffect(() => setOpen(false), [pathname])
+  // The menu remembers the path it was opened on, so it closes itself on any navigation.
+  const [openOn, setOpenOn] = useState(null)
+  const open = openOn === pathname
+  const setOpen = (value) => setOpenOn(value ? pathname : null)
 
   // Close on Escape.
   useEffect(() => {
     if (!open) return
-    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    const onKey = (e) => e.key === 'Escape' && setOpenOn(null)
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
@@ -49,7 +49,7 @@ export default function Navbar() {
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              onClick={() => setOpen((v) => !v)}
+              onClick={() => setOpen(!open)}
               className="relative size-8 bg-surface md:hidden"
             >
               <span
