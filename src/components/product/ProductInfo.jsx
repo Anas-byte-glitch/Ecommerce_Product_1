@@ -17,9 +17,10 @@ export default function ProductInfo({ product }) {
   const [guideOpen, setGuideOpen] = useState(false)
   const [added, setAdded] = useState(false)
   const addItem = useCartStore((s) => s.addItem)
+  const openCart = useCartStore((s) => s.openCart)
   const onSale = product.compareAtPrice && product.compareAtPrice > product.price
 
-  // The reference gives no feedback on Add to Cart; we flash "Added" for 1.5s.
+  // Brief "Added" confirmation on the button (interim until the Phase 5 drawer is visible).
   useEffect(() => {
     if (!added) return
     const t = setTimeout(() => setAdded(false), 1500)
@@ -28,6 +29,7 @@ export default function ProductInfo({ product }) {
 
   const addToCart = () => {
     addItem(product.slug, size, quantity)
+    openCart()
     setAdded(true)
   }
 

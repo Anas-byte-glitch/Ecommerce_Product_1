@@ -8,7 +8,7 @@
 
 const img = (slug) => [`/images/products/${slug}-1.svg`, `/images/products/${slug}-2.svg`]
 
-// The reference offers S, M and L for every product (it lists them L, S, M — Shopify variant order).
+// Every product is offered in S, M and L.
 const SIZES = ['S', 'M', 'L']
 
 export const products = [
