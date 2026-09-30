@@ -10,6 +10,12 @@ export const site = {
   freeShippingThreshold: 100,
   email: 'support@atlas.com',
 
+  // The template renders no prices on product cards. We show a small muted price under the
+  // name (deliberate deviation, see DESIGN_NOTES §14). Set to false for the template look.
+  showPrices: true,
+
+  instagram: 'https://www.instagram.com/',
+
   nav: [
     { label: 'Hoodies', to: '/shop/hoodies' },
     { label: 'Shirts', to: '/shop/shirts' },

@@ -9,10 +9,10 @@ const base =
 const variants = {
   // Hero "shop all" / "our story": transparent pill, white border.
   'outline-light':
-    'h-10 gap-2 rounded-full border border-white px-5 text-body font-medium text-white',
+    'h-10 gap-2 rounded-full border border-white px-[19px] text-body font-medium text-white',
   // Collection tile "shop now": white pill, grey border, Jost label.
   light:
-    'h-10 gap-2 rounded-full border border-muted bg-white px-5 font-jost text-body font-medium text-slate',
+    'h-10 gap-2 rounded-full border border-muted bg-white px-[19px] font-jost text-body leading-[1.1] font-medium text-slate',
   // "Add to Cart": solid black block.
   primary: 'h-14 gap-2 bg-black px-6 text-body font-normal text-white hover:bg-slate',
   // "Follow us on Instagram": small dark tag-like button.

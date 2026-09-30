@@ -52,6 +52,15 @@
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Instagram strip: 6 tiles × (360 + 16px) = 2256px per loop at 100px/s, right → left. */
+  --animate-marquee: marquee 22.56s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-33.3333%);
+    }
+  }
 }
 
 @layer base {
@@ -101,6 +110,91 @@
   @apply text-[32px] leading-[1.1] font-medium md:text-[38px] lg:text-[42px];
 }
 
+/* Collection tiles, brand-story banner: 32 / 30 / 24px, line-height 1.3, weight 500. */
+@utility heading-tile {
+  @apply text-[24px] leading-[1.3] font-medium md:text-[30px] lg:text-[32px];
+}
+
 @utility lead {
   @apply font-jost text-[16px] leading-[1.6] md:text-[18px] lg:text-[20px];
+}
+
+/*
+ * Scroll-linked image effects (DESIGN_NOTES §15), as CSS scroll-driven animations.
+ * Browsers without support (or with reduced motion) simply show the image at rest.
+ *
+ * zoom-timeline / zoom-on-scroll: the image scales 1.2 → 1 while its frame travels from
+ * "top enters the viewport bottom" to "bottom enters the viewport bottom" (collection tiles,
+ * Everyday Essentials editorial image).
+ *
+ * tilt-timeline / tilt-on-scroll: brand-story banner. perspective(2000px) scale 1.2 +
+ * rotateX 10deg + opacity .8 settle to rest over the banner's whole pass through the viewport
+ * (keyframes fitted to readings from the reference).
+ */
+@utility zoom-timeline {
+  view-timeline-name: --zoom;
+}
+
+@utility tilt-timeline {
+  view-timeline-name: --tilt;
+}
+
+@utility zoom-on-scroll {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: zoom-settle linear both;
+      animation-timeline: --zoom;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@utility tilt-on-scroll {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: tilt-settle linear both;
+      animation-timeline: --tilt;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes zoom-settle {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes tilt-settle {
+  0% {
+    transform: perspective(2000px) scale(1.2) rotateX(10deg);
+    opacity: 0.8;
+  }
+  10% {
+    transform: perspective(2000px) scale(1.17) rotateX(8.5deg);
+    opacity: 0.83;
+  }
+  30% {
+    transform: perspective(2000px) scale(1.11) rotateX(5.5deg);
+    opacity: 0.89;
+  }
+  50% {
+    transform: perspective(2000px) scale(1.048) rotateX(2.4deg);
+    opacity: 0.952;
+  }
+  70% {
+    transform: perspective(2000px) scale(1.02) rotateX(1deg);
+    opacity: 0.98;
+  }
+  90% {
+    transform: perspective(2000px) scale(1.008) rotateX(0.4deg);
+    opacity: 0.992;
+  }
+  100% {
+    transform: perspective(2000px) scale(1) rotateX(0deg);
+    opacity: 1;
+  }
 }

@@ -167,6 +167,9 @@ export const products = [
 
 export const getProductBySlug = (slug) => products.find((p) => p.slug === slug) ?? null
 
+// Keeps the order of `slugs`; unknown slugs are skipped.
+export const getProductsBySlugs = (slugs) => slugs.map(getProductBySlug).filter(Boolean)
+
 export const getProductsByCategory = (category) =>
   !category || category === 'all' ? products : products.filter((p) => p.category === category)
 
