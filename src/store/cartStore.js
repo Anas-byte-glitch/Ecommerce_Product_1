@@ -1,32 +1,31 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-// Minimal cart store. Full cart behaviour (drawer, quantities, totals UI) is wired in Phase 5.
-// item: { slug, size, color, quantity }
+// Cart lines: { slug, size, quantity }. A line is identified by slug + size.
+// Persisted to localStorage ("atlas-cart"). Drawer / cart UI comes in Phase 5.
+const sameLine = (slug, size) => (i) => i.slug === slug && i.size === size
+
 export const useCartStore = create(
   persist(
     (set) => ({
       items: [],
-      addItem: (item) =>
+      addItem: (slug, size, quantity = 1) =>
         set((state) => {
-          const match = (i) => i.slug === item.slug && i.size === item.size && i.color === item.color
-          const existing = state.items.find(match)
-          if (existing) {
+          const match = sameLine(slug, size)
+          if (state.items.some(match)) {
             return {
               items: state.items.map((i) =>
-                match(i) ? { ...i, quantity: i.quantity + (item.quantity ?? 1) } : i,
+                match(i) ? { ...i, quantity: i.quantity + quantity } : i,
               ),
             }
           }
-          return { items: [...state.items, { ...item, quantity: item.quantity ?? 1 }] }
+          return { items: [...state.items, { slug, size, quantity }] }
         }),
-      removeItem: (slug, size, color) =>
-        set((state) => ({
-          items: state.items.filter((i) => !(i.slug === slug && i.size === size && i.color === color)),
-        })),
+      removeItem: (slug, size) =>
+        set((state) => ({ items: state.items.filter((i) => !sameLine(slug, size)(i)) })),
       clear: () => set({ items: [] }),
     }),
-    { name: 'atlas-cart' },
+    { name: 'atlas-cart', version: 1, migrate: () => ({ items: [] }) },
   ),
 )
 
