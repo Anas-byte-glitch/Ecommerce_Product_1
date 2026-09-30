@@ -1,15 +1,17 @@
 import { ShoppingCart } from 'lucide-react'
-import { useCartStore, selectCartCount } from '../../store/cartStore'
+import { selectCount, useCartStore } from '../../store/cartStore'
 
-// 24px cart icon with a 16px count badge at its top-right (hidden while empty).
-// Opening the cart drawer is wired in Phase 5.
+// 24px cart icon with a 16px count badge at its top-right (hidden while empty). Opens the drawer.
 export default function CartButton() {
-  const count = useCartStore(selectCartCount)
+  const count = useCartStore(selectCount)
+  const openDrawer = useCartStore((s) => s.openDrawer)
   return (
     <button
       type="button"
+      onClick={openDrawer}
+      aria-haspopup="dialog"
       aria-label={count ? `Cart, ${count} item${count === 1 ? '' : 's'}` : 'Cart'}
-      className="relative flex size-6 items-center justify-center text-ink"
+      className="relative flex size-6 cursor-pointer items-center justify-center text-ink"
     >
       <ShoppingCart aria-hidden="true" strokeWidth={1.5} className="size-6" />
       {count > 0 && (

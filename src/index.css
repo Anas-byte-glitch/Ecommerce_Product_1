@@ -25,6 +25,8 @@
   --color-surface-2: #f0f0f0;
   --color-line: #e6e6e6;
   --color-field: #3b3c3d;
+  /* Form errors (checkout) — no reference value; accessible red on white (5.9:1). */
+  --color-danger: #c62828;
 
   /* Radii */
   --radius-sm: 4px;
