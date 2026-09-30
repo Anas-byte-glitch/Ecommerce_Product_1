@@ -7,6 +7,7 @@ import ProductCard from './ProductCard'
 export default function ProductGrid({
   products,
   showBadges = true,
+  badge,
   gap = 'gap-x-2 gap-y-4',
   className,
 }) {
@@ -14,7 +15,7 @@ export default function ProductGrid({
     <ul className={cn('grid grid-cols-1', gap, className)}>
       {products.map((product) => (
         <li key={product.slug}>
-          <ProductCard product={product} showBadge={showBadges} />
+          <ProductCard product={product} showBadge={showBadges} badge={badge} />
         </li>
       ))}
     </ul>

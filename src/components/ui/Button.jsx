@@ -14,7 +14,7 @@ const variants = {
   light:
     'h-10 gap-2 rounded-full border border-muted bg-white px-[19px] font-jost text-body leading-[1.1] font-medium text-slate',
   // "Add to Cart": solid black block.
-  primary: 'h-14 gap-2 bg-black px-6 text-body font-normal text-white hover:bg-slate',
+  primary: 'h-14 gap-2 bg-black px-6 text-body font-normal text-white hover:bg-[#424242]',
   // "Follow us on Instagram": small dark tag-like button.
   dark: 'gap-2 rounded-sm bg-black px-3 py-1 text-body text-white hover:bg-slate',
   // Footer "Subscribe".

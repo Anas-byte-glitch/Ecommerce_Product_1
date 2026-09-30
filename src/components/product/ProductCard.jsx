@@ -6,8 +6,10 @@ import Badge from '../ui/Badge'
 
 // Product tile (DESIGN_NOTES §15.2): 4:5 image (radius 4) → 16px → name (16/500).
 // Hover: the main image fades out (200ms) over the alternate image, which zooms to 1.05.
-export default function ProductCard({ product, showBadge = true, className }) {
+// `badge` overrides the product's own badge label (e.g. "New in" on every related item).
+export default function ProductCard({ product, showBadge = true, badge, className }) {
   const [main, alt] = product.images
+  const badgeLabel = badge ?? product.badge
   const onSale = product.compareAtPrice && product.compareAtPrice > product.price
 
   return (
@@ -30,8 +32,8 @@ export default function ProductCard({ product, showBadge = true, className }) {
             alt && 'transition-opacity duration-200 ease-out group-hover:opacity-0',
           )}
         />
-        {showBadge && product.badge && (
-          <Badge className="absolute bottom-2.5 left-2.5">{product.badge}</Badge>
+        {showBadge && badgeLabel && (
+          <Badge className="absolute bottom-2.5 left-2.5">{badgeLabel}</Badge>
         )}
       </div>
 
