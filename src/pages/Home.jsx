@@ -1,22 +1,24 @@
-import PagePlaceholder from '../components/layout/PagePlaceholder'
-import Button from '../components/ui/Button'
-import Badge from '../components/ui/Badge'
-import { site } from '../config/site'
+import BrandStory from '../components/home/BrandStory'
+import CategoryCards from '../components/home/CategoryCards'
+import EverydayEssentials from '../components/home/EverydayEssentials'
+import Hero from '../components/home/Hero'
+import InstagramStrip from '../components/home/InstagramStrip'
+import NewThisSeason from '../components/home/NewThisSeason'
+import NowTrending from '../components/home/NowTrending'
+import WhyCustomersLoveUs from '../components/home/WhyCustomersLoveUs'
 
-// Placeholder — home sections are built in Phase 2.
+// Section order matches the reference home page.
 export default function Home() {
   return (
-    <PagePlaceholder title={site.tagline} subtitle={site.description}>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-        <Button variant="light" to="/shop/all">
-          shop now
-        </Button>
-        <Button variant="dark" to="/shop/hoodies" icon={false}>
-          Shop hoodies
-        </Button>
-        <Badge>Sale</Badge>
-        <Badge>New in</Badge>
-      </div>
-    </PagePlaceholder>
+    <>
+      <Hero />
+      <NowTrending />
+      <CategoryCards />
+      <NewThisSeason />
+      <BrandStory />
+      <EverydayEssentials />
+      <WhyCustomersLoveUs />
+      <InstagramStrip />
+    </>
   )
 }
