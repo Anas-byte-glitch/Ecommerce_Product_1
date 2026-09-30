@@ -12,7 +12,7 @@ placeholders.
 
 The build is split into 7 phases. Phase 1 (this foundation) is done:
 research → `docs/DESIGN_NOTES.md`, project setup, design tokens, routing, Navbar, MobileMenu,
-Footer, product data. Phase 2 (Home page) and Phase 3 (Shop pages) are done. Later phases: 4 Product page,
+Footer, product data. Phases 2 (Home), 3 (Shop) and 4 (Product page + minimal cart store) are done. Later phases:
 5 Cart (drawer, wiring the navbar badge), 6 About / Contact / Return policy, 7 polish & QA.
 
 ## Golden rule
@@ -42,19 +42,24 @@ src/
   config/site.js          brand name, year, nav + footer links, categories  (single source of truth)
   data/                   products.js (+ query helpers incl. getProductsBySlugs, SORT_OPTIONS, sortProducts;
                           array order = Relevance; salesRank = Best Selling), perks.js, faqs.js,
-                          reviews.js, team.js
+                          reviews.js (+ avatar placeholders), sizeGuide.js, team.js;
+                          perks.js also exports productPerks (PDP trust tiles)
   components/layout/      Layout, Navbar, NavItem, MobileMenu, CartButton, Logo, Footer,
                           NewsletterForm, ScrollToTop, PagePlaceholder
   components/ui/          Container, Button, Badge, Accordion, Reveal, SectionHeader (centered title+subtitle)
   components/product/     ProductCard (4:5 image, hover swap/zoom, badge, optional price),
                           ProductGrid (1-col grid, add md:/lg: columns via className; `gap` prop)
+  components/product/     (PDP) ProductGallery, ProductInfo, SizeSelector (native radios),
+                          QuantityStepper, SizeGuideDrawer (native <dialog>), TrustBadges, ProductFaq,
+                          HappyCustomers + ReviewCard, RelatedProducts
   components/shop/        CategoryTabs (text-link tabs), SortSelect (native select under a styled label)
   components/home/        Hero, NowTrending, CategoryCards(+CategoryCard), NewThisSeason, BrandStory,
                           EverydayEssentials, WhyCustomersLoveUs, InstagramStrip; shared pieces:
                           HomeSection (padding + header), ProductRow (titled grid)
   assets/placeholders/    hero, category-*, story, essentials, instagram-1..6 (neutral SVGs, imported)
   pages/                  Home, Shop, ProductDetail, About, Contact, ReturnPolicy, NotFound
-  store/cartStore.js      zustand cart (persisted to localStorage as "atlas-cart")
+  store/cartStore.js      zustand cart, persisted ("atlas-cart"): items [{slug,size,quantity}],
+                          addItem(slug, size, qty) merges slug+size, selectCartCount
   utils/                  formatPrice.js, cn.js
   index.css               Tailwind import + @theme tokens + base styles
 public/images/products/   placeholder SVGs: <slug>-1.svg (main), <slug>-2.svg (hover/alt), 4:5
@@ -105,6 +110,9 @@ pathname change.
 - Marquee: `animate-marquee` on a `w-max` list containing 3 copies of the items (translates −1/3).
 - `site.showPrices` toggles card prices (the template has none — documented deviation).
 - Shop sort state lives in the URL (`?sort=title_asc` …, reference values); tabs reset it.
+- Accordion: multi-open grey cards (reference behaviour); pass `items=[{question, answer}]`.
+- Modals/drawers: native `<dialog>` + `showModal()` (Escape, focus trap, `backdrop:` styling).
+- ProductGrid/ProductCard accept `badge` to force a badge label (related items: "New in").
 - Home section vertical padding: `HomeSection` (64/80/120, or `compact` for 64/80/100).
 - Accessibility: real `<button>`/`<a>`, labels for inputs (`sr-only` if hidden), `aria-*` on toggles.
 - Small, meaningful commits; `npm run build` must pass before each commit.

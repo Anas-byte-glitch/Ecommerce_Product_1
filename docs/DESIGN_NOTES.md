@@ -158,7 +158,7 @@ the "1" quantity label.
 | `outline-light` pill (hero "shop all", "our story") | h 40px, px 20px, radius 999px, 1px **white** border, transparent bg, label 16/500 Inter white, gap 8px, 16px arrow-up-right icon |
 | `light` pill ("shop now" on collection tiles) | h 40px, px 20px, radius 999px, white bg, 1px **#6d6d6d** border, label **Jost** 16/500 `#33383c`, 18px black arrow icon |
 | Pill hover | the ↗ arrow icon **rotates 45°** to → (no colour change) |
-| `primary` ("Add to Cart") | h 56px, px 24px, radius 0, bg black, label 16/400 white |
+| `primary` ("Add to Cart") | h 56px, px 24px, radius 0, bg black, label 16/400 white; hover bg `#424242` |
 | `dark` small ("Follow us on Instagram") | px 12px, py 4px, radius 4px, bg black, 16px white; hover bg `#33383c` |
 | Subscribe | see footer |
 | Size option | h 40px, px 20px, radius 4px; selected = black bg/white text, else white bg/black text |
@@ -347,3 +347,81 @@ products render). No badges on shop cards.
   White atlas graphic tee, Cream atlas graphic tee, Red atlas tee, Fleece hoodie white.
 - Page heights with prices off match the reference exactly (e.g. 1355 / 2301 / 2978 for shirts), except
   /shop/hoodies at 1440×900: 900 vs 885px because our `<main>` has `min-h-screen`.
+
+## 17. Product page `/atlas/:slug` (measured Phase 4)
+
+`<title>` on the reference: "<product name> - My Framer Site" → we set "<name> - <site.name>".
+All 9 products share one structure: 2 gallery images, sizes (listed **L, S, M** — Shopify variant
+order; we list S, M, L and preselect the first, as the reference preselects its first), no badge, no
+price. Descriptions are the reference copy (in `products.js`). `<main>` stacks the sections with a
+**10px gap**. Page heights with prices off match exactly: **3949 / 6485 / 6694px**.
+
+### 17.1 Layout & gallery
+- Top section padding: **120 40 100** desktop / **80 32 80** tablet / **80 16 64** phone.
+- Desktop: row, max-width **1120px** centered, **gap 48px**, two equal columns (536px). Left: the 2 images
+  **stacked, 8px apart**, each a **4:5 frame** (536×670), `object-fit: cover`, no radius. No slider, dots,
+  thumbnails, zoom or lightbox; images are not clickable.
+- Right column is **sticky, top 100px**, contents 500px wide centered in the 536px column.
+- Tablet: single column — images full width (936×1170), gap 48, then the info block **700px, centered**.
+  Phone: same, full width (images 358×448).
+
+### 17.2 Info column (blocks 24px apart)
+- Title H1 **36 / 28 / 24px**, lh 1.1, w500 black → 12px → (price slot — empty on the reference; our
+  price line lives here, 18px slate, behind `site.showPrices`) → **32px** → description 16/24 `muted` →
+  **32px** → 1px `black/8` rule.
+- **Size**: label 14/14 `muted` (normal tracking) → 8px → option tiles 8px apart: h 40, px 20, radius 4,
+  1px `black/8` border, white, text 12px black (reference renders the browser default sans-serif; we use
+  Inter). Selected: black bg, black border, white text. Hover: bg `rgba(0,0,0,.03)`, border black.
+  Reference buttons are `role="radio"`; ours are native radios (arrow keys). Selecting a size on the
+  reference appends `?variant=<shopify id>` to the URL — not replicated (no variant ids).
+- **Size Guide**: 18/25.2 black text with a 1px black underline (86×26). Opens a drawer (§17.4).
+- **Quantity + Add to Cart** row, gap 16: stepper **150×56**, bg `surface`, radius 4, 1px border
+  `rgba(231,236,229,.64)`, padding 0 6px, two **40×40 white** buttons, count Jost 16/16 w600.
+  On the reference both buttons are permanently disabled and render **blank**; ours work (min 1, max 99)
+  and show 16px minus/plus icons (deviation). Add to Cart: `primary` button filling the rest (334 / 534 /
+  192px wide).
+- **Add to Cart on the reference does nothing visible** (no drawer, no badge, no redirect, no request).
+  Ours adds `{slug, size, quantity}` to the persisted cart, updates the navbar badge, and the label reads
+  "Added" for 1.5s (deviation).
+- 1px rule → **trust tiles**: grid 2 columns (1 on phone), gap 16; tile bg `surface`, radius 4,
+  padding 12, gap 16; icon 24px black stroke 1.5; title 16/24 `slate`; line 14/19.6 w500 `muted`
+  (normal tracking). Icons: reference Phosphor-style bag, repeat, truck, medal → lucide `Lock`, `Repeat`,
+  `Truck`, `Award`.
+
+### 17.3 FAQ
+- Section padding 100/80/64, gutters as Container. Title H2 (42/38/32) centered, **max-width 420px**
+  (wraps to 2 lines) — reference text "Frequenly Asked Questions" (typo; we spell it correctly) → 64px →
+  list **700px** wide (full width on phone), items **10px** apart.
+- Item: bg `surface`, **radius 8**, padding 16. Question 18/25.2 w400 black + 16px chevron (gap 10) →
+  16px → 1px rule (`black/8`, **invisible while closed**) → 16px → answer 16/24 `slate`.
+  Closed 74px; open e.g. 138px.
+- Behaviour: **all closed initially; several can be open at once**; the chevron **swaps** (down ↔ up,
+  filled Material-style glyph; we use lucide chevrons), no rotation. Height grows with a quick spring
+  (74→92→116→134→139→138 px at ~50ms steps, i.e. ~200ms with a 1px overshoot).
+- Answers are in `src/data/faqs.js` (reused by Contact in Phase 6).
+
+### 17.4 Size Guide drawer
+- Fixed full-height panel on the **right, 400px** wide (full width on phone), white, over a
+  **rgba(0,0,0,.8)** backdrop. **No open/close animation** (instant).
+- Header: padding 24 16 16, title "Size Guide" **26 / 22 / 20px** lh 1.2 w500 `slate`; 24px close (X)
+  at the right; 1px `black/8` rule under the header.
+- Body: padding 16, gap 32: intro 16/24 `muted` → table: 4 equal columns (gap 24), rows 12px apart with
+  1px `black/8` rules under the header and every row; header cells and size column 14/19.6 **w600
+  slate**, values 14/19.6 **w500 muted**, normal tracking. Values in `src/data/sizeGuide.js`
+  (XS 32-34"/26"/7.5" … XXL 50-52"/31"/10").
+- Closing: X button or backdrop click. The reference **ignores Escape**; ours (native `<dialog>`) also
+  closes on Escape and traps/restores focus.
+
+### 17.5 Happy Customers
+- Section padding 100/80/64; header like home sections (title + 320px subtitle) → 64px.
+- **Static grid** 4 / 2 / 1 columns, gap 16px row / 8px column (cards 334 / 464 / 358 wide). No slider.
+- Card: **no background, no border**, radius 4, **height 300**, padding 24, gap 16: [avatar **60px
+  circle** + (name 16/24 w500 → 12px → five **16px filled black stars**, 4px apart), gap 12] → 1px rule →
+  text 16/24 `muted`.
+
+### 17.6 You may also Like
+- Padding top 100/80/64; bottom **100 desktop, 0 tablet/phone**. Title H2 centered → **48px** → grid
+  **4 / 2 / 1 columns, gap 24px** (cards 322 / 456 / 358), every card badged **"New in"**.
+- The reference lists the **whole category including the current product** (4 hoodies, or all 5 tees
+  wrapping to a second row). We show 4 **other** products, same category first, topped up from the
+  other category (`getRelatedProducts`) — deliberate deviation.
