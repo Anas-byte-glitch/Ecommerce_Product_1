@@ -12,14 +12,15 @@ placeholders.
 
 The build is split into 7 phases. Phase 1 (this foundation) is done:
 research → `docs/DESIGN_NOTES.md`, project setup, design tokens, routing, Navbar, MobileMenu,
-Footer, product data. Phases 2 (Home), 3 (Shop) and 4 (Product page + minimal cart store) are done. Later phases:
-5 Cart (drawer, wiring the navbar badge), 6 About / Contact / Return policy, 7 polish & QA.
+Footer, product data. Phases 2 (Home), 3 (Shop), 4 (Product page) and 5 (cart drawer, /cart, demo checkout) are done.
+Later phases: 6 About / Contact / Return policy, 7 polish & QA.
 
 ## No Shopify behaviour
 
 The reference template is a Shopify-backed Framer site. This project is a standalone frontend store:
 never mimic Shopify plumbing (variant IDs, `?variant=` URLs, disabled cart controls, Shopify wording).
 Cart = local zustand store; Add to Cart adds the line, opens the drawer and updates the badge.
+Checkout is UI only (in-memory order, no payment).
 
 ## Golden rule
 
@@ -52,7 +53,8 @@ src/
                           perks.js also exports productPerks (PDP trust tiles)
   components/layout/      Layout, Navbar, NavItem, MobileMenu, CartButton, Logo, Footer,
                           NewsletterForm, ScrollToTop, PagePlaceholder
-  components/ui/          Container, Button, Badge, Accordion, Reveal, SectionHeader (centered title+subtitle)
+  components/ui/          Container, Button, Badge, Accordion, Reveal, SectionHeader (centered title+subtitle),
+                          Drawer (right panel on native <dialog>: focus trap, Esc, backdrop click, scroll lock)
   components/product/     ProductCard (4:5 image, hover swap/zoom, badge, optional price),
                           ProductGrid (1-col grid, add md:/lg: columns via className; `gap` prop)
   components/product/     (PDP) ProductGallery, ProductInfo, SizeSelector (native radios),
@@ -63,10 +65,18 @@ src/
                           EverydayEssentials, WhyCustomersLoveUs, InstagramStrip; shared pieces:
                           HomeSection (padding + header), ProductRow (titled grid)
   assets/placeholders/    hero, category-*, story, essentials, instagram-1..6 (neutral SVGs, imported)
-  pages/                  Home, Shop, ProductDetail, About, Contact, ReturnPolicy, NotFound
-  store/cartStore.js      zustand cart, persisted ("atlas-cart"): items [{slug,size,quantity}],
-                          addItem(slug, size, qty) merges slug+size, selectCartCount;
-                          isOpen / openCart / closeCart (drawer state, not persisted)
+  pages/                  Home, Shop, ProductDetail, Cart, Checkout, CheckoutSuccess, About, Contact,
+                          ReturnPolicy, NotFound
+  store/cartStore.js      zustand cart, persisted ("atlas-cart", items only; unknown slugs dropped on load):
+                          items [{slug,size,quantity}], addItem(slug,size,qty) merges slug+size,
+                          updateQuantity(slug,size,qty) (1–10), removeItem(slug,size), clearCart,
+                          isDrawerOpen / openDrawer / closeDrawer (not persisted);
+                          selectors selectCount/selectSubtotal/selectShipping/selectTotal;
+                          helpers getCartLines(items), getTotals(items), getShipping, lineTotal,
+                          getFreeShippingRemaining
+  store/orderStore.js     lastOrder (memory only) + createOrderId() → "ATL-XXXXXX"
+  components/cart/        CartDrawer, CartLine, OrderSummary, OrderLines, FreeShippingNote, EmptyCart
+  components/checkout/    Field (label + input + inline error), validateCheckout
   utils/                  formatPrice.js, cn.js
   index.css               Tailwind import + @theme tokens + base styles
 public/images/products/   placeholder SVGs: <slug>-1.svg (main), <slug>-2.svg (hover/alt), 4:5
@@ -83,6 +93,7 @@ reference/                screenshots of the reference when needed
 | `/atlas/:slug` | ProductDetail (unknown slug → 404) |
 | `/about`, `/contact` | About, Contact |
 | `/returns/return-exchange-policy` | ReturnPolicy |
+| `/cart`, `/checkout`, `/checkout/success` | Cart, Checkout (empty cart → /cart), CheckoutSuccess (no order → /) — ours, not in the template |
 | `*` (incl. `/404`) | NotFound |
 
 All routes render inside `Layout` (Navbar + `<main>` + Footer). `ScrollToTop` resets scroll on
@@ -118,7 +129,11 @@ pathname change.
 - `site.showPrices` toggles card prices (the template has none — documented deviation).
 - Shop sort state lives in the URL (`?sort=title_asc` …, reference values); tabs reset it.
 - Accordion: multi-open grey cards (reference behaviour); pass `items=[{question, answer}]`.
-- Modals/drawers: native `<dialog>` + `showModal()` (Escape, focus trap, `backdrop:` styling).
+- Drawers: use `ui/Drawer` (header styling via props). Cart drawer opens via `openDrawer()`.
+- Buttons also have `secondary` (outlined 56px) and `plain` (white, borderless, Jost) variants.
+- Pricing: `site.freeShippingThreshold` / `site.flatShipping`; always compute totals with the
+  cartStore helpers. Cart/checkout always show prices, whatever `site.showPrices` says.
+- Checkout is a demo: never add card-number fields.
 - ProductGrid/ProductCard accept `badge` to force a badge label (related items: "New in").
 - Home section vertical padding: `HomeSection` (64/80/120, or `compact` for 64/80/100).
 - Accessibility: real `<button>`/`<a>`, labels for inputs (`sr-only` if hidden), `aria-*` on toggles.

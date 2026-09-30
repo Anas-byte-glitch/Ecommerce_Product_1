@@ -382,8 +382,8 @@ no price. Descriptions are the reference copy (in `products.js`). `<main>` stack
   Minus / plus show 16px icons; quantity min 1, max 99. Add to Cart: `primary` button filling the rest (334 / 534 /
   192px wide).
 - **Add to Cart** adds `{slug, size, quantity}` to the persisted cart (same slug + size merges the
-  quantity), updates the navbar badge and opens the cart drawer (`openCart()` in the store; drawer UI is
-  Phase 5). Until the drawer exists the label also reads "Added" for 1.5s.
+  quantity), updates the navbar badge and opens the cart drawer — the drawer is the confirmation
+  (deliberate deviation; the temporary "Added" label is gone).
 - 1px rule → **trust tiles**: grid 2 columns (1 on phone), gap 16; tile bg `surface`, radius 4,
   padding 12, gap 16; icon 24px black stroke 1.5; title 16/24 `slate`; line 14/19.6 w500 `muted`
   (normal tracking). Icons: reference Phosphor-style bag, repeat, truck, medal → lucide `Lock`, `Repeat`,
@@ -426,3 +426,64 @@ no price. Descriptions are the reference copy (in `products.js`). `<main>` stack
 - The reference lists the **whole category including the current product** (4 hoodies, or all 5 tees
   wrapping to a second row). We show 4 **other** products, same category first, topped up from the
   other category (`getRelatedProducts`) — deliberate deviation.
+
+## 18. Cart, checkout (Phase 5)
+
+What the reference shows: clicking the navbar cart icon (home and product page) opens a **cart drawer**
+— same pattern as the Size Guide: 400px panel from the right (full width on phone), `rgba(0,0,0,.8)`
+backdrop, **no animation**, closes on the X, backdrop click and **Escape**. Only its **empty state** is
+observable (the template's cart is Shopify-backed). Everything else below has **no reference** and is
+built from the tokens in this file.
+
+### 18.1 Cart drawer (`CartDrawer`, on the shared `ui/Drawer`)
+- Measured (reference, empty state): header **64px**, padding 16, title 16/24 `slate` ("Your Cart is
+  empty"), **32×32 close** with a 14px X of 2px strokes, header rule **1px `rgba(33,26,26,.06)`**.
+  Body: centered text 16/24 `slate` → 8px → "shop now": white, **no border, radius 4**, h 40, px 20,
+  Jost 16/500 `slate`, 18px ↗ arrow (our `plain` button variant). The reference links it to `/`; ours says
+  "continue shopping" and goes to `/shop/all`.
+- Ours, filled (no reference): title "Cart (n)"; lines separated by `black/8` rules, 16px padding:
+  80px 4:5 thumbnail (radius 4, `surface-2`) · name 16/500 (links to the product, closes the drawer) ·
+  "Size M" 14px `muted` · line total 16 `slate` · small stepper (112×40, 32px buttons, max 10) ·
+  "Remove" 14px underlined link. Footer (1px rule, padding 16, gap 16): Subtotal row, free-shipping line,
+  2-column buttons **View cart** (`secondary`: 56px, white, 1px black border) + **Checkout** (`primary`).
+- Opens from the navbar icon and after Add to Cart. Any route change closes it. Focus is trapped
+  (native modal dialog), returns to the trigger; **body scroll is locked** while any drawer is open.
+- The Size Guide now uses the same `ui/Drawer` and still measures exactly as §17.4.
+
+### 18.2 Cart page `/cart` (no reference)
+- Padding top 100, bottom 64/80/100, Container gutters. Header row: H1 (`heading-2`) "Your Cart" + item
+  count (muted), 1px rule, 24px below it. Desktop: lines (flex 1) | **400px** summary, gap 48, summary
+  sticky at 100px; tablet/phone stacked (gap 40).
+- Lines as the drawer but 120px thumbnails (96 on phone) and "$X each" after the size.
+- Summary card: `surface`, radius 8, padding 24, gap 16 — title 22/20/18 · Subtotal · Shipping (Free / $8)
+  · rule · Total 18/500 black · free-shipping line · Checkout (`primary`, full width); "Continue shopping"
+  underlined link below. Empty state: "Your Cart is empty" + `light` "continue shopping" → /shop/all.
+
+### 18.3 Checkout `/checkout` (demo, no reference)
+- Same page frame; form | 400px sticky summary (lines with 56px thumbnails, qty, totals).
+- Sections (legend 22/20/18 w500): Contact (email) · Delivery (full name, phone, country `<select>`,
+  address, city, postal code; 2 columns from 810px) · Shipping method (single "Standard delivery" tile
+  with the current cost) · Payment: tiles **"Card (demo)"** / **"Cash on delivery"** — **no card number
+  fields, ever** — plus a grey note that it is a demo checkout.
+- Inputs: 50px, radius 4, 1px `black/8` border (black on focus), 14px text, normal tracking; labels 14/14
+  `muted`. Errors: 14px `danger` (#c62828, new token) under the field, red border, `aria-invalid` +
+  `aria-describedby`; a `role="alert"` line counts the errors; focus goes to the first invalid field.
+  After the first submit, fields re-validate as you type.
+- Rules: all fields required; email `x@y.zz`; phone 7–15 digits (spaces, `()`, `-`, `.`, leading `+`
+  allowed); postal code 2–10 letters/digits/space/dash.
+- Submit → order `{ id: "ATL-XXXXXX", createdAt, items, totals, customer, payment, shippingMethod }` in
+  memory (`orderStore`, not persisted) → cart cleared → `/checkout/success`. Empty cart → redirect `/cart`.
+- The footer (with its newsletter block) stays on checkout — it sits below the form and doesn't clash.
+
+### 18.4 Success `/checkout/success`
+- 40px check icon, "Thank you for your order!" (`heading-2`), order number, summary card (totals, lines,
+  delivery address, shipping, payment), "Continue shopping" (`primary`). No order in memory (e.g. after a
+  refresh) → redirect to `/`.
+
+### 18.5 Pricing rules (`site.js` + `cartStore.js`)
+- `freeShippingThreshold` **100**, `flatShipping` **8** (placeholder). No taxes, no discount codes.
+  Shipping = 0 for an empty cart, 0 when subtotal ≥ 100, else 8.
+- Verified cases: $0 → ship $0 · $35 → $8, total $43, "Add $65.00 more" · $70 → $8, total $78 ·
+  $99.99 → $8 · $100 → Free · $104 → Free, total $104 · $242 → Free. Unknown product lines are skipped.
+- Cart, drawer, checkout and success **always show prices**, regardless of `site.showPrices` (that flag
+  only affects product cards / the product page).
