@@ -6,7 +6,7 @@ export default function Badge({ children, className }) {
   return (
     <span
       className={cn(
-        'inline-flex h-6 items-center bg-black px-3 text-badge font-semibold text-white',
+        'font-badge-alt inline-flex h-6 items-center bg-black px-3 text-badge font-semibold text-white',
         className,
       )}
     >

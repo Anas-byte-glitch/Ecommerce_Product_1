@@ -29,7 +29,7 @@ export default function ProductInfo({ product }) {
       <div className="flex w-full flex-col gap-8">
         {/* Title + price: the reference reserves a 12px gap + empty price slot under the title. */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-[24px] leading-[1.1] md:text-[28px] lg:text-[36px]">{product.name}</h1>
+          <h1 className="font-heading-alt text-[24px] leading-[1.1] md:text-[28px] lg:text-[36px]">{product.name}</h1>
           <p className="flex gap-2 text-body-lg text-slate">
             {site.showPrices && (
               <>
