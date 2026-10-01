@@ -20,7 +20,7 @@ export default function About() {
         />
         <div className="relative flex flex-col items-center gap-4 text-center">
           <Reveal as="h1" y={20} delay={2} duration={1} ease={appearEase} className="heading-1 text-white">
-            The Story of {site.name}
+            The Story of {site.brandName}
           </Reveal>
           <Reveal as="p" y={20} delay={2} duration={1} ease={appearEase} className="lead text-white">
             An ongoing journey of design, purpose, and style.

@@ -1,5 +1,6 @@
 import { Award, Headset, Lock, Repeat, RotateCcw, ShieldCheck, Truck } from 'lucide-react'
 import { site } from '../config/site'
+import { formatPrice } from '../utils/formatPrice'
 
 // "Why Customers Love Us". The reference uses Phosphor (regular) Truck, Headset,
 // ClockCounterClockwise and ShieldCheck; these are the closest lucide icons.
@@ -19,6 +20,6 @@ export const perks = [
 export const productPerks = [
   { icon: Lock, title: 'Secure Checkout', text: 'Shop safely, always' },
   { icon: Repeat, title: 'Easy Returns', text: `${site.returnWindowDays}-day return policy` },
-  { icon: Truck, title: 'Free Shipping', text: `On orders over $${site.freeShippingThreshold}` },
+  { icon: Truck, title: 'Free Shipping', text: `On orders over ${formatPrice(site.shipping.freeThreshold, { trim: true })}` },
   { icon: Award, title: 'Premium Quality', text: 'Crafted to last' },
 ]

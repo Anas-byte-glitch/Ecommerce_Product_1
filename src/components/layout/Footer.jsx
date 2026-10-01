@@ -62,7 +62,7 @@ export default function Footer() {
           <Divider />
 
           <p className="text-small font-medium tracking-normal text-white/80">
-            Copyright © {site.year} - {site.name}. All rights reserved.
+            Copyright © {site.year} - {site.brandName}. All rights reserved.
           </p>
         </div>
       </footer>

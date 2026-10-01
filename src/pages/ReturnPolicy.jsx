@@ -15,7 +15,7 @@ export default function ReturnPolicy() {
   // The reference titles this page "Return & Exchange Policy - <site>".
   useEffect(() => {
     const previous = document.title
-    document.title = `Return & Exchange Policy - ${site.name}`
+    document.title = `Return & Exchange Policy - ${site.brandName}`
     return () => {
       document.title = previous
     }

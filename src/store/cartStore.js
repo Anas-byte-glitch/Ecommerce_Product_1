@@ -84,7 +84,7 @@ export const getSubtotal = (items) =>
 
 // Free at or above the threshold; flat rate below it; nothing for an empty cart.
 export const getShipping = (subtotal) =>
-  subtotal <= 0 || subtotal >= site.freeShippingThreshold ? 0 : site.flatShipping
+  subtotal <= 0 || subtotal >= site.shipping.freeThreshold ? 0 : site.shipping.flat
 
 export const getTotals = (items) => {
   const subtotal = getSubtotal(items)
@@ -94,7 +94,7 @@ export const getTotals = (items) => {
 
 // Amount still needed for free shipping (0 when unlocked).
 export const getFreeShippingRemaining = (subtotal) =>
-  Math.max(0, Math.round((site.freeShippingThreshold - subtotal) * 100) / 100)
+  Math.max(0, Math.round((site.shipping.freeThreshold - subtotal) * 100) / 100)
 
 // ── Store selectors (return primitives, safe for useCartStore) ─────────────────
 export const selectCount = (state) =>

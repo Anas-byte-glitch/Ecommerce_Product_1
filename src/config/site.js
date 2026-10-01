@@ -1,17 +1,21 @@
-// Brand configuration — change the brand here, never hard-code it in components.
+// Store settings — the single source of truth. Change the brand, currency, shipping and contact
+// details here; components never hard-code them (see README "Store settings").
 export const site = {
-  name: 'Atlas',
-  logo: 'atlas', // rendered uppercase in the wordmark font
+  brandName: 'Atlas', // shown in the wordmark (uppercase, Abril Fatface), titles, footer, copy
   tagline: 'Wear it. Live it. Own it.',
   description: 'Built for movement, made for style—comfort and confidence in motion.',
   year: 2025,
-  currency: 'USD',
-  locale: 'en-US',
-  // Cart shipping: free from this subtotal up, otherwise a flat rate (placeholder amount).
-  // No taxes, no discount codes.
-  freeShippingThreshold: 100,
-  flatShipping: 8,
+  // Placeholder production URL (used for the sitemap, robots.txt and Open Graph tags).
+  siteUrl: 'https://www.example.com',
   contactEmail: 'support@atlas.com',
+
+  // Prices are stored as plain numbers in this currency. `position`: symbol 'before' ($69.00) or
+  // 'after' (69 DA); `decimals`: digits after the separator; `locale`: digit grouping/separator.
+  currency: { code: 'USD', symbol: '$', position: 'before', decimals: 2, locale: 'en-US' },
+
+  // Cart shipping: free from `freeThreshold` up, otherwise a `flat` rate. No taxes, no discounts.
+  shipping: { flat: 8, freeThreshold: 100 },
+
   // One return window for the whole site (returns page, perks, product trust tile). The template
   // says 14 days on the returns page but 30 elsewhere; we use 30 everywhere (DESIGN_NOTES §19.3).
   returnWindowDays: 30,

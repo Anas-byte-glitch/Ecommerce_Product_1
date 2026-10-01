@@ -18,7 +18,7 @@ export default function ProductDetail() {
   useEffect(() => {
     if (!product) return
     const previous = document.title
-    document.title = `${product.name} - ${site.name}`
+    document.title = `${product.name} - ${site.brandName}`
     return () => {
       document.title = previous
     }
