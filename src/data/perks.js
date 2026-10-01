@@ -6,7 +6,7 @@ import { site } from '../config/site'
 export const perks = [
   { icon: Truck, title: 'Free & Fast Shipping', text: 'Enjoy quick delivery right to your doorstep.' },
   { icon: Headset, title: '24/7 Customer Support', text: 'Friendly help whenever you need it.' },
-  { icon: RotateCcw, title: 'Hassle-Free Returns', text: 'Shop with confidence; easy 30-day returns.' },
+  { icon: RotateCcw, title: 'Hassle-Free Returns', text: `Shop with confidence; easy ${site.returnWindowDays}-day returns.` },
   {
     icon: ShieldCheck,
     title: 'Secure, Effortless Checkout',
@@ -18,7 +18,7 @@ export const perks = [
 // truck, medal) at 24px, stroke 1.5, black; these are the closest lucide icons.
 export const productPerks = [
   { icon: Lock, title: 'Secure Checkout', text: 'Shop safely, always' },
-  { icon: Repeat, title: 'Easy Returns', text: '30-day return policy' },
+  { icon: Repeat, title: 'Easy Returns', text: `${site.returnWindowDays}-day return policy` },
   { icon: Truck, title: 'Free Shipping', text: `On orders over $${site.freeShippingThreshold}` },
   { icon: Award, title: 'Premium Quality', text: 'Crafted to last' },
 ]

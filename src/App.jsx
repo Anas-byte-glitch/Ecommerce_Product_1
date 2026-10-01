@@ -11,7 +11,7 @@ import ProductDetail from './pages/ProductDetail'
 import ReturnPolicy from './pages/ReturnPolicy'
 import Shop from './pages/Shop'
 
-// URL paths mirror the Atlas template; /cart and /checkout/* are ours (the template uses Shopify).
+// URL paths mirror the Atlas template; /cart and /checkout/* are ours (not in the template).
 export default function App() {
   return (
     <BrowserRouter>
