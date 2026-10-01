@@ -6,9 +6,11 @@ import { site } from '../config/site'
 import { aboutParagraphs, missionBlocks } from '../data/about'
 import { team } from '../data/team'
 import { appearEase } from '../utils/motion'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /about (DESIGN_NOTES §19.1).
 export default function About() {
+  useDocumentTitle('About')
   return (
     <>
       {/* Hero: 594px band at every width, centered copy, bottom-heavy gradient, Home-hero appear. */}

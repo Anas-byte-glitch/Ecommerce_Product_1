@@ -1,10 +1,12 @@
 import contactImage from '../assets/placeholders/contact.svg'
 import ContactForm from '../components/contact/ContactForm'
 import ProductFaq from '../components/product/ProductFaq'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /contact (DESIGN_NOTES §19.2). Tablet/desktop: 100vh image hero with a centered white 700px card
 // (radius 12, padding 32). Phone: no image — the card content sits on white (padding 120/64).
 export default function Contact() {
+  useDocumentTitle('Contact')
   return (
     <>
       <section className="relative flex flex-col items-center justify-center overflow-clip pt-[120px] pb-16 md:h-screen md:pt-[70px] md:pb-0 lg:pt-[60px]">

@@ -7,6 +7,7 @@ import SectionHeader from '../components/ui/SectionHeader'
 import { categories } from '../config/site'
 import { getProductsByCategory, SORT_OPTIONS, sortProducts } from '../data/products'
 import NotFound from './NotFound'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /shop/:category (DESIGN_NOTES §16). Sort lives in the URL as ?sort=<value> (like the reference);
 // "relevance" removes the param.
@@ -14,6 +15,7 @@ export default function Shop() {
   const { category } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   const current = categories.find((c) => c.slug === category)
+  useDocumentTitle(current ? (current.slug === 'all' ? 'Shop' : `Shop ${current.label}`) : 'Page not found')
   if (!current) return <NotFound />
 
   const requested = searchParams.get('sort')

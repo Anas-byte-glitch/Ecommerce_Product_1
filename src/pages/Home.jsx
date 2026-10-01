@@ -6,9 +6,11 @@ import InstagramStrip from '../components/home/InstagramStrip'
 import NewThisSeason from '../components/home/NewThisSeason'
 import NowTrending from '../components/home/NowTrending'
 import WhyCustomersLoveUs from '../components/home/WhyCustomersLoveUs'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // Section order matches the reference home page.
 export default function Home() {
+  useDocumentTitle()
   return (
     <>
       <Hero />

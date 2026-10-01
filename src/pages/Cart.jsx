@@ -7,10 +7,12 @@ import OrderSummary from '../components/cart/OrderSummary'
 import Button from '../components/ui/Button'
 import Container from '../components/ui/Container'
 import { getCartLines, getTotals, useCartStore } from '../store/cartStore'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /cart (DESIGN_NOTES §18.2) — no reference; built from the project's tokens.
 // Desktop: lines | 400px summary card. Tablet/phone: stacked.
 export default function Cart() {
+  useDocumentTitle('Cart')
   const items = useCartStore((s) => s.items)
   const lines = useMemo(() => getCartLines(items), [items])
   const totals = useMemo(() => getTotals(items), [items])
