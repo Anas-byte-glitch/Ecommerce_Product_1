@@ -3,8 +3,8 @@ import { persist } from 'zustand/middleware'
 import { site } from '../config/site'
 import { getProductBySlug } from '../data/products'
 
-// Cart (DESIGN_NOTES §18). Lines: { slug, size, quantity }; a line is identified by slug + size.
-// Only `items` is persisted (localStorage "atlas-cart"); drawer visibility is not.
+// Cart. Lines: { slug, size, quantity }; a line is identified by slug + size.
+// Only `items` is persisted (localStorage "store-cart"); drawer visibility is not.
 export const MIN_QTY = 1
 export const MAX_QTY = 10
 
@@ -54,7 +54,7 @@ export const useCartStore = create(
       clearCart: () => set({ items: [] }),
     }),
     {
-      name: 'atlas-cart',
+      name: 'store-cart',
       version: 1,
       migrate: () => ({ items: [] }),
       partialize: (state) => ({ items: state.items }),

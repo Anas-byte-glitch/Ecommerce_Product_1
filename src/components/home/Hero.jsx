@@ -1,5 +1,5 @@
-import heroImage from '../../assets/placeholders/hero.svg'
 import { site } from '../../config/site'
+import { images } from '../../data/images'
 import { cn } from '../../utils/cn'
 import Button from '../ui/Button'
 import HeroImage from '../ui/HeroImage'
@@ -9,9 +9,9 @@ import { appearEase } from '../../utils/motion'
 
 // Full-bleed hero under the fixed navbar. Height: 88vh phone, 1.29667 aspect tablet, 100vh
 // desktop, never under 700px. Copy sits bottom-left (centered on phone).
-// Also used by the 404 page (same layout on the reference) with its own copy / image.
+// Also used by the 404 page (same layout) with its own copy / image.
 export default function Hero({
-  image = heroImage,
+  image = images.homeHero,
   title = site.tagline,
   subtitle = site.description,
   cta = { label: 'shop all', to: '/shop/all' },
@@ -19,7 +19,7 @@ export default function Hero({
 }) {
   return (
     <section className="relative flex h-[88vh] min-h-[700px] w-full flex-col items-center justify-end overflow-clip py-20 pl-4 md:aspect-[1.29667] md:h-auto md:items-start md:pt-[70px] md:pb-[60px] md:pl-10 lg:aspect-auto lg:h-screen lg:py-20">
-      <HeroImage src={image} />
+      <HeroImage image={image} />
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.4)_0%,rgba(0,0,0,0.36)_72.44%,rgba(0,0,0,0.6)_100%)] lg:bg-[linear-gradient(rgba(0,0,0,0)_0%,rgba(0,0,0,0.4)_38.21%,rgba(0,0,0,0.6)_100%)]"

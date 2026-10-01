@@ -1,3 +1,5 @@
+import { rmSync } from 'node:fs'
+import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
@@ -30,7 +32,23 @@ function storeHtml() {
   }
 }
 
+// public/images-source/ holds the original photo downloads used by `npm run images`; they are
+// build inputs only, so they are removed from the built site.
+function dropImageSources() {
+  let outDir = 'dist'
+  return {
+    name: 'drop-image-sources',
+    apply: 'build',
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir)
+    },
+    closeBundle() {
+      rmSync(resolve(outDir, 'images-source'), { recursive: true, force: true })
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), storeHtml()],
+  plugins: [react(), tailwindcss(), storeHtml(), dropImageSources()],
 })

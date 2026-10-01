@@ -8,9 +8,9 @@ import Drawer from '../ui/Drawer'
 import CartLine from './CartLine'
 import FreeShippingNote from './FreeShippingNote'
 
-// Cart drawer (DESIGN_NOTES §18.1). Header measured on the reference (64px, 16px padding, 16/24 slate
+// Cart drawer. Header (64px, 16px padding, 16/24 slate
 // title, 32px close with a 14px 2px-stroke X, 1px rgba(33,26,26,.06) rule); the empty state copies
-// the reference's centered text + "shop now"-style link. The filled state has no reference.
+// centered text + "shop now"-style link.
 export default function CartDrawer() {
   const items = useCartStore((s) => s.items)
   const open = useCartStore((s) => s.isDrawerOpen)

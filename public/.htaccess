@@ -1,0 +1,55 @@
+# Apache / cPanel / shared hosting. Upload this file next to index.html (it is included in the
+# built site). It needs mod_rewrite; mod_deflate, mod_expires and mod_headers are used if present.
+
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # legacy-redirects:start
+  RewriteRule ^atlas/black-atlas-tee/?$ /product/black-basic-tee [R=301,L]
+  RewriteRule ^atlas/white-atlas-tee/?$ /product/white-crew-tee [R=301,L]
+  RewriteRule ^atlas/cream-graphic-tee/?$ /product/cream-crew-tee [R=301,L]
+  RewriteRule ^atlas/redatlas-tee/?$ /product/red-studio-tee [R=301,L]
+  RewriteRule ^atlas/(.+?)/?$ /product/$1 [R=301,L]
+  # legacy-redirects:end
+
+  # Single-page app: serve real files and folders as they are, send every other path to
+  # index.html so links like /product/zipper-hoodie work when opened directly or reloaded.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Compress text files.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Browser caching: the files in /assets have a content hash in their name, so they can be cached
+# for a year. index.html is always revalidated so visitors get new versions right away.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 week"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+AddType image/webp .webp
+AddType font/woff2 .woff2

@@ -1,7 +1,7 @@
 {
-  "name": "atlas-store",
+  "name": "halvo-store",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,11 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "a11y": "node scripts/a11y-check.mjs"
+    "a11y": "node scripts/a11y-check.mjs",
+    "images": "node scripts/build-images.mjs",
+    "credits": "node scripts/generate-credits.mjs",
+    "package": "node scripts/package-release.mjs",
+    "check:release": "node scripts/check-release.mjs"
   },
   "dependencies": {
     "@fontsource/abril-fatface": "^5.3.0",
@@ -27,8 +31,13 @@
     "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^6.1.1",
     "axe-core": "^4.13.0",
+    "fflate": "^0.8.3",
     "oxlint": "^1.81.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   }
 }

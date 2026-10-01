@@ -1,8 +1,9 @@
 import mission1 from '../assets/placeholders/mission-1.svg'
 import mission2 from '../assets/placeholders/mission-2.svg'
 import { site } from '../config/site'
+import { photo } from './photo'
 
-// About page copy (reference text; the brand name comes from site.js).
+// About page copy (the brand name comes from site.js).
 export const aboutParagraphs = [
   `${site.brandName} was born from a vision to redefine what luxury means in a fast-changing world. We strip away the excess, focusing on precision, quality, and form — creating pieces that feel both timeless and unapologetically current.`,
   'Our mission is to craft clothing that embodies quiet confidence and individuality — for those who value presence over labels and expression over convention. Every garment is thoughtfully designed and meticulously made, blending minimalist silhouettes with modern detailing to deliver effortless sophistication.',
@@ -13,11 +14,11 @@ export const missionBlocks = [
   {
     title: 'Quality over Quantity',
     text: 'We believe true luxury lies in craftsmanship, not excess. Each garment is made to last, using premium materials and timeless construction.',
-    image: mission1,
+    image: photo('about/mission-1', mission1, 'Hands guiding cream fabric through a sewing machine'),
   },
   {
     title: 'Intentional Design',
     text: 'Every piece begins with purpose — crafted with precision, balance, and thoughtful detail to create effortless sophistication that endures beyond seasons.',
-    image: mission2,
+    image: photo('about/mission-2', mission2, 'Designer sewing at a table in a bright workshop'),
   },
 ]

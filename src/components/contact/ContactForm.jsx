@@ -6,12 +6,12 @@ import validateContact, { CONTACT_FIELDS } from './validateContact'
 
 const EMPTY = { name: '', email: '', message: '' }
 
-// Field look measured on the reference: 48px, radius 4, 1px rgba(136,136,136,.1) border (black on
+// Field look: 48px, radius 4, 1px rgba(136,136,136,.1) border (black on
 // focus), padding 12, 14px/1.2 Inter, muted placeholder; label 16/24 slate, 10px above.
 const control =
   'w-full rounded-sm border bg-white p-3 text-[14px] leading-[1.2] tracking-normal text-black placeholder:text-muted transition-colors focus:border-black focus:outline-none'
 
-// Contact form (DESIGN_NOTES §19.2). There is no backend: a valid submit only shows a confirmation
+// Contact form. There is no backend: a valid submit only shows a confirmation
 // and resets the form — no message is sent anywhere.
 export default function ContactForm() {
   const [values, setValues] = useState(EMPTY)

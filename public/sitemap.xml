@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.example.com/</loc></url>
-  <url><loc>https://www.example.com/shop/all</loc></url>
-  <url><loc>https://www.example.com/shop/hoodies</loc></url>
-  <url><loc>https://www.example.com/shop/shirts</loc></url>
-  <url><loc>https://www.example.com/atlas/premium-ream-choodie</loc></url>
-  <url><loc>https://www.example.com/atlas/zipper-hoodie</loc></url>
-  <url><loc>https://www.example.com/atlas/black-hoodie</loc></url>
-  <url><loc>https://www.example.com/atlas/chill-vibes-tee</loc></url>
-  <url><loc>https://www.example.com/atlas/black-atlas-tee</loc></url>
-  <url><loc>https://www.example.com/atlas/white-atlas-tee</loc></url>
-  <url><loc>https://www.example.com/atlas/cream-graphic-tee</loc></url>
-  <url><loc>https://www.example.com/atlas/redatlas-tee</loc></url>
-  <url><loc>https://www.example.com/atlas/fleece-hoodie-white</loc></url>
-  <url><loc>https://www.example.com/about</loc></url>
-  <url><loc>https://www.example.com/contact</loc></url>
-  <url><loc>https://www.example.com/returns/return-exchange-policy</loc></url>
+  <url><loc>https://example.com/</loc></url>
+  <url><loc>https://example.com/shop/all</loc></url>
+  <url><loc>https://example.com/shop/hoodies</loc></url>
+  <url><loc>https://example.com/shop/shirts</loc></url>
+  <url><loc>https://example.com/product/premium-ream-choodie</loc></url>
+  <url><loc>https://example.com/product/zipper-hoodie</loc></url>
+  <url><loc>https://example.com/product/black-hoodie</loc></url>
+  <url><loc>https://example.com/product/chill-vibes-tee</loc></url>
+  <url><loc>https://example.com/product/black-basic-tee</loc></url>
+  <url><loc>https://example.com/product/white-crew-tee</loc></url>
+  <url><loc>https://example.com/product/cream-crew-tee</loc></url>
+  <url><loc>https://example.com/product/red-studio-tee</loc></url>
+  <url><loc>https://example.com/product/fleece-hoodie-white</loc></url>
+  <url><loc>https://example.com/about</loc></url>
+  <url><loc>https://example.com/contact</loc></url>
+  <url><loc>https://example.com/returns/return-exchange-policy</loc></url>
 </urlset>

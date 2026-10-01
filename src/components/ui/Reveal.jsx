@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
 
-// Fade (+ optional slide-up / zoom-out) on first scroll into view — Framer "appear" effects.
+// Fade (+ optional slide-up / zoom-out) on first scroll into view ("appear" effects).
 // Defaults: subtle fade-up. Pass `transition` to override timing entirely (e.g. a spring).
 export default function Reveal({
   as = 'div',

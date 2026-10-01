@@ -27,7 +27,7 @@ out('robots.txt', `User-agent: *\nAllow: /\nDisallow: /cart\nDisallow: /checkout
 const paths = [
   '/',
   ...categories.map((c) => `/shop/${c.slug}`),
-  ...products.map((p) => `/atlas/${p.slug}`),
+  ...products.map((p) => `/product/${p.slug}`),
   '/about',
   '/contact',
   '/returns/return-exchange-policy',

@@ -1,6 +1,12 @@
-# Atlas — Design Notes (extracted from the reference)
+# Design Notes (extracted from the reference "Atlas" template) — INTERNAL, not shipped
 
 Reference: https://atlas-template.framer.website/ (Framer template "Atlas").
+
+> Phase 9: our store is now branded **Halvo** (wordmark "halvo", 63.6px wide at 20px vs 60.1px for
+> "atlas"; 50.9 vs 48.1 at 16px), product pages moved to `/product/:slug` (sections below still
+> say `/atlas/:slug`, the reference URL), products renamed: Black basic tee, White everyday crew
+> tee, Cream relaxed crew tee, Red studio tee. Photos come from Pexels (images.json), cropped to
+> the slot ratios below, so page heights are unchanged (internal/heights-before/after.json).
 
 **How these values were obtained (Phase 1, 2026-09-30):** the live site was rendered in headless
 Chromium at 1440px (desktop), 1000px (tablet) and 390px (phone). Values below are

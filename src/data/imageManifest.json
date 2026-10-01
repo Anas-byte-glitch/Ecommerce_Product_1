@@ -1,0 +1,450 @@
+{
+  "products/premium-ream-choodie-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/premium-ream-choodie-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/zipper-hoodie-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/zipper-hoodie-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/black-hoodie-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/black-hoodie-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/chill-vibes-tee-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/chill-vibes-tee-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/black-basic-tee-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/black-basic-tee-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/white-crew-tee-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/white-crew-tee-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/cream-crew-tee-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/cream-crew-tee-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/red-studio-tee-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/red-studio-tee-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/fleece-hoodie-white-1": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "products/fleece-hoodie-white-2": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      4,
+      5
+    ]
+  },
+  "home/hero": {
+    "widths": [
+      960,
+      1440,
+      1920
+    ],
+    "aspect": [
+      3,
+      2
+    ]
+  },
+  "home/category-shirts": {
+    "widths": [
+      600,
+      900,
+      1200
+    ],
+    "aspect": [
+      8,
+      7
+    ]
+  },
+  "home/category-hoodies": {
+    "widths": [
+      600,
+      900,
+      1200
+    ],
+    "aspect": [
+      8,
+      7
+    ]
+  },
+  "home/story": {
+    "widths": [
+      960,
+      1440,
+      1920
+    ],
+    "aspect": [
+      21,
+      9
+    ]
+  },
+  "home/essentials": {
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "aspect": [
+      2,
+      3
+    ]
+  },
+  "home/instagram-1": {
+    "widths": [
+      360,
+      720
+    ],
+    "aspect": [
+      18,
+      19
+    ]
+  },
+  "home/instagram-2": {
+    "widths": [
+      360,
+      720
+    ],
+    "aspect": [
+      18,
+      19
+    ]
+  },
+  "home/instagram-3": {
+    "widths": [
+      360,
+      720
+    ],
+    "aspect": [
+      18,
+      19
+    ]
+  },
+  "home/instagram-4": {
+    "widths": [
+      360,
+      720
+    ],
+    "aspect": [
+      18,
+      19
+    ]
+  },
+  "home/instagram-5": {
+    "widths": [
+      360,
+      720
+    ],
+    "aspect": [
+      18,
+      19
+    ]
+  },
+  "home/instagram-6": {
+    "widths": [
+      360,
+      720
+    ],
+    "aspect": [
+      18,
+      19
+    ]
+  },
+  "about/hero": {
+    "widths": [
+      960,
+      1440,
+      1920
+    ],
+    "aspect": [
+      16,
+      9
+    ]
+  },
+  "about/team-1": {
+    "widths": [
+      400,
+      800
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "about/team-2": {
+    "widths": [
+      400,
+      800
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "about/team-3": {
+    "widths": [
+      400,
+      800
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "about/team-4": {
+    "widths": [
+      400,
+      800
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "about/mission-1": {
+    "widths": [
+      600,
+      900,
+      1200
+    ],
+    "aspect": [
+      18,
+      17
+    ]
+  },
+  "about/mission-2": {
+    "widths": [
+      600,
+      900,
+      1200
+    ],
+    "aspect": [
+      18,
+      17
+    ]
+  },
+  "contact/hero": {
+    "widths": [
+      960,
+      1440,
+      1920
+    ],
+    "aspect": [
+      16,
+      9
+    ]
+  },
+  "reviews/avatar-1": {
+    "widths": [
+      120,
+      240
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "reviews/avatar-2": {
+    "widths": [
+      120,
+      240
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "reviews/avatar-3": {
+    "widths": [
+      120,
+      240
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "reviews/avatar-4": {
+    "widths": [
+      120,
+      240
+    ],
+    "aspect": [
+      1,
+      1
+    ]
+  },
+  "notfound/hero": {
+    "widths": [
+      960,
+      1440,
+      1920
+    ],
+    "aspect": [
+      3,
+      2
+    ]
+  }
+}

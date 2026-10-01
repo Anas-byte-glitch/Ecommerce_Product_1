@@ -1,4 +1,5 @@
 import Button from '../ui/Button'
+import Img from '../ui/Img'
 
 // Collection tile (≈8:7, 1.1429): image zooms 1.2 → 1 as it scrolls in, black→20% top gradient,
 // title top-left + "shop now" bottom-left (phone: both stacked at the bottom).
@@ -6,7 +7,7 @@ export default function CategoryCard({ title, to, image }) {
   return (
     <div className="zoom-timeline relative aspect-[1.1429] overflow-clip rounded-sm md:flex-1">
       <div className="zoom-on-scroll absolute -inset-[0.5%]">
-        <img src={image} alt="" width={1200} height={1200} loading="lazy" decoding="async" className="size-full object-cover" />
+        <Img image={image} sizes="(min-width: 810px) 50vw, 100vw" loading="lazy" className="size-full object-cover" />
       </div>
       <div
         aria-hidden="true"

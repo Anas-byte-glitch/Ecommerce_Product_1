@@ -1,1 +1,9 @@
+# Netlify: old product URLs, then the single-page-app fallback (keep the fallback last).
+# legacy-redirects:start
+/atlas/black-atlas-tee  /product/black-basic-tee  301
+/atlas/white-atlas-tee  /product/white-crew-tee  301
+/atlas/cream-graphic-tee  /product/cream-crew-tee   301
+/atlas/redatlas-tee     /product/red-studio-tee   301
+/atlas/*                /product/:splat           301
+# legacy-redirects:end
 /*    /index.html    200

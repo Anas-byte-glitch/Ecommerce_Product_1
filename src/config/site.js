@@ -1,13 +1,14 @@
 // Store settings — the single source of truth. Change the brand, currency, shipping and contact
 // details here; components never hard-code them (see README "Store settings").
 export const site = {
-  brandName: 'Atlas', // shown in the wordmark (uppercase, Abril Fatface), titles, footer, copy
+  brandName: 'Halvo', // shown in the wordmark (uppercase, Abril Fatface), titles, footer, copy
   tagline: 'Wear it. Live it. Own it.',
   description: 'Built for movement, made for style—comfort and confidence in motion.',
   year: 2025,
-  // Placeholder production URL (used for the sitemap, robots.txt and Open Graph tags).
-  siteUrl: 'https://www.example.com',
-  contactEmail: 'support@atlas.com',
+  // Your production URL, no trailing slash (used for the sitemap, robots.txt and Open Graph tags).
+  siteUrl: 'https://example.com',
+  // Shown on the Return Policy page and in the contact form confirmation.
+  contactEmail: 'hello@example.com',
 
   // Prices are stored as plain numbers in this currency. `position`: symbol 'before' ($69.00) or
   // 'after' (69 DA); `decimals`: digits after the separator; `locale`: digit grouping/separator.
@@ -16,12 +17,11 @@ export const site = {
   // Cart shipping: free from `freeThreshold` up, otherwise a `flat` rate. No taxes, no discounts.
   shipping: { flat: 8, freeThreshold: 100 },
 
-  // One return window for the whole site (returns page, perks, product trust tile). The template
-  // says 14 days on the returns page but 30 elsewhere; we use 30 everywhere (DESIGN_NOTES §19.3).
+  // One return window for the whole site (returns page, perks, product trust tile).
   returnWindowDays: 30,
 
-  // The template renders no prices on product cards. We show a small muted price under the
-  // name (deliberate deviation, see DESIGN_NOTES §14). Set to false for the template look.
+  // Show a small muted price under the name on product cards and the product page. Set to false
+  // for a cleaner, price-free look (cart and checkout always show prices).
   showPrices: true,
 
   instagram: 'https://www.instagram.com/',
@@ -33,7 +33,7 @@ export const site = {
     { label: 'Contact', to: '/contact' },
   ],
 
-  // The template uses different labels in the phone menu.
+  // Labels used in the phone menu.
   mobileNav: [
     { label: 'Hoodies', to: '/shop/hoodies' },
     { label: 'Shirts', to: '/shop/shirts' },

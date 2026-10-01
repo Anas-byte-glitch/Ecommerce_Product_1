@@ -20,7 +20,7 @@ const click = (selector) => async (page) => {
 const cases = [
   ['/'],
   ['/shop/all'],
-  ['/atlas/zipper-hoodie'],
+  ['/product/zipper-hoodie'],
   ['/about'],
   ['/contact'],
   ['/returns/return-exchange-policy'],
@@ -28,8 +28,8 @@ const cases = [
   ['/cart'],
   ['/checkout'],
   ['/checkout (errors)', '/checkout', click('main button[type=submit]')],
-  ['/atlas/zipper-hoodie (cart drawer)', '/atlas/zipper-hoodie', click('main button:has-text("Add to Cart")')],
-  ['/atlas/zipper-hoodie (size guide)', '/atlas/zipper-hoodie', click('button:has-text("Size Guide")')],
+  ['/product/zipper-hoodie (cart drawer)', '/product/zipper-hoodie', click('main button:has-text("Add to Cart")')],
+  ['/product/zipper-hoodie (size guide)', '/product/zipper-hoodie', click('button:has-text("Size Guide")')],
   ['/ (mobile menu)', '/', click('header button[aria-controls="mobile-menu"]'), 390],
 ]
 
@@ -38,7 +38,7 @@ let failed = 0
 for (const [label, path = label, action, width = 1440] of cases) {
   const page = await browser.newPage({ viewport: { width, height: 900 } })
   await page.goto(BASE + '/')
-  await page.evaluate((v) => localStorage.setItem('atlas-cart', JSON.stringify({ state: { items: v }, version: 1 })), items)
+  await page.evaluate((v) => localStorage.setItem('store-cart', JSON.stringify({ state: { items: v }, version: 1 })), items)
   await page.goto(BASE + path)
   await page.waitForTimeout(3200) // let hero appear animations finish
   if (action) await action(page)

@@ -9,7 +9,7 @@ import Container from '../components/ui/Container'
 import { getCartLines, getTotals, useCartStore } from '../store/cartStore'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /cart (DESIGN_NOTES §18.2) — no reference; built from the project's tokens.
+// /cart — built from the project's tokens.
 // Desktop: lines | 400px summary card. Tablet/phone: stacked.
 export default function Cart() {
   useDocumentTitle('Cart')

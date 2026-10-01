@@ -7,7 +7,7 @@ export const useOrderStore = create((set) => ({
   setLastOrder: (order) => set({ lastOrder: order }),
 }))
 
-// Order number: first 3 letters of the brand + "-" + 6 random characters, e.g. "ATL-7AN5LK".
+// Order number: first 3 letters of the brand + "-" + 6 random characters, e.g. "HAL-7AN5LK".
 export const createOrderId = () => {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
   const values = crypto.getRandomValues(new Uint32Array(6))

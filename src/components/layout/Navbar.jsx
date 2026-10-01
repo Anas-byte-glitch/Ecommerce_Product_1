@@ -7,7 +7,7 @@ import Logo from './Logo'
 import MobileMenu from './MobileMenu'
 import NavItem from './NavItem'
 
-// Fixed, solid-white navbar (DESIGN_NOTES §7).
+// Fixed, solid-white navbar.
 // Phone: 72px, shadow, logo left + cart + hamburger. Tablet/desktop: 64px, bottom border,
 // links left / logo centred / cart right.
 export default function Navbar() {

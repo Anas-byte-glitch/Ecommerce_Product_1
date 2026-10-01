@@ -1,0 +1,49 @@
+HALVO STORE TEMPLATE — LICENSE AGREEMENT
+Version 1.0.0
+
+[PLACEHOLDER TERMS — THE SELLER MUST REVIEW AND REPLACE THIS TEXT BEFORE SALE.
+ Items in square brackets are to be completed. This placeholder is not legal advice.]
+
+Copyright (c) [YEAR] [SELLER NAME / COMPANY]. All rights reserved.
+
+1. GRANT
+   By purchasing this template you ("the Buyer") receive a non-exclusive, non-transferable
+   license to use and modify the template's source code to build [ONE / UNLIMITED] website(s)
+   for [yourself / yourself or one client per license].
+
+2. YOU MAY
+   - Modify the code, design and content in any way.
+   - Use the resulting website for commercial purposes.
+   - [Build sites for clients, provided each end product is a single website and not a
+     template.]
+
+3. YOU MAY NOT
+   - Resell, sublicense, share or redistribute the template, in original or modified form, as
+     a template, theme, starter kit or similar product.
+   - Make the source code publicly available (for example in a public repository) [except as
+     part of a deployed website].
+   - Claim the original template as your own work.
+
+4. THIRD-PARTY COMPONENTS
+   The template includes open-source libraries and fonts under their own licenses (see each
+   package in node_modules, e.g. React, Vite, Tailwind CSS: MIT; Lucide icons: ISC; Inter,
+   Jost and Abril Fatface fonts: SIL Open Font License 1.1). Those licenses continue to apply.
+
+5. DEMO IMAGES
+   The demo photos are NOT covered by this license. They are third-party stock photos included
+   for preview only, listed with their authors and licenses in CREDITS.md. The Buyer must
+   replace them or verify that their use complies with the original license.
+
+6. NO WARRANTY
+   The template is provided "as is", without warranty of any kind. It contains no payment
+   processing, no order storage and no form delivery (see README.md). [SELLER NAME] is not
+   liable for any damages arising from its use.
+
+7. SUPPORT
+   [Describe support terms, e.g. "Support by email at support@example.com for 6 months after
+   purchase."]
+
+8. TERMINATION
+   This license ends automatically if its terms are breached.
+
+[Governing law: ____________________]

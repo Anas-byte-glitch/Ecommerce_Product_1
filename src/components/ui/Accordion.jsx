@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
-// FAQ accordion (DESIGN_NOTES §17.3): grey cards (radius 8, padding 16), 10px apart. Any number of
+// FAQ accordion: grey cards (radius 8, padding 16), 10px apart. Any number of
 // items may be open; all start closed. The chevron swaps down ↔ up; the answer grows in with a
 // quick spring (~200ms); the rule under the question shows only while open. items: [{ question, answer }]
 export default function Accordion({ items, className }) {
@@ -41,7 +41,7 @@ export default function Accordion({ items, className }) {
                 </button>
               </h3>
               <div className="px-4 pb-4">
-                {/* The rule keeps its space but is only visible while open (as on the reference). */}
+                {/* The rule keeps its space but is only visible while open (by design). */}
                 <div
                   aria-hidden="true"
                   className={cn('mt-4 h-px bg-black/8 transition-opacity duration-200', !isOpen && 'opacity-0')}

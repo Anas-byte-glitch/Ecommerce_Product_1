@@ -3,7 +3,7 @@ import ProductGrid from '../product/ProductGrid'
 import HomeSection from './HomeSection'
 
 // Titled product grid ("Now Trending", "New this season"): 1 / 2 / 4 columns.
-// The reference renders it as a static grid (no slider, arrows or drag) at every breakpoint.
+// Rendered as a static grid (no slider, arrows or drag) at every breakpoint.
 export default function ProductRow({ title, subtitle, slugs, showBadges = true }) {
   return (
     <HomeSection title={title} subtitle={subtitle}>

@@ -12,7 +12,7 @@ import { cn } from '../utils/cn'
 import { formatPrice } from '../utils/formatPrice'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /checkout (DESIGN_NOTES §18.3) — demo checkout, UI only. No payment is taken and no card
+// /checkout — demo checkout, UI only. No payment is taken and no card
 // details are ever collected. Submitting creates an in-memory order, clears the cart and shows
 // /checkout/success.
 const COUNTRIES = [

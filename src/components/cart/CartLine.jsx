@@ -3,6 +3,7 @@ import { useCartStore } from '../../store/cartStore'
 import { cn } from '../../utils/cn'
 import { formatPrice } from '../../utils/formatPrice'
 import QuantityStepper from '../product/QuantityStepper'
+import Img from '../ui/Img'
 
 // One cart line: 4:5 thumbnail, name (links to the product), size, price, stepper, remove.
 // `size="lg"` = cart page (120px image, unit price + line total); default = drawer (80px image).
@@ -11,7 +12,7 @@ export default function CartLine({ line, size = 'sm', onNavigate }) {
   const removeItem = useCartStore((s) => s.removeItem)
   const { product, quantity, lineTotal } = line
   const large = size === 'lg'
-  const href = `/atlas/${product.slug}`
+  const href = `/product/${product.slug}`
 
   return (
     <li className="flex gap-4 py-4 md:gap-6">
@@ -22,7 +23,7 @@ export default function CartLine({ line, size = 'sm', onNavigate }) {
         aria-hidden="true"
         className={cn('shrink-0 self-start overflow-hidden rounded-sm bg-surface-2', large ? 'w-24 md:w-[120px]' : 'w-20')}
       >
-        <img src={product.images[0]} alt="" width={800} height={1000} decoding="async" className="aspect-[4/5] w-full object-cover" />
+        <Img image={product.images[0]} sizes="120px" alt="" className="aspect-[4/5] w-full object-cover" />
       </Link>
 
       <div className="flex min-w-0 flex-1 flex-col gap-3">

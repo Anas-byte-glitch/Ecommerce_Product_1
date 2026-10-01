@@ -2,8 +2,8 @@ import { useEffect, useId, useRef } from 'react'
 import { X } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
-// Right-hand drawer (DESIGN_NOTES §17.4 / §18.1): 400px panel (full width on phone) over an 80% black
-// backdrop, instant open/close like the reference. Native <dialog> + showModal() gives the focus
+// Right-hand drawer: 400px panel (full width on phone) over an 80% black
+// backdrop, instant open/close. Native <dialog> + showModal() gives the focus
 // trap, focus return and Escape; we add backdrop-click close and a body scroll lock.
 // Header styling is configurable so each drawer keeps its measured look.
 export default function Drawer({

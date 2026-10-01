@@ -1,147 +1,105 @@
-# Atlas Store
+# Halvo — clothing store template
 
-A **frontend-only e-commerce store** built with React, Vite and Tailwind CSS. Its layout,
-typography, spacing and interactions replicate a reference design (the "Atlas" Framer template),
-measured element by element at 1440 / 1000 / 390px. Product photos are neutral placeholders and
-the brand, currency, prices and shipping rules are configurable.
+**Start here.** Halvo is a ready-made online-store website for a clothing brand (hoodies and
+tees). It is built with React, Vite and Tailwind CSS and runs entirely in the visitor's browser:
+you change the brand name, prices, products and photos, build it, and upload the result to any
+web host.
 
-It is a complete storefront UI — home, shop with sorting, product pages, cart drawer, cart page,
-a demo checkout, about / contact / returns / 404 — but **there is no backend** (see
-[What is not included](#what-is-not-included)).
+## What is included
 
-## Stack
+- A complete storefront: **Home**, **Shop** (all / hoodies / shirts, with sorting), **product
+  pages** (gallery, sizes, size guide, quantity, reviews, FAQ), a **cart drawer** and **cart
+  page**, a **demo checkout** with confirmation page, **About**, **Contact**, **Return policy**
+  and a **404** page.
+- Responsive design for phones, tablets and desktops, scroll animations, keyboard and
+  screen-reader support (checked with axe-core).
+- One settings file for the brand name, currency, shipping, contact email and links:
+  `src/config/site.js`.
+- 9 demo products, demo photos (see [CREDITS.md](CREDITS.md)), favicon, social-sharing image,
+  `sitemap.xml` and `robots.txt` generated from your settings.
+- Hosting files for Vercel (`vercel.json`), Netlify (`public/_redirects`) and Apache / cPanel
+  (`public/.htaccess`).
+- Step-by-step guides in [`docs/`](docs/).
 
-- [Vite 8](https://vite.dev) + [React 19](https://react.dev) (JavaScript/JSX)
-- [Tailwind CSS v4](https://tailwindcss.com) (design tokens in `src/index.css`)
-- [React Router 7](https://reactrouter.com) · [Motion](https://motion.dev) (hero/accordion
-  animations) · [Zustand](https://zustand.docs.pmnd.rs) (cart, persisted to `localStorage`) ·
-  [Lucide](https://lucide.dev) icons
-- Self-hosted fonts: Inter ([`inter-ui`](https://www.npmjs.com/package/inter-ui)), Jost and
-  Abril Fatface ([Fontsource](https://fontsource.org))
-- [oxlint](https://oxc.rs) for linting, [axe-core](https://github.com/dequelabs/axe-core) for the
-  accessibility check
+## What is NOT included — please read
 
-## Getting started
+- **No backend.** There is no server, database, admin panel or API. Products are edited in a
+  code file (`src/data/products.js`).
+- **No real payments.** The checkout is a demonstration: it checks the form and shows an order
+  confirmation, but no money is taken and no card details are asked for.
+- **Orders are not saved or sent anywhere.** The confirmation exists only in the visitor's
+  browser until the page is reloaded. You will not receive an email about orders.
+- **The contact form and the newsletter signup send nothing.** They check the input and show a
+  thank-you message only.
+- **The cart is stored in the visitor's browser** (`localStorage`). It is not shared between
+  devices and you cannot see it.
+- No user accounts, stock management, taxes or discount codes.
+- **The demo photos are for preview only.** Replace them with your own, or check each photo's
+  license yourself before you sell or publish your store (see [CREDITS.md](CREDITS.md)).
 
-Requires Node.js 20+.
+To turn the template into a store that takes real orders, see
+[docs/07-next-steps.md](docs/07-next-steps.md).
+
+## Quick start
+
+You need [Node.js](https://nodejs.org) 20.19 or newer (22 LTS recommended). In a terminal, inside
+this folder:
 
 ```bash
-npm install
-npm run dev       # development server → http://localhost:5173
-npm run build     # production build in dist/ (also regenerates SEO files, see below)
-npm run preview   # serve the production build → http://localhost:4173
-npm run lint      # oxlint
-npm run seo       # regenerate public/favicon.svg, og-image.svg, robots.txt, sitemap.xml
-npm run a11y      # axe-core check of every route (run `npm run preview` first; needs Playwright)
+npm install       # once: downloads the libraries the project uses
+npm run dev       # opens a live preview at http://localhost:5173
+npm run build     # makes the finished website in the dist/ folder
+npm run preview   # shows the finished website at http://localhost:4173
 ```
 
-## Folder structure
+The full walk-through, for people who have never used a terminal, is in
+[docs/01-quick-start.md](docs/01-quick-start.md).
+
+## Guides
+
+| Guide | What it covers |
+| --- | --- |
+| [01 — Quick start](docs/01-quick-start.md) | Install Node.js, run the store on your computer, build it |
+| [02 — Store settings](docs/02-store-settings.md) | Brand name, currency (with a DZD example), shipping, email, links |
+| [03 — Products](docs/03-products.md) | Product fields, adding / removing products, product photos |
+| [04 — Design](docs/04-design.md) | Colours, fonts, sizes and spacing: where to change them |
+| [05 — Pages and content](docs/05-pages-and-content.md) | About, Contact, Return policy, FAQ, team, navigation and footer |
+| [06 — Deploy](docs/06-deploy.md) | Vercel, Netlify, cPanel / shared hosting, Nginx |
+| [07 — Next steps](docs/07-next-steps.md) | Options for real forms, payments and order storage |
+| [08 — Troubleshooting](docs/08-troubleshooting.md) | Blank page, 404 on refresh, missing images, build errors |
+| [Images](docs/IMAGES.md) | Every image slot, its size and how to replace it |
+
+## All commands
+
+| Command | What it does |
+| --- | --- |
+| `npm install` | Installs the libraries (run once, and again after updating the project) |
+| `npm run dev` | Live preview while you edit, at http://localhost:5173 |
+| `npm run build` | Builds the website into `dist/` (also regenerates favicon, sitemap, robots.txt) |
+| `npm run preview` | Serves the built `dist/` folder at http://localhost:4173 |
+| `npm run images` | Downloads / rebuilds the photos listed in `images.json` (see docs/IMAGES.md) |
+| `npm run credits` | Rewrites `CREDITS.md` from `images.json` |
+| `npm run seo` | Regenerates favicon, social image, `robots.txt` and `sitemap.xml` |
+| `npm run lint` | Checks the code for common mistakes |
+| `npm run a11y` | Accessibility check of every page (optional, needs Playwright — see docs/08) |
+
+## Files at a glance
 
 ```
-src/
-  config/site.js        store settings — the single source of truth (see below)
-  data/                 products, FAQs, reviews, team, perks, size guide, About copy
-  pages/                one component per route (all lazy-loaded except Home)
-  components/
-    layout/             Layout (skip link, navbar, main, footer, cart drawer), Navbar, Footer, …
-    ui/                 Button, Badge, Container, Drawer, Accordion, Reveal, HeroImage, …
-    home/ shop/ product/ cart/ checkout/ about/ contact/   page sections
-  store/                cartStore.js (persisted cart), orderStore.js (last order, memory only)
-  hooks/                useDocumentTitle
-  utils/                formatPrice, cn, motion constants
-  styles/fonts.css      self-hosted @font-face rules
-  assets/placeholders/  neutral SVG placeholders (hero, collections, team, …)
-public/
-  images/products/      product placeholders: <slug>-1.svg (main) and <slug>-2.svg (hover)
-  _redirects            Netlify SPA rewrite
-scripts/                generate-seo.mjs, a11y-check.mjs
-docs/DESIGN_NOTES.md    measured design system + list of deliberate deviations
-CLAUDE.md               conventions for AI-assisted sessions on this repo
-vercel.json             Vercel SPA rewrite
+src/config/site.js     store settings (brand, currency, shipping, email, links)
+src/data/              products, FAQ, reviews, team, About text, size guide, perks, page photos
+src/pages/             one file per page
+src/components/        building blocks of the pages
+src/index.css          colours, fonts and sizes (design tokens)
+public/                files copied as-is to the website (photos, favicon, hosting files)
+public/images/         optimized photos (WebP) and SVG placeholders
+images.json            list of every photo: slot, source, author, license
+scripts/               helper scripts behind the npm commands
+docs/                  the guides
 ```
 
-## Store settings
+## License and credits
 
-Everything store-specific lives in **`src/config/site.js`**:
-
-| Setting | Example | Used for |
-| --- | --- | --- |
-| `brandName` | `'Atlas'` | wordmark (uppercase, Abril Fatface), page titles, footer, About copy, order numbers, meta tags, favicon |
-| `tagline`, `description` | | Home hero, page title of Home, meta description |
-| `contactEmail` | `'support@atlas.com'` | returns page, contact confirmation |
-| `siteUrl` | `'https://www.example.com'` | sitemap, robots.txt, canonical and Open Graph URLs |
-| `currency` | `{ code: 'USD', symbol: '$', position: 'before', decimals: 2, locale: 'en-US' }` | every price via `formatPrice()` — e.g. `{ code: 'DZD', symbol: 'DA', position: 'after', decimals: 0, locale: 'fr-DZ' }` gives `6 900 DA` |
-| `shipping` | `{ flat: 8, freeThreshold: 100 }` | cart/checkout totals and the "Add X more for free shipping" message |
-| `returnWindowDays` | `30` | returns page, Home perk, product trust tile |
-| `showPrices` | `true` | prices on product cards / product page (cart and checkout always show prices) |
-| `nav`, `mobileNav`, `footer`, `instagram`, `year` | | navigation, footer links, copyright |
-
-After changing the brand name or `siteUrl`, run `npm run seo` (or just `npm run build`) to
-regenerate the favicon, OG image, robots.txt and sitemap.
-
-## Adding a product
-
-1. Add two images to `public/images/products/`: `<slug>-1.svg` (main) and `<slug>-2.svg` (shown on
-   hover), portrait **4:5** (e.g. 800×1000). Any format works if you change the paths.
-2. Add an entry to `products` in `src/data/products.js`:
-
-   ```js
-   {
-     slug: 'linen-shirt',            // URL: /atlas/linen-shirt
-     name: 'Linen shirt',
-     category: 'shirts',             // 'hoodies' | 'shirts' (see `categories` in site.js)
-     price: 59,                      // in site.currency
-     compareAtPrice: 75,             // or null — shown struck through when higher than price
-     badge: 'Sale',                  // 'Sale' | 'New in' | null
-     images: img('linen-shirt'),     // → ['/images/products/linen-shirt-1.svg', '…-2.svg']
-     sizes: SIZES,                   // ['S', 'M', 'L']
-     description: 'Two or three sentences shown on the product page.',
-     salesRank: 10,                  // lower = better seller ("Best Selling" sort)
-     createdAt: '2025-04-01',        // "Newest" sort
-   },
-   ```
-
-   Array order is the "Relevance" order on the shop pages. To feature it on Home, add its slug to
-   the lists in `src/components/home/NowTrending.jsx`, `NewThisSeason.jsx` or
-   `EverydayEssentials.jsx`.
-3. Run `npm run seo` to add it to the sitemap.
-
-## Deploying
-
-The build is a static site (`dist/`) with client-side routing, so every path must fall back to
-`index.html`. Both configurations are included:
-
-- **Vercel** — import the repository; framework preset "Vite" (build `npm run build`, output
-  `dist`). `vercel.json` rewrites all paths to `/index.html`.
-- **Netlify** — build command `npm run build`, publish directory `dist`. `public/_redirects`
-  (`/* /index.html 200`) is copied into the build.
-
-Set `siteUrl` in `site.js` to the real domain before deploying.
-
-## What is not included
-
-- **No backend** — there is no server, database or API.
-- **No real payments** — the checkout is a demo: it validates the form and shows a confirmation,
-  but takes no payment and never asks for card details.
-- **Orders are not saved** — the confirmed order exists only in memory until the page is reloaded.
-- **The cart lives only in the browser** (`localStorage`); it is not shared between devices.
-- **The contact form and the newsletter signup do not send anything** — they validate and show a
-  success message only.
-- No user accounts, inventory, taxes or discount codes. Product images are placeholders.
-
-## Next steps to make it a real store
-
-1. **Payments and orders** — connect a payment provider (e.g. Stripe Checkout) and an order store
-   (a small backend, serverless functions or a hosted commerce API), then replace the demo submit
-   in `src/pages/Checkout.jsx`.
-2. **Forms** — send the contact form and newsletter to a form or email service (e.g. Formspree,
-   a mailing-list provider) in `ContactForm.jsx` and `NewsletterForm.jsx`.
-3. **Catalogue** — real product photography and data (or load products from a CMS/commerce API
-   instead of `src/data/products.js`), real stock and size availability.
-4. **Legal and ops** — real contact details, returns policy, privacy policy, analytics/consent.
-
-## Documentation
-
-- `docs/DESIGN_NOTES.md` — every measured value from the reference, per page, plus a table of all
-  deliberate deviations.
-- `CLAUDE.md` — coding conventions and project memory.
+See [LICENSE.txt](LICENSE.txt) for what you may do with this template, [CREDITS.md](CREDITS.md)
+for the demo photos and [CHANGELOG.md](CHANGELOG.md) for the version history. Fonts (Inter, Jost,
+Abril Fatface) are under the SIL Open Font License; icons are from Lucide (ISC license).

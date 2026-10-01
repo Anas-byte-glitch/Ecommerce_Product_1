@@ -1,10 +1,10 @@
 import { site } from '../config/site'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /returns/return-exchange-policy (DESIGN_NOTES §19.3). Text page: 1000px column, centered H1,
-// grey content card (padding 40 / 16 on phone) with the reference's rich-text rhythm:
+// /returns/return-exchange-policy. Text page: 1000px column, centered H1,
+// grey content card (padding 40 / 16 on phone) with a rich-text rhythm:
 // H2 42/38/32 bold, 40px above; lists 24px above, 20px bullets; paragraphs 20px above.
-// The return window comes from site.returnWindowDays (the reference says 14 days here, 30 elsewhere).
+// The return window comes from site.returnWindowDays.
 const h2 = 'font-heading-alt mt-10 text-[32px] leading-[1.1] font-bold text-black md:text-[38px] lg:text-[42px]'
 const ul = 'mt-6 list-disc pl-5 marker:text-slate'
 const p = 'mt-5'
