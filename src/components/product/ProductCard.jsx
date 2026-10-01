@@ -19,14 +19,20 @@ export default function ProductCard({ product, showBadge = true, badge, classNam
           <img
             src={alt}
             alt=""
+            width={800}
+            height={1000}
             loading="lazy"
+            decoding="async"
             className="absolute inset-0 size-full object-cover transition-transform duration-300 ease-out-soft group-hover:scale-105"
           />
         )}
         <img
           src={main}
           alt={product.name}
+          width={800}
+          height={1000}
           loading="lazy"
+          decoding="async"
           className={cn(
             'absolute inset-0 size-full object-cover',
             alt && 'transition-opacity duration-200 ease-out group-hover:opacity-0',

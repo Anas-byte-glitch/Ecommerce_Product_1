@@ -45,7 +45,7 @@ export default function About() {
           {team.map((m) => (
             <li key={m.name} className="flex flex-col gap-4">
               <div className="relative aspect-square overflow-hidden rounded-lg bg-surface-2">
-                <img src={m.image} alt={`${m.name}, ${m.role}`} loading="lazy" className="absolute inset-0 size-full object-cover" />
+                <img src={m.image} alt={`${m.name}, ${m.role}`} width={600} height={800} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-body-lg font-normal text-slate">{m.name}</h3>
@@ -63,7 +63,7 @@ export default function About() {
               {/* Image zooms 1.2 → 1 as the card scrolls in (same effect as the home tiles). */}
               <div className="relative aspect-[1.059] overflow-clip bg-surface-2">
                 <div className="zoom-on-scroll absolute inset-0">
-                  <img src={b.image} alt="" loading="lazy" className="size-full object-cover" />
+                  <img src={b.image} alt="" width={900} height={1080} loading="lazy" decoding="async" className="size-full object-cover" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">

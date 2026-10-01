@@ -22,7 +22,7 @@ export default function CartLine({ line, size = 'sm', onNavigate }) {
         aria-hidden="true"
         className={cn('shrink-0 overflow-hidden rounded-sm bg-surface-2', large ? 'w-24 md:w-[120px]' : 'w-20')}
       >
-        <img src={product.images[0]} alt="" className="aspect-[4/5] w-full object-cover" />
+        <img src={product.images[0]} alt="" width={800} height={1000} decoding="async" className="aspect-[4/5] w-full object-cover" />
       </Link>
 
       <div className="flex min-w-0 flex-1 flex-col gap-3">

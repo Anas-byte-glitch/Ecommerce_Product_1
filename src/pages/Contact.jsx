@@ -11,7 +11,7 @@ export default function Contact() {
     <>
       <section className="relative flex flex-col items-center justify-center overflow-clip pt-[120px] pb-16 md:h-screen md:pt-[70px] md:pb-0 lg:pt-[60px]">
         <div aria-hidden="true" className="absolute inset-0 hidden md:block">
-          <img src={contactImage} alt="" className="size-full object-cover" />
+          <img src={contactImage} alt="" width={1440} height={1800} decoding="async" fetchPriority="high" className="size-full object-cover" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0)_0%,rgba(0,0,0,0.36)_72.44%,rgba(0,0,0,0.6)_100%)]" />
         </div>
         <div className="relative flex w-full flex-col items-center gap-6 bg-white px-4 md:w-[700px] md:rounded-lg md:p-8">

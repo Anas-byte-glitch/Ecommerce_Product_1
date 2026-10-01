@@ -8,7 +8,7 @@ export default function BrandStory() {
     <section className="tilt-timeline relative flex h-[70vh] items-end overflow-clip">
       <div className="absolute inset-0 overflow-clip">
         <div className="tilt-on-scroll absolute -inset-[5%]">
-          <img src={storyImage} alt="" loading="lazy" className="size-full object-cover" />
+          <img src={storyImage} alt="" width={1000} height={1200} loading="lazy" decoding="async" className="size-full object-cover" />
         </div>
       </div>
 

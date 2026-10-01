@@ -6,7 +6,7 @@ export default function ReviewCard({ review }) {
   return (
     <article className="flex h-full min-h-[300px] flex-col gap-4 rounded-sm p-6">
       <div className="flex items-start gap-3">
-        <img src={review.avatar} alt="" loading="lazy" className="size-15 shrink-0 rounded-full object-cover" />
+        <img src={review.avatar} alt="" width={120} height={120} loading="lazy" decoding="async" className="size-15 shrink-0 rounded-full object-cover" />
         <div className="flex flex-col gap-3">
           <h3 className="text-body">{review.name}</h3>
           <div className="flex gap-1" role="img" aria-label={`${review.rating} out of 5 stars`}>

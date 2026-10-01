@@ -20,7 +20,7 @@ export default function InstagramStrip() {
         <ul className="flex w-max animate-marquee motion-reduce:animate-none">
           {loop.map((src, i) => (
             <li key={i} aria-hidden={i >= images.length} className="h-[380px] w-[376px] shrink-0 pr-4">
-              <img src={src} alt="" className="size-full rounded-sm object-cover" />
+              <img src={src} alt="" width={720} height={960} decoding="async" className="size-full rounded-sm object-cover" />
             </li>
           ))}
         </ul>

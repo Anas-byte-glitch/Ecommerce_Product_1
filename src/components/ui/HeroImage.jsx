@@ -8,6 +8,10 @@ export default function HeroImage({ src }) {
     <motion.img
       src={src}
       alt=""
+      width={1536}
+      height={1024}
+      decoding="async"
+      fetchPriority="high"
       className="absolute inset-0 size-full object-cover"
       initial={reduce ? false : { opacity: 0, scale: 1.2 }}
       animate={{ opacity: 1, scale: 1 }}
