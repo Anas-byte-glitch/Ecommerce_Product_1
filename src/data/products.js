@@ -22,7 +22,6 @@ export const products = [
     badge: null,
     images: img('premium-ream-choodie'),
     sizes: SIZES,
-    colors: ['Sand'],
     description:
       'Some hoodies try too hard. This one doesn’t have to. Soft, clean, and timeless, it’s the kind of piece you reach for without thinking—because it never lets you down. Made from a mid-weight ultra-soft fleece blend, it features a relaxed everyday fit with a full front zipper for quick on-and-off wear. The soft brushed interior ensures maximum comfort, making it perfect for casual days, layering, and slow weekends. Ribbed cuffs and hem provide a snug, finished look.',
     salesRank: 6,
@@ -37,7 +36,6 @@ export const products = [
     badge: 'Sale',
     images: img('zipper-hoodie'),
     sizes: SIZES,
-    colors: ['Heather grey'],
     description:
       'Not every day calls for a full “fit,” but this hoodie makes even the lazy days look intentional. Smooth, simple, and effortlessly sharp—zip it up, head out, and let the comfort do the talking. Made from a mid-weight fleece blend, it features a regular, easygoing fit with a full front zipper for quick on-and-off wear. The soft brushed interior ensures maximum comfort, while side pockets hold essentials—or warm your hands. Ribbed cuffs and hem provide a snug, finished look.',
     salesRank: 1,
@@ -52,7 +50,6 @@ export const products = [
     badge: 'New in',
     images: img('black-hoodie'),
     sizes: SIZES,
-    colors: ['Black'],
     description:
       'You don’t have to be headed to a mountain cabin to wear this, but it definitely feels like you should be. Warm, clean, and designed for the soft-life days when comfort and style work together effortlessly. Crafted from a mid-weight fleece blend, it features a relaxed, cozy fit with an adjustable drawstring hood and soft brushed interior for maximum comfort. The kangaroo pocket keeps hands warm—or hides snacks, no judgment—while ribbed cuffs and hem provide a snug, finished look.',
     salesRank: 7,
@@ -69,7 +66,6 @@ export const products = [
     badge: 'Sale',
     images: img('chill-vibes-tee'),
     sizes: SIZES,
-    colors: ['Cobalt'],
     description:
       'Maybe you’re not on a beach right now, but this tee does a pretty good job pretending you are. Easygoing, clean, and effortlessly cool—because sometimes the simplest pieces say the most. Made from a softweight cotton blend, it features a classic relaxed fit and short sleeve crew neck for comfortable, everyday wear. The right-chest white logo adds a clean, minimal touch, while the reinforced neckline keeps its shape and the smooth, breathable fabric ensures all-day comfort.',
     salesRank: 2,
@@ -84,7 +80,6 @@ export const products = [
     badge: 'Sale',
     images: img('black-atlas-tee'),
     sizes: SIZES,
-    colors: ['Black'],
     description:
       'The simplest pieces always hit the hardest. This tee keeps things sharp, minimal, and effortlessly cool—no logos needed, just pure everyday confidence. Made from a softweight cotton blend, it offers a classic fit and short sleeve crew neck for comfortable, versatile wear. Its clean, minimalist design pairs with literally anything, while the reinforced neckline keeps its shape and the durable fabric and print are built to last wash after wash.',
     salesRank: 3,
@@ -99,7 +94,6 @@ export const products = [
     badge: 'Sale',
     images: img('white-atlas-tee'),
     sizes: SIZES,
-    colors: ['White'],
     description:
       'If wanderlust had a uniform, this tee would be it. Clean, crisp, and effortlessly cool, it brings that “always exploring” vibe without trying too hard. Made from a softweight cotton blend, it features a white base with a detailed atlas-inspired graphic for a modern, adventurous touch. The classic relaxed fit and short sleeve crew neck make it perfect for everyday wear, while the soft, breathable fabric ensures all-day comfort. Reinforced neckline keeps its shape, and the durable print stays sharp through countless washes.',
     salesRank: 4,
@@ -114,7 +108,6 @@ export const products = [
     badge: 'Sale',
     images: img('cream-graphic-tee'),
     sizes: SIZES,
-    colors: ['Cream'],
     description:
       'You don’t have to travel the world to look like you’ve been everywhere—this tee gives off seasoned-explorer energy all on its own. Clean, classic, and made from a softweight cotton blend, it features a cream color with an atlas-inspired graphic. Designed with a classic fit and short sleeve crew neck, it pairs effortlessly with literally anything. The reinforced neckline keeps its shape, while the durable print is built to last wash after wash.',
     salesRank: 5,
@@ -129,7 +122,6 @@ export const products = [
     badge: 'New in',
     images: img('redatlas-tee'),
     sizes: SIZES,
-    colors: ['Red'],
     description:
       'You don’t need ink to look like you’ve got attitude—this tee does the talking for you. With bold color, a clean fit, and a tattoo-inspired graphic, it adds just the right amount of edge. Made from a softweight cotton blend, it features a classic fit for everyday wear, a short sleeve crew neck, and a reinforced neckline to maintain its shape. The durable print is designed to last wash after wash, keeping your statement style strong.',
     salesRank: 8,
@@ -146,7 +138,6 @@ export const products = [
     badge: 'New in',
     images: img('fleece-hoodie-white'),
     sizes: SIZES,
-    colors: ['White'],
     description:
       'You don’t have to be headed to a mountain cabin to wear this, but it definitely feels like you should be. Warm, clean, and built for the soft-life days when comfort and style decide to work together. Crafted from a mid-weight fleece blend, it offers a relaxed, cozy fit with an adjustable drawstring hood and soft brushed interior for maximum comfort. The kangaroo pocket keeps hands warm—or hides snacks, no judgment—while ribbed cuffs and hem provide a snug, finished look.',
     salesRank: 9,

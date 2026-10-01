@@ -10,10 +10,10 @@ configurable brand name. Do **not** copy the template's images or copywriting as
 labels (nav/footer link names, section titles) are fine; product photos are replaced by local
 placeholders.
 
-The build is split into 7 phases. Phase 1 (this foundation) is done:
-research → `docs/DESIGN_NOTES.md`, project setup, design tokens, routing, Navbar, MobileMenu,
-Footer, product data. Phases 2 (Home), 3 (Shop), 4 (Product page), 5 (cart drawer, /cart, demo checkout) and 6 (About,
-Contact, Return policy, 404, newsletter) are done. Later phase: 7 polish & QA.
+All 7 build phases are done: foundation, Home, Shop, Product page, cart drawer + /cart + demo
+checkout, About / Contact / Return policy / 404 / newsletter, and polish & QA (store settings,
+self-hosted fonts, a11y, performance, SEO, deploy files, README). The project is in maintenance:
+keep every measured layout intact — re-measure (see below) after any visual change.
 
 ## No Shopify behaviour
 
@@ -40,14 +40,17 @@ npm run dev       # dev server (http://localhost:5173)
 npm run build     # must pass with no errors before every commit
 npm run preview   # serve the production build
 npm run lint      # oxlint
+npm run seo       # regenerate favicon / OG image / robots / sitemap from site.js + products
+npm run a11y      # axe-core on every route (needs `npm run preview` running + Playwright)
 ```
 
 ## Folder structure
 
 ```
 src/
-  config/site.js          brand name, year, nav + footer links, categories, contactEmail,
-                          returnWindowDays (30 — use it wherever a return window appears)
+  config/site.js          store settings: brandName, tagline, description, siteUrl, contactEmail,
+                          currency {code,symbol,position,decimals,locale}, shipping {flat,freeThreshold},
+                          returnWindowDays, showPrices, nav/footer links, categories
   data/                   products.js (+ query helpers incl. getProductsBySlugs, SORT_OPTIONS, sortProducts;
                           array order = Relevance; salesRank = Best Selling), perks.js, faqs.js,
                           reviews.js (+ avatar placeholders), sizeGuide.js, team.js (+ portraits),
@@ -82,9 +85,17 @@ src/
   components/checkout/    Field (label + input + inline error), validateCheckout
   components/about/       AboutSection (6-col grid: label 2 cols, content 4)
   components/contact/     ContactForm, validateContact (+ isValidEmail, also used by the newsletter)
-  utils/                  formatPrice.js, cn.js, motion.js (appearEase)
+  hooks/                  useDocumentTitle ("<page> — <brand>")
+  utils/                  formatPrice.js (currency from site.js; {trim} for round thresholds), cn.js,
+                          motion.js (appearEase)
+  styles/fonts.css        self-hosted Inter (inter-ui) @font-face; Jost/Abril via @fontsource in main.jsx
   index.css               Tailwind import + @theme tokens + base styles
 public/images/products/   placeholder SVGs: <slug>-1.svg (main), <slug>-2.svg (hover/alt), 4:5
+public/                   favicon.svg, og-image.svg, robots.txt, sitemap.xml (generated — don't edit),
+                          _redirects (Netlify)
+scripts/                  generate-seo.mjs (npm run seo / prebuild), a11y-check.mjs (npm run a11y)
+vite.config.js            store-html plugin: fills %BRAND% etc. in index.html, preloads critical fonts
+vercel.json               SPA rewrite
 docs/DESIGN_NOTES.md      extracted design system (read before styling)
 reference/                screenshots of the reference when needed
 ```
@@ -118,11 +129,13 @@ pathname change.
   easing `ease-out-soft`.
 - Letter-spacing −0.03em is applied globally to every element; use `tracking-normal` where the
   reference uses normal tracking (footer headings, inputs).
-- Page width/gutters: wrap content in `<Container>` (max 1600px, px 16/32/40).
+- Page width/gutters: wrap content in `<Container>` (px 16/32/40; content max 1600 above 1600px,
+  `narrow` = box max 1600 as on the About page). Navbar and heroes stay full width.
 - The navbar is **fixed** (72px phone / 64px tablet+desktop) and overlays content: heroes sit under
   it; other pages add their own top padding (template uses ~100px).
-- Brand name/year/links come from `src/config/site.js` — never hard-code "Atlas".
-- Prices: always render through `formatPrice()`.
+- Brand name/year/links/email/currency/shipping come from `src/config/site.js` — never hard-code
+  "Atlas", "$", an email or a number of days. Prices and thresholds: always `formatPrice()`.
+- Page titles: `useDocumentTitle('Page')` in every page component.
 - Buttons: use `<Button variant=…>` (`outline-light`, `light`, `primary`, `dark`, `subscribe`);
   pass `to` for internal links, `href` for external. Badges: `<Badge>Sale</Badge>`.
 - Scroll-in animation: wrap in `<Reveal>` (props: `y`, `scale`, `delay`, `duration`, `ease`,
@@ -136,14 +149,18 @@ pathname change.
 - Accordion: multi-open grey cards (reference behaviour); pass `items=[{question, answer}]`.
 - Drawers: use `ui/Drawer` (header styling via props). Cart drawer opens via `openDrawer()`.
 - Buttons also have `secondary` (outlined 56px) and `plain` (white, borderless, Jost) variants.
-- Pricing: `site.freeShippingThreshold` / `site.flatShipping`; always compute totals with the
+- Pricing: `site.shipping.freeThreshold` / `site.shipping.flat`; always compute totals with the
   cartStore helpers. Cart/checkout always show prices, whatever `site.showPrices` says.
 - Checkout is a demo: never add card-number fields.
 - ProductGrid/ProductCard accept `badge` to force a badge label (related items: "New in").
 - `Hero` (home) takes `image/title/subtitle/cta` and is reused by the 404 page.
 - `<main>` has no min height (matches the reference); short pages show the footer right after.
 - Section H2s use Inter alternates (`heading-2` includes them; `font-heading-alt` / `font-badge-alt`
-  elsewhere) — no-ops with the Google-hosted Inter, see DESIGN_NOTES §19.
+  elsewhere); they work with the self-hosted Inter (widths match the reference).
+- Routes are lazy (`App.jsx`, all except Home). Images: intrinsic width/height, `decoding="async"`,
+  `loading="lazy"` below the fold, `fetchPriority="high"` on heroes.
+- Accessibility: skip link in Layout; keep `npm run a11y` at zero violations; `muted` (#6d6d6d) is the
+  lightest allowed text grey on white. Reduced motion is handled globally (MotionConfig + base CSS).
 - Forms are demos: Contact and the newsletter validate and confirm but never send anything.
 - Home section vertical padding: `HomeSection` (64/80/120, or `compact` for 64/80/100).
 - Accessibility: real `<button>`/`<a>`, labels for inputs (`sr-only` if hidden), `aria-*` on toggles.
@@ -182,8 +199,9 @@ const browser = await chromium.launch({
 
 Measure at 1440 / 1000 / 390px widths with `getComputedStyle` + `getBoundingClientRect`.
 For `localhost` use the same launch but add `bypass: 'localhost,127.0.0.1'` to `proxy` and
-`--proxy-bypass-list=<-loopback>;localhost;127.0.0.1` to `args`: the local page must still reach Google
-Fonts through the proxy, otherwise fallback fonts make every text width wrong.
+`--proxy-bypass-list=<-loopback>;localhost;127.0.0.1` to `args` (fonts are self-hosted now, so the local
+build needs no proxy at all). The proxy CA can rotate between sessions — recompute the SPKI hash
+if you get ERR_CERT_AUTHORITY_INVALID.
 Tips: the reference names its layers (`data-framer-name`) — query by those; its appear effects are in
 the `__framer__appearAnimationsContent` JSON in the page source; compare by text content (same string →
 same box) and with `showPrices: false` for exact heights.
