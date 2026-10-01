@@ -38,6 +38,8 @@
 
   /* Layout */
   --container-site: 1600px;
+  /* Above 1600px the reference caps product/home sections' content at 1600 (box 1600 + 2×40). */
+  --container-site-wide: 1680px;
   --container-policy: 1000px;
 
   /* Type scale (size / line-height) */

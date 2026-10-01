@@ -20,7 +20,7 @@ export default function CartLine({ line, size = 'sm', onNavigate }) {
         onClick={onNavigate}
         tabIndex={-1}
         aria-hidden="true"
-        className={cn('shrink-0 overflow-hidden rounded-sm bg-surface-2', large ? 'w-24 md:w-[120px]' : 'w-20')}
+        className={cn('shrink-0 self-start overflow-hidden rounded-sm bg-surface-2', large ? 'w-24 md:w-[120px]' : 'w-20')}
       >
         <img src={product.images[0]} alt="" width={800} height={1000} decoding="async" className="aspect-[4/5] w-full object-cover" />
       </Link>
