@@ -1,0 +1,38 @@
+/*
+ * Self-hosted fonts (no Google Fonts request). Same families and weights as before:
+ *   Inter 400/500/600/700 — full rsms build from `inter-ui` (latin subset). Unlike the Google build it
+ *     keeps the OpenType alternates the reference turns on for headings (cv01 cv05 cv09 cv11 ss03).
+ *   Jost 400/500/600 and Abril Fatface 400 — @fontsource (imported in main.jsx).
+ * All faces use font-display: swap; the critical files are preloaded by the plugin in vite.config.js.
+ */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../node_modules/inter-ui/web-latin/Inter-Regular-subset.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../../node_modules/inter-ui/web-latin/Inter-Medium-subset.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../../node_modules/inter-ui/web-latin/Inter-SemiBold-subset.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../../node_modules/inter-ui/web-latin/Inter-Bold-subset.woff2') format('woff2');
+}
