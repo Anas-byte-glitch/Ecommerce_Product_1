@@ -35,7 +35,7 @@ export default function ProductInfo({ product }) {
               <>
                 <span>{formatPrice(product.price)}</span>
                 {onSale && (
-                  <s className="text-black/32">
+                  <s className="text-muted">
                     <span className="sr-only">was </span>
                     {formatPrice(product.compareAtPrice)}
                   </s>

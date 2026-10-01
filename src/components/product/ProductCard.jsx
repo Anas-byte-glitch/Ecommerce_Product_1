@@ -50,7 +50,7 @@ export default function ProductCard({ product, showBadge = true, badge, classNam
           <p className="flex gap-2 text-small text-muted">
             <span>{formatPrice(product.price)}</span>
             {onSale && (
-              <s className="text-black/32">
+              <s className="text-muted">
                 <span className="sr-only">was </span>
                 {formatPrice(product.compareAtPrice)}
               </s>

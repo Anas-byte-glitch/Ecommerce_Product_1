@@ -45,6 +45,7 @@ export default function Shop() {
             <SortSelect value={sort} onChange={setSort} />
           </div>
 
+          <h2 className="sr-only">{current.label} products</h2>
           {products.length > 0 ? (
             <ProductGrid
               products={products}
