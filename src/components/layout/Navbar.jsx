@@ -31,7 +31,7 @@ export default function Navbar() {
         aria-label="Main"
         className="bg-white px-4 py-5 shadow-[0_1px_2px_rgba(0,0,0,0.25)] md:px-8 md:shadow-[inset_0_-1px_0_var(--color-line)] lg:px-10"
       >
-        <div className="mx-auto flex h-8 max-w-site items-center justify-between md:grid md:h-6 md:grid-cols-[1fr_auto_1fr]">
+        <div className="flex h-8 items-center justify-between md:grid md:h-6 md:grid-cols-[1fr_auto_1fr]">
           <ul className="hidden items-center gap-5 md:flex">
             {site.nav.map((link) => (
               <li key={link.to}>

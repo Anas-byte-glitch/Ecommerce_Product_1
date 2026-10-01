@@ -8,7 +8,7 @@ export default function FreeShippingNote({ subtotal, className }) {
   return (
     <p className={className ?? 'text-small tracking-normal text-muted'} aria-live="polite">
       {remaining > 0
-        ? `Add ${formatPrice(remaining)} more for free shipping (orders over ${formatPrice(site.freeShippingThreshold)}).`
+        ? `Add ${formatPrice(remaining)} more for free shipping (orders over ${formatPrice(site.shipping.freeThreshold, { trim: true })}).`
         : 'You’ve unlocked free shipping.'}
     </p>
   )

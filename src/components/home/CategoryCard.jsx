@@ -6,7 +6,7 @@ export default function CategoryCard({ title, to, image }) {
   return (
     <div className="zoom-timeline relative aspect-[1.1429] overflow-clip rounded-sm md:flex-1">
       <div className="zoom-on-scroll absolute -inset-[0.5%]">
-        <img src={image} alt="" loading="lazy" className="size-full object-cover" />
+        <img src={image} alt="" width={1200} height={1200} loading="lazy" decoding="async" className="size-full object-cover" />
       </div>
       <div
         aria-hidden="true"

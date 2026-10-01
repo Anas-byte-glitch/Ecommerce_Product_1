@@ -10,6 +10,7 @@ import { getCartLines, getTotals, useCartStore } from '../store/cartStore'
 import { createOrderId, useOrderStore } from '../store/orderStore'
 import { cn } from '../utils/cn'
 import { formatPrice } from '../utils/formatPrice'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /checkout (DESIGN_NOTES §18.3) — demo checkout, UI only. No payment is taken and no card
 // details are ever collected. Submitting creates an in-memory order, clears the cart and shows
@@ -46,6 +47,7 @@ const tile =
 const legend = 'mb-4 text-[18px] leading-[1.2] font-medium text-black md:text-[20px] lg:text-[22px]'
 
 export default function Checkout() {
+  useDocumentTitle('Checkout')
   const items = useCartStore((s) => s.items)
   const clearCart = useCartStore((s) => s.clearCart)
   const setLastOrder = useOrderStore((s) => s.setLastOrder)

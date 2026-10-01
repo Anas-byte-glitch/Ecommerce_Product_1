@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import { site } from '../config/site'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /returns/return-exchange-policy (DESIGN_NOTES §19.3). Text page: 1000px column, centered H1,
 // grey content card (padding 40 / 16 on phone) with the reference's rich-text rhythm:
@@ -12,14 +12,7 @@ const p = 'mt-5'
 export default function ReturnPolicy() {
   const days = `${site.returnWindowDays} days`
 
-  // The reference titles this page "Return & Exchange Policy - <site>".
-  useEffect(() => {
-    const previous = document.title
-    document.title = `Return & Exchange Policy - ${site.name}`
-    return () => {
-      document.title = previous
-    }
-  }, [])
+  useDocumentTitle('Return & Exchange Policy')
 
   return (
     <section className="mx-auto flex max-w-[1000px] flex-col gap-12 px-4 pt-[140px] pb-16 md:gap-16 md:px-8 md:pb-20 lg:px-10 lg:pb-[100px]">

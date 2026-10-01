@@ -18,7 +18,7 @@ export default function Hero({
   flushTablet = false, // 404: copy aligns with the 40px section padding on tablet (no extra 32px)
 }) {
   return (
-    <section className="relative flex min-h-[700px] h-[88vh] flex-col items-center justify-end overflow-clip py-20 pl-4 md:aspect-[1.29667] md:h-auto md:items-start md:pt-[70px] md:pb-[60px] md:pl-10 lg:aspect-auto lg:h-screen lg:py-20">
+    <section className="relative flex h-[88vh] min-h-[700px] w-full flex-col items-center justify-end overflow-clip py-20 pl-4 md:aspect-[1.29667] md:h-auto md:items-start md:pt-[70px] md:pb-[60px] md:pl-10 lg:aspect-auto lg:h-screen lg:py-20">
       <HeroImage src={image} />
       <div
         aria-hidden="true"

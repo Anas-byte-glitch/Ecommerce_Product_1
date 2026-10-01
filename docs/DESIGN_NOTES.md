@@ -31,12 +31,14 @@ exist. Write mobile-first: base = phone, `md:` = tablet, `lg:` = desktop.
 
 | Role                       | Family         | Source       | Notes |
 | -------------------------- | -------------- | ------------ | ----- |
-| UI / headings / body       | **Inter**      | Google Fonts | weights 400, 500, 600 (700 used for `<strong>` in policy headings) |
-| Secondary body / lead text | **Jost**       | Google Fonts | weights 400, 500, 600 — hero subtitle, shop category tabs, "shop now" pill, qty number |
-| Wordmark logo              | **Abril Fatface** | Google Fonts | 400, uppercase |
+| UI / headings / body       | **Inter**      | `inter-ui` (npm, self-hosted) | weights 400, 500, 600, 700 (700 for policy headings) |
+| Secondary body / lead text | **Jost**       | `@fontsource/jost` | weights 400, 500, 600 — hero subtitle, shop category tabs, "shop now" pill, qty number |
+| Wordmark logo              | **Abril Fatface** | `@fontsource/abril-fatface` | 400, uppercase |
 
-All three are the exact families used by the template (the woff2 files are served from
-fonts.gstatic.com in the source) — no substitutes needed. Loaded in `index.html` via Google Fonts.
+All three are the exact families used by the template — no substitutes. Since Phase 7 they are
+**self-hosted** (`src/styles/fonts.css` + imports in `main.jsx`, `font-display: swap`, critical files
+preloaded by the Vite plugin). Inter is the full rsms build, which keeps the OpenType alternates the
+reference uses (see §19) — the Google-hosted Inter used before did not.
 
 **Letter spacing is -0.03em on almost all text** (e.g. 16px → -0.48px, 42px → -1.26px).
 Exceptions with `normal` tracking: footer column headings/copyright (14px/500), form inputs,
@@ -94,8 +96,9 @@ the "1" quantity label.
 
 ## 6. Layout, container & spacing
 
-- **Container:** `max-width: 1600px`, centered. Horizontal padding: **40px desktop / 32px tablet / 16px phone**
-  (`px-4 md:px-8 lg:px-10`) → `Container` component.
+- **Container:** centered, horizontal padding **40px desktop / 32px tablet / 16px phone**
+  (`px-4 md:px-8 lg:px-10`) → `Container` component. Above 1600px see §20: content max **1600px**
+  (box 1680, `max-w-site-wide`) for home/shop/product sections; `narrow` = box max 1600 (About).
 - **Section vertical padding:** desktop **120px** (home product sections) or **100px** (most others),
   tablet **80px**, phone **64px**. Section inner stack: header block → content gap **64px**
   (48px for "Related items"). Header block: title → subtitle gap **16px**; subtitle max-width 320px, centered.
@@ -496,10 +499,9 @@ Contact and 404 use the site title.
 
 **Inter stylistic alternates.** The reference renders section H2s (`heading-2`), the product title and the
 policy headings with `font-feature-settings: "cv01","cv05","cv09","cv11","ss03"`, and badges with
-`"ss01".."ss04"`. We set the same (`heading-2`, `font-heading-alt`, `font-badge-alt`), but the Google-hosted
-Inter we load doesn't contain these alternates, so they currently have **no effect**: headings render
-~0.5% narrower than the reference (e.g. "Non-Returnable Items" 427 vs 430px at 42px). Self-hosting the full
-Inter build would close the gap (rsms.me was not reachable from the build container).
+`"ss01".."ss04"`. We set the same (`heading-2`, `font-heading-alt`, `font-badge-alt`). Since Phase 7 the
+self-hosted full Inter honours them and heading widths match the reference exactly (e.g. "Non-Returnable
+Items" 430px at 42px, "Everyday Essentials" 383px, "24/7 Available" 272px).
 
 ### 19.1 About `/about`
 - **Hero**: full-bleed image band, **594px at every width**; overlay
@@ -543,8 +545,7 @@ Inter build would close the gap (rsms.me was not reachable from the build contai
   (`site.contactEmail`) is black and underlined.
 - **Deliberate fix:** the reference says **14 days** here but 30 days on Home and the product page. We use
   `site.returnWindowDays` (**30**) on this page, the Home perk and the product trust tile.
-- Heights match at 1440/1000 (1575 / 1520); phone 1782 vs 1817 because "Non-Returnable Items" wraps on the
-  reference (stylistic-alternates width, see above).
+- Heights match at all widths (1575 / 1520 / 1817) since the Phase 7 font change.
 
 ### 19.4 404
 - `/404` and any unknown URL (HTTP 404 on the reference) render the **Home hero layout** with "404" /
@@ -557,3 +558,58 @@ Inter build would close the gap (rsms.me was not reachable from the build contai
   feedback. Ours: `noValidate` + inline error under the form (14px, `#ff8a80` on black, input outlined in the
   same colour), focus stays in the input; a valid address replaces the form with a 50px "Thanks for
   subscribing!" row, so the footer keeps its exact height (468px at 1440). **Nothing is stored or sent.**
+
+## 20. Phase 7 — wide screens, accessibility, motion
+
+### 20.1 Above 1600px (measured on the reference at 1920)
+| Element | Reference | Ours |
+| --- | --- | --- |
+| Navbar | full width (links at x = 40) | full width (no max-width) |
+| Hero / 404 / About / Contact heroes, brand-story banner, Instagram marquee | full-bleed | full-bleed |
+| Home, shop, product, reviews, related sections | **content** capped at 1600 (x 160–1760) | `Container` box max 1680 (`max-w-site-wide`) |
+| Collection tiles | capped at 1600, centred | `max-w-site` on the tile row |
+| About sections | **box** capped at 1600 (content at x = 200) | `<Container narrow>` |
+| Footer | content at x = 200 | inner max-width 1520 |
+At ≤ 1600px nothing changed (all pages re-measured: identical).
+
+### 20.2 Tablet hero
+The Home/404 hero uses `aspect-ratio: 1.29667` with `min-height: 700px`; without an explicit width the
+min-height was transferred through the ratio and the hero became 908px wide at 810px (98px horizontal
+scroll). It now has `width: 100%` → 810×700 / 900×700, exactly like the reference.
+
+### 20.3 Accessibility (axe-core: no violations on any route or open state)
+- Skip-to-content link (first focusable element, visible on focus) → `<main id="main">`.
+- Contrast: the reference's "Sort by" label is 32% black (2.2:1 on white) → we use `muted` #6d6d6d
+  (5.3:1). Our struck-through compare-at prices use `muted` too. `#6d6d6d` body text passes (5.3:1).
+- Shop pages have a visually hidden H2 between the H1 and the product-card H3s.
+- The cart count is announced through a polite live region; form confirmations use `role="status"`.
+
+### 20.4 Reduced motion
+`<MotionConfig reducedMotion="user">` (hero appear, accordion, mobile menu) plus a base rule that makes
+CSS transitions/animations instant under `prefers-reduced-motion: reduce`; the marquee stops
+(`motion-reduce:animate-none`) and the scroll-linked zoom/tilt effects only run under `no-preference`.
+
+## 21. All deliberate deviations from the reference
+
+| # | Where | Reference | This project | Why |
+| --- | --- | --- | --- | --- |
+| 1 | Product cards, product page | no prices | small price (+ struck compare-at) when `site.showPrices` | a store needs prices; toggleable |
+| 2 | Product card | only the image is a link | whole card (image + name) is one link | one tab stop, larger target |
+| 3 | Home hero "shop all" | links to `/` | links to `/shop/all` | requested |
+| 4 | Navbar | no active state | active link keeps its underline | orientation |
+| 5 | Shop tabs (tablet/phone) | "Shirts" always shown active (bug) | current category active | bug not copied |
+| 6 | Sort control | empty 20px icon slot; sorting not wired | chevron icon; real sorting | usability |
+| 7 | "Sort by" label | 32% black (2.2:1) | `muted` #6d6d6d (5.3:1) | WCAG contrast |
+| 8 | Size options | L, S, M; browser-default font; `?variant=` URL | S, M, L; Inter; no URL change | standalone store, no Shopify |
+| 9 | Quantity stepper | disabled, blank buttons | working (1–10/99) with −/+ icons | standalone store |
+| 10 | Add to Cart | no feedback | adds to the local cart and opens the cart drawer | standalone store |
+| 11 | Size Guide drawer | Escape does nothing | Escape closes; focus trapped/restored | accessibility |
+| 12 | FAQ heading | "Frequenly Asked Questions" | "Frequently Asked Questions" | typo |
+| 13 | Related products | whole category incl. current product | 4 other products (same category first) | relevance |
+| 14 | Cart drawer empty state | "shop now" → `/` | "continue shopping" → `/shop/all` | requested |
+| 15 | Cart page, checkout, success | none (Shopify) | own pages in the project's style | standalone store |
+| 16 | Return window | 14 days on returns page, 30 elsewhere | 30 everywhere (`site.returnWindowDays`) | consistency |
+| 17 | Contact / newsletter forms | native validation, POST to a form service, no feedback | inline validation + confirmation; nothing is sent | no backend |
+| 18 | Mission images (About) | zooming image overlaps the text | clipped to its frame | visual glitch not copied |
+| 19 | Icons | Phosphor / Material glyphs | closest Lucide icons | one icon set |
+| 20 | Template badges ("Use Template", "Made in Framer") | present | not replicated | Framer marketing |

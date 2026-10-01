@@ -11,8 +11,15 @@ export default function Layout() {
   return (
     <>
       <ScrollToTop />
+      {/* First focusable element on every page. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-sm focus:bg-black focus:px-4 focus:py-3 focus:text-small focus:text-white"
+      >
+        Skip to content
+      </a>
       <Navbar />
-      <main className="relative z-[2] bg-white">
+      <main id="main" tabIndex={-1} className="relative z-[2] bg-white focus:outline-none">
         <Outlet />
       </main>
       <Footer />

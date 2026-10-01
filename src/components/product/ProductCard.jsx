@@ -19,14 +19,20 @@ export default function ProductCard({ product, showBadge = true, badge, classNam
           <img
             src={alt}
             alt=""
+            width={800}
+            height={1000}
             loading="lazy"
+            decoding="async"
             className="absolute inset-0 size-full object-cover transition-transform duration-300 ease-out-soft group-hover:scale-105"
           />
         )}
         <img
           src={main}
           alt={product.name}
+          width={800}
+          height={1000}
           loading="lazy"
+          decoding="async"
           className={cn(
             'absolute inset-0 size-full object-cover',
             alt && 'transition-opacity duration-200 ease-out group-hover:opacity-0',
@@ -44,7 +50,7 @@ export default function ProductCard({ product, showBadge = true, badge, classNam
           <p className="flex gap-2 text-small text-muted">
             <span>{formatPrice(product.price)}</span>
             {onSale && (
-              <s className="text-black/32">
+              <s className="text-muted">
                 <span className="sr-only">was </span>
                 {formatPrice(product.compareAtPrice)}
               </s>

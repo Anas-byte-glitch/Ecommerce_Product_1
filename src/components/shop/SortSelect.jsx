@@ -2,7 +2,8 @@ import { useId } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { SORT_OPTIONS } from '../../data/products'
 
-// Same technique as the reference: a styled "Sort by  <value>" label with a transparent native
+// "Sort by" uses `muted` (#6d6d6d) instead of the reference's 32% black, which fails contrast
+// (2.2:1). Same technique as the reference: a styled "Sort by  <value>" label with a transparent native
 // <select> stretched over it. The open list is the browser's own menu, so arrow keys, Enter,
 // Escape, type-ahead and outside-click all behave natively.
 export default function SortSelect({ value, onChange }) {
@@ -12,7 +13,7 @@ export default function SortSelect({ value, onChange }) {
   return (
     <div className="relative flex h-6 shrink-0 items-center gap-2 rounded-md has-[select:focus-visible]:outline-2 has-[select:focus-visible]:outline-offset-2 has-[select:focus-visible]:outline-black">
       <span className="flex items-center gap-1.5 text-body" aria-hidden="true">
-        <span className="text-black/32">Sort by</span>
+        <span className="text-muted">Sort by</span>
         <span className="text-slate">{current.label}</span>
       </span>
       <ChevronDown aria-hidden="true" strokeWidth={1.5} className="size-5 text-slate" />

@@ -8,7 +8,11 @@ export default function ProductGallery({ images, name }) {
           <img
             src={src}
             alt={i === 0 ? name : `${name}, view ${i + 1}`}
+            width={800}
+            height={1000}
             loading={i === 0 ? 'eager' : 'lazy'}
+            fetchPriority={i === 0 ? 'high' : undefined}
+            decoding="async"
             className="size-full object-cover"
           />
         </div>

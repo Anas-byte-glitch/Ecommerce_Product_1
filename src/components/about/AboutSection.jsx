@@ -5,7 +5,7 @@ import Container from '../ui/Container'
 export default function AboutSection({ title, children }) {
   return (
     <section className="py-16 md:py-20 lg:py-[100px]">
-      <Container className="flex flex-col gap-8 md:grid md:grid-cols-6 md:gap-6">
+      <Container narrow className="flex flex-col gap-8 md:grid md:grid-cols-6 md:gap-6">
         <h2 className="heading-2 md:col-span-2">{title}</h2>
         <div className="md:col-span-4">{children}</div>
       </Container>

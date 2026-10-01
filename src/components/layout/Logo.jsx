@@ -7,10 +7,10 @@ export default function Logo({ className }) {
   return (
     <Link
       to="/"
-      aria-label={`${site.name} — home`}
+      aria-label={`${site.brandName} — home`}
       className={cn('font-logo text-[16px] leading-none uppercase text-ink md:text-[20px]', className)}
     >
-      {site.logo}
+      {site.brandName.toLowerCase()}
     </Link>
   )
 }

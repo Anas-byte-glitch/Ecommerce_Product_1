@@ -1,28 +1,19 @@
-import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import HappyCustomers from '../components/product/HappyCustomers'
 import ProductFaq from '../components/product/ProductFaq'
 import ProductGallery from '../components/product/ProductGallery'
 import ProductInfo from '../components/product/ProductInfo'
 import RelatedProducts from '../components/product/RelatedProducts'
-import { site } from '../config/site'
 import { getProductBySlug } from '../data/products'
 import NotFound from './NotFound'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 // /atlas/:slug (DESIGN_NOTES §17). Sections are 10px apart, as on the reference.
 export default function ProductDetail() {
   const { slug } = useParams()
   const product = getProductBySlug(slug)
 
-  // The reference titles product pages "<name> - <site>".
-  useEffect(() => {
-    if (!product) return
-    const previous = document.title
-    document.title = `${product.name} - ${site.name}`
-    return () => {
-      document.title = previous
-    }
-  }, [product])
+  useDocumentTitle(product ? product.name : 'Page not found')
 
   if (!product) return <NotFound />
 

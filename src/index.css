@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens extracted from the Atlas template.
+ * Design tokens extracted from the reference (Atlas Framer template).
  * Source of truth for every value: docs/DESIGN_NOTES.md
  */
 @theme {
@@ -38,6 +38,8 @@
 
   /* Layout */
   --container-site: 1600px;
+  /* Above 1600px the reference caps product/home sections' content at 1600 (box 1600 + 2×40). */
+  --container-site-wide: 1680px;
   --container-policy: 1000px;
 
   /* Type scale (size / line-height) */
@@ -97,6 +99,20 @@
 
   ::selection {
     @apply bg-black text-white;
+  }
+
+  /* Reduced motion: CSS transitions/animations become instant (the marquee is switched off with
+     motion-reduce:animate-none, scroll-linked effects only run under no-preference, motion
+     components follow <MotionConfig reducedMotion="user">). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   :focus-visible {

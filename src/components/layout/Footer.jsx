@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <div className="relative z-[1] md:sticky md:bottom-0">
       <footer className="bg-black px-4 py-16 text-white md:px-8 md:py-20 lg:px-10 lg:py-[100px]">
-        <div className="mx-auto flex max-w-site flex-col gap-10">
+        <div className="mx-auto flex max-w-[1520px] flex-col gap-10">
           <div className="flex flex-col gap-10 md:gap-[60px] lg:flex-row lg:items-start lg:justify-between lg:gap-10">
             <div className="flex flex-col gap-6 lg:w-1/2">
               <p className="text-body text-white">{footer.newsletter}</p>
@@ -62,7 +62,7 @@ export default function Footer() {
           <Divider />
 
           <p className="text-small font-medium tracking-normal text-white/80">
-            Copyright © {site.year} - {site.name}. All rights reserved.
+            Copyright © {site.year} - {site.brandName}. All rights reserved.
           </p>
         </div>
       </footer>
