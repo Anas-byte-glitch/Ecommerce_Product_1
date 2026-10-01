@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { MotionConfig } from 'motion/react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
@@ -24,22 +25,25 @@ const page = (Page) => (
 
 // URL paths mirror the Atlas template; /cart and /checkout/* are ours (not in the template).
 export default function App() {
+  // reducedMotion="user": every motion animation honours prefers-reduced-motion (no movement).
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="shop/:category" element={page(Shop)} />
-          <Route path="atlas/:slug" element={page(ProductDetail)} />
-          <Route path="about" element={page(About)} />
-          <Route path="contact" element={page(Contact)} />
-          <Route path="returns/return-exchange-policy" element={page(ReturnPolicy)} />
-          <Route path="cart" element={page(Cart)} />
-          <Route path="checkout" element={page(Checkout)} />
-          <Route path="checkout/success" element={page(CheckoutSuccess)} />
-          <Route path="*" element={page(NotFound)} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="shop/:category" element={page(Shop)} />
+            <Route path="atlas/:slug" element={page(ProductDetail)} />
+            <Route path="about" element={page(About)} />
+            <Route path="contact" element={page(Contact)} />
+            <Route path="returns/return-exchange-policy" element={page(ReturnPolicy)} />
+            <Route path="cart" element={page(Cart)} />
+            <Route path="checkout" element={page(Checkout)} />
+            <Route path="checkout/success" element={page(CheckoutSuccess)} />
+            <Route path="*" element={page(NotFound)} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </MotionConfig>
   )
 }
