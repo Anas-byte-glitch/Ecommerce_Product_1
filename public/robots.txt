@@ -3,4 +3,4 @@ Allow: /
 Disallow: /cart
 Disallow: /checkout
 
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://example.com/sitemap.xml

@@ -1,21 +1,22 @@
-import aboutHero from '../assets/placeholders/about-hero.svg'
 import AboutSection from '../components/about/AboutSection'
 import HeroImage from '../components/ui/HeroImage'
+import Img from '../components/ui/Img'
 import Reveal from '../components/ui/Reveal'
 import { site } from '../config/site'
 import { aboutParagraphs, missionBlocks } from '../data/about'
+import { images } from '../data/images'
 import { team } from '../data/team'
 import { appearEase } from '../utils/motion'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /about (DESIGN_NOTES §19.1).
+// /about.
 export default function About() {
   useDocumentTitle('About')
   return (
     <>
       {/* Hero: 594px band at every width, centered copy, bottom-heavy gradient, Home-hero appear. */}
       <section className="relative flex h-[594px] flex-col items-center justify-center overflow-clip p-6 md:p-8">
-        <HeroImage src={aboutHero} />
+        <HeroImage image={images.aboutHero} sizes="(max-width: 809px) 270vw, 100vw" />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0)_0%,rgba(0,0,0,0.36)_72.44%,rgba(0,0,0,0.6)_100%)]"
@@ -45,7 +46,7 @@ export default function About() {
           {team.map((m) => (
             <li key={m.name} className="flex flex-col gap-4">
               <div className="relative aspect-square overflow-hidden rounded-lg bg-surface-2">
-                <img src={m.image} alt={`${m.name}, ${m.role}`} width={600} height={800} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
+                <Img image={m.image} sizes="(min-width: 810px) 30vw, 100vw" alt={`${m.name}, ${m.role}`} loading="lazy" className="absolute inset-0 size-full object-cover" />
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-body-lg font-normal text-slate">{m.name}</h3>
@@ -63,7 +64,7 @@ export default function About() {
               {/* Image zooms 1.2 → 1 as the card scrolls in (same effect as the home tiles). */}
               <div className="relative aspect-[1.059] overflow-clip bg-surface-2">
                 <div className="zoom-on-scroll absolute inset-0">
-                  <img src={b.image} alt="" width={900} height={1080} loading="lazy" decoding="async" className="size-full object-cover" />
+                  <Img image={b.image} sizes="(min-width: 810px) 60vw, 100vw" loading="lazy" className="size-full object-cover" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">

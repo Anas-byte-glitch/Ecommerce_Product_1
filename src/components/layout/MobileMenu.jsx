@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { site } from '../../config/site'
 import NavItem from './NavItem'
 
-// Phone menu: the nav panel expands downward with the stacked links (DESIGN_NOTES §7).
+// Phone menu: the nav panel expands downward with the stacked links.
 export default function MobileMenu({ open, onNavigate }) {
   return (
     <AnimatePresence initial={false}>

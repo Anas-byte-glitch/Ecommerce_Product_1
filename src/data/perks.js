@@ -2,7 +2,7 @@ import { Award, Headset, Lock, Repeat, RotateCcw, ShieldCheck, Truck } from 'luc
 import { site } from '../config/site'
 import { formatPrice } from '../utils/formatPrice'
 
-// "Why Customers Love Us". The reference uses Phosphor (regular) Truck, Headset,
+// "Why Customers Love Us". Icons: Truck, Headset,
 // ClockCounterClockwise and ShieldCheck; these are the closest lucide icons.
 export const perks = [
   { icon: Truck, title: 'Free & Fast Shipping', text: 'Enjoy quick delivery right to your doorstep.' },
@@ -15,7 +15,7 @@ export const perks = [
   },
 ]
 
-// Product-page trust badges. The reference uses Phosphor-style icons (bag/lock, repeat arrows,
+// Product-page trust badges. Icons (bag/lock, repeat arrows,
 // truck, medal) at 24px, stroke 1.5, black; these are the closest lucide icons.
 export const productPerks = [
   { icon: Lock, title: 'Secure Checkout', text: 'Shop safely, always' },

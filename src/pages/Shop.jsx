@@ -9,7 +9,7 @@ import { getProductsByCategory, SORT_OPTIONS, sortProducts } from '../data/produ
 import NotFound from './NotFound'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /shop/:category (DESIGN_NOTES §16). Sort lives in the URL as ?sort=<value> (like the reference);
+// /shop/:category. Sort lives in the URL as ?sort=<value>;
 // "relevance" removes the param.
 export default function Shop() {
   const { category } = useParams()

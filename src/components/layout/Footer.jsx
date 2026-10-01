@@ -23,7 +23,7 @@ function Divider() {
   return <hr className="w-full border-0 border-t border-white/10" />
 }
 
-// Footer (DESIGN_NOTES §8).
+// Footer.
 // Phone: stacked, gap 40, 2-col links. Tablet: stacked, gap 60, 3-col links (gap 64).
 // Desktop: newsletter left / columns right, then divider + copyright.
 export default function Footer() {

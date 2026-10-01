@@ -1,4 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/atlas/black-atlas-tee", "destination": "/product/black-basic-tee", "permanent": true },
+    { "source": "/atlas/white-atlas-tee", "destination": "/product/white-crew-tee", "permanent": true },
+    { "source": "/atlas/cream-graphic-tee", "destination": "/product/cream-crew-tee", "permanent": true },
+    { "source": "/atlas/redatlas-tee", "destination": "/product/red-studio-tee", "permanent": true },
+    { "source": "/atlas/:slug", "destination": "/product/:slug", "permanent": true }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

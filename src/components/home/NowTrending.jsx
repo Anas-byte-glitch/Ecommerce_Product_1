@@ -1,6 +1,6 @@
 import ProductRow from './ProductRow'
 
-const slugs = ['zipper-hoodie', 'chill-vibes-tee', 'black-atlas-tee', 'white-atlas-tee', 'cream-graphic-tee']
+const slugs = ['zipper-hoodie', 'chill-vibes-tee', 'black-basic-tee', 'white-crew-tee', 'cream-crew-tee']
 
 export default function NowTrending() {
   return (

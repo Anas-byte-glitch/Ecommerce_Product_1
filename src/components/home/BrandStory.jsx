@@ -1,5 +1,6 @@
-import storyImage from '../../assets/placeholders/story.svg'
+import { images } from '../../data/images'
 import Button from '../ui/Button'
+import Img from '../ui/Img'
 
 // 70vh image banner; the image (110% of the frame) tilts/zooms into place while scrolling.
 // Copy bottom-left; the "our story" pill sits under it (phone/tablet) or bottom-right (desktop).
@@ -8,7 +9,7 @@ export default function BrandStory() {
     <section className="tilt-timeline relative flex h-[70vh] items-end overflow-clip">
       <div className="absolute inset-0 overflow-clip">
         <div className="tilt-on-scroll absolute -inset-[5%]">
-          <img src={storyImage} alt="" width={1000} height={1200} loading="lazy" decoding="async" className="size-full object-cover" />
+          <Img image={images.story} sizes="(max-width: 809px) 300vw, 110vw" loading="lazy" className="size-full object-cover" />
         </div>
       </div>
 

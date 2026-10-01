@@ -7,7 +7,7 @@ import Container from '../components/ui/Container'
 import { useOrderStore } from '../store/orderStore'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /checkout/success (DESIGN_NOTES §18.4). The order lives in memory only: after a refresh there is
+// /checkout/success. The order lives in memory only: after a refresh there is
 // nothing to show, so we go home.
 export default function CheckoutSuccess() {
   useDocumentTitle('Order confirmed')

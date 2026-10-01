@@ -1,4 +1,5 @@
 import { formatPrice } from '../../utils/formatPrice'
+import Img from '../ui/Img'
 
 // Compact read-only list for summaries: 56px 4:5 thumbnail, name, size × qty, line total.
 // lines: [{ slug, size, quantity, lineTotal, name, image }]
@@ -7,7 +8,7 @@ export default function OrderLines({ lines }) {
     <ul className="flex flex-col gap-4">
       {lines.map((l) => (
         <li key={`${l.slug}-${l.size}`} className="flex items-center gap-3">
-          <img src={l.image} alt="" width={800} height={1000} decoding="async" className="aspect-[4/5] w-14 shrink-0 rounded-sm bg-surface-2 object-cover" />
+          <Img image={l.image} sizes="56px" alt="" className="aspect-[4/5] w-14 shrink-0 rounded-sm bg-surface-2 object-cover" />
           <div className="flex min-w-0 flex-1 flex-col">
             <p className="truncate text-body text-black">{l.name}</p>
             <p className="text-small tracking-normal text-muted">

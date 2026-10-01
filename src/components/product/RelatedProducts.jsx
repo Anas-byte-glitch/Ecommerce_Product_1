@@ -2,8 +2,8 @@ import { getRelatedProducts } from '../../data/products'
 import Container from '../ui/Container'
 import ProductGrid from './ProductGrid'
 
-// "You may also Like": 4 other products (same category first), every card badged "New in" like
-// the reference. Grid as the shop category pages: 4 / 2 / 1 columns, 24px gaps.
+// "You may also Like": 4 other products (same category first), every card badged "New in".
+// Grid as the shop category pages: 4 / 2 / 1 columns, 24px gaps.
 // Padding: 64 / 80 top; bottom 0 on phone/tablet, 100 on desktop.
 export default function RelatedProducts({ slug }) {
   const products = getRelatedProducts(slug, 4)

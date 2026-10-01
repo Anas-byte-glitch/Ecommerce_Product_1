@@ -1,4 +1,4 @@
-// FAQ as on the reference product page (questions + answers read from the live accordion).
+// FAQ (product page and Contact page). Edit the questions and answers freely.
 // Reused on the Contact page (Phase 6).
 export const faqs = [
   {

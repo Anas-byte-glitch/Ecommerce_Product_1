@@ -1,7 +1,7 @@
 import { sizeGuide } from '../../data/sizeGuide'
 import Drawer from '../ui/Drawer'
 
-// Size Guide (DESIGN_NOTES §17.4) on the shared Drawer: header padding 24/16/16, 26/22/20px slate
+// Size Guide on the shared Drawer: header padding 24/16/16, 26/22/20px slate
 // title, 24px X, then intro + measurement table.
 export default function SizeGuideDrawer({ open, onClose }) {
   return (

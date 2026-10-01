@@ -10,7 +10,7 @@ import TrustBadges from './TrustBadges'
 
 const rule = <div aria-hidden="true" className="h-px w-full bg-black/8" />
 
-// Product info column (DESIGN_NOTES §17.2). Blocks 24px apart.
+// Product info column. Blocks 24px apart.
 export default function ProductInfo({ product }) {
   const [size, setSize] = useState(product.sizes[0])
   const [quantity, setQuantity] = useState(1)
@@ -27,7 +27,7 @@ export default function ProductInfo({ product }) {
   return (
     <div className="flex w-full flex-col items-start gap-6">
       <div className="flex w-full flex-col gap-8">
-        {/* Title + price: the reference reserves a 12px gap + empty price slot under the title. */}
+        {/* Title + price: a 12px gap + empty price slot under the title. */}
         <div className="flex flex-col gap-3">
           <h1 className="font-heading-alt text-[24px] leading-[1.1] md:text-[28px] lg:text-[36px]">{product.name}</h1>
           <p className="flex gap-2 text-body-lg text-slate">

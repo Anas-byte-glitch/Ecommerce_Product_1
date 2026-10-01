@@ -23,7 +23,7 @@ const page = (Page) => (
   </Suspense>
 )
 
-// URL paths mirror the Atlas template; /cart and /checkout/* are ours (not in the template).
+// Every URL of the store. Product pages live under /product/:slug.
 export default function App() {
   // reducedMotion="user": every motion animation honours prefers-reduced-motion (no movement).
   return (
@@ -33,7 +33,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="shop/:category" element={page(Shop)} />
-            <Route path="atlas/:slug" element={page(ProductDetail)} />
+            <Route path="product/:slug" element={page(ProductDetail)} />
             <Route path="about" element={page(About)} />
             <Route path="contact" element={page(Contact)} />
             <Route path="returns/return-exchange-policy" element={page(ReturnPolicy)} />

@@ -1,4 +1,4 @@
-// Size Guide drawer (product page) — table values from the reference. Inches.
+// Size Guide drawer (product page) — table values in inches.
 export const sizeGuide = {
   intro: 'Choose your size based on the measurements below. All measurements are in inches.',
   columns: ['Size', 'Chest', 'Length', 'Sleeve'],

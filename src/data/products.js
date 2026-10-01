@@ -1,12 +1,14 @@
-// Product catalogue. Slugs and names match the Atlas template URLs (/atlas/:slug).
-// Array order = "Relevance" order = the reference's /shop/all order.
-// salesRank: lower = better seller (drives "Best Selling").
-// Prices are placeholders: the reference template does not render prices.
-// Images are local neutral placeholders (4:5, 800×1000) in public/images/products; `images` is
-// also the product-page gallery (the reference shows exactly 2 per product).
-// Descriptions are the reference's product copy.
+import { photo } from './photo.js'
 
-const img = (slug) => [`/images/products/${slug}-1.svg`, `/images/products/${slug}-2.svg`]
+// Product catalogue. Each product page lives at /product/<slug>.
+// Array order = "Relevance" order on the shop pages.
+// salesRank: lower = better seller (drives "Best Selling").
+// Prices are demo values in site.currency. `images` (2 per product, 4:5) is also the product-page
+// gallery.
+
+// Photos: public/images/products/<slug>-1/-2 (WebP, built by `npm run images`); the SVGs next to
+// them are the fallback placeholders. Alt text = product name (set by the components).
+const img = (slug) => [1, 2].map((n) => photo(`products/${slug}-${n}`, `/images/products/${slug}-${n}.svg`))
 
 // Every product is offered in S, M and L.
 const SIZES = ['S', 'M', 'L']
@@ -67,18 +69,18 @@ export const products = [
     images: img('chill-vibes-tee'),
     sizes: SIZES,
     description:
-      'Maybe you’re not on a beach right now, but this tee does a pretty good job pretending you are. Easygoing, clean, and effortlessly cool—because sometimes the simplest pieces say the most. Made from a softweight cotton blend, it features a classic relaxed fit and short sleeve crew neck for comfortable, everyday wear. The right-chest white logo adds a clean, minimal touch, while the reinforced neckline keeps its shape and the smooth, breathable fabric ensures all-day comfort.',
+      'Maybe you’re not on a beach right now, but this tee does a pretty good job pretending you are. Easygoing, clean, and effortlessly cool—because sometimes the simplest pieces say the most. Made from a softweight cotton blend, it features a classic relaxed fit and short sleeve crew neck for comfortable, everyday wear. The plain, unbranded chest adds a clean, minimal touch, while the reinforced neckline keeps its shape and the smooth, breathable fabric ensures all-day comfort.',
     salesRank: 2,
     createdAt: '2025-01-22',
   },
   {
-    slug: 'black-atlas-tee',
-    name: 'Black atlas tee',
+    slug: 'black-basic-tee',
+    name: 'Black basic tee',
     category: 'shirts',
     price: 39,
     compareAtPrice: 49,
     badge: 'Sale',
-    images: img('black-atlas-tee'),
+    images: img('black-basic-tee'),
     sizes: SIZES,
     description:
       'The simplest pieces always hit the hardest. This tee keeps things sharp, minimal, and effortlessly cool—no logos needed, just pure everyday confidence. Made from a softweight cotton blend, it offers a classic fit and short sleeve crew neck for comfortable, versatile wear. Its clean, minimalist design pairs with literally anything, while the reinforced neckline keeps its shape and the durable fabric and print are built to last wash after wash.',
@@ -86,49 +88,49 @@ export const products = [
     createdAt: '2025-02-01',
   },
   {
-    slug: 'white-atlas-tee',
-    name: 'White atlas graphic tee',
+    slug: 'white-crew-tee',
+    name: 'White everyday crew tee',
     category: 'shirts',
     price: 39,
     compareAtPrice: 49,
     badge: 'Sale',
-    images: img('white-atlas-tee'),
+    images: img('white-crew-tee'),
     sizes: SIZES,
     description:
-      'If wanderlust had a uniform, this tee would be it. Clean, crisp, and effortlessly cool, it brings that “always exploring” vibe without trying too hard. Made from a softweight cotton blend, it features a white base with a detailed atlas-inspired graphic for a modern, adventurous touch. The classic relaxed fit and short sleeve crew neck make it perfect for everyday wear, while the soft, breathable fabric ensures all-day comfort. Reinforced neckline keeps its shape, and the durable print stays sharp through countless washes.',
+      'If wanderlust had a uniform, this tee would be it. Clean, crisp, and effortlessly cool, it brings that “always exploring” vibe without trying too hard. Made from a softweight cotton blend, it features a clean white base and a smooth, minimal finish for a modern, adventurous touch. The classic relaxed fit and short sleeve crew neck make it perfect for everyday wear, while the soft, breathable fabric ensures all-day comfort. Reinforced neckline keeps its shape, and the durable fabric stays crisp through countless washes.',
     salesRank: 4,
     createdAt: '2025-02-08',
   },
   {
-    slug: 'cream-graphic-tee',
-    name: 'Cream atlas graphic tee',
+    slug: 'cream-crew-tee',
+    name: 'Cream relaxed crew tee',
     category: 'shirts',
     price: 39,
     compareAtPrice: 49,
     badge: 'Sale',
-    images: img('cream-graphic-tee'),
+    images: img('cream-crew-tee'),
     sizes: SIZES,
     description:
-      'You don’t have to travel the world to look like you’ve been everywhere—this tee gives off seasoned-explorer energy all on its own. Clean, classic, and made from a softweight cotton blend, it features a cream color with an atlas-inspired graphic. Designed with a classic fit and short sleeve crew neck, it pairs effortlessly with literally anything. The reinforced neckline keeps its shape, while the durable print is built to last wash after wash.',
+      'You don’t have to travel the world to look like you’ve been everywhere—this tee gives off seasoned-explorer energy all on its own. Clean, classic, and made from a softweight cotton blend, it features a warm cream color and a clean finish. Designed with a classic fit and short sleeve crew neck, it pairs effortlessly with literally anything. The reinforced neckline keeps its shape, while the durable fabric is built to last wash after wash.',
     salesRank: 5,
     createdAt: '2025-02-20',
   },
   {
-    slug: 'redatlas-tee',
-    name: 'Red atlas tee',
+    slug: 'red-studio-tee',
+    name: 'Red studio tee',
     category: 'shirts',
     price: 42,
     compareAtPrice: null,
     badge: 'New in',
-    images: img('redatlas-tee'),
+    images: img('red-studio-tee'),
     sizes: SIZES,
     description:
-      'You don’t need ink to look like you’ve got attitude—this tee does the talking for you. With bold color, a clean fit, and a tattoo-inspired graphic, it adds just the right amount of edge. Made from a softweight cotton blend, it features a classic fit for everyday wear, a short sleeve crew neck, and a reinforced neckline to maintain its shape. The durable print is designed to last wash after wash, keeping your statement style strong.',
+      'You don’t need ink to look like you’ve got attitude—this tee does the talking for you. With bold color, a clean fit, and a strong silhouette, it adds just the right amount of edge. Made from a softweight cotton blend, it features a classic fit for everyday wear, a short sleeve crew neck, and a reinforced neckline to maintain its shape. The durable fabric is designed to last wash after wash, keeping your statement style strong.',
     salesRank: 8,
     createdAt: '2025-03-10',
   },
 
-  // ── Hoodie listed last on the reference's /shop/all ─────────
+  // ── Hoodie listed last on /shop/all ──────────────────────────
   {
     slug: 'fleece-hoodie-white',
     name: 'Fleece hoodie white',
@@ -154,7 +156,7 @@ export const getProductsByCategory = (category) =>
   !category || category === 'all' ? products : products.filter((p) => p.category === category)
 
 
-// Shop sort options. Values are the reference's `?sort=` query values.
+// Shop sort options. Values are the `?sort=` query values.
 export const SORT_OPTIONS = [
   { value: 'relevance', label: 'Relevance' },
   { value: 'title_asc', label: 'A-Z' },

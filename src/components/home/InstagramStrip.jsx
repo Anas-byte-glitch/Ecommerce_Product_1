@@ -1,13 +1,9 @@
-import ig1 from '../../assets/placeholders/instagram-1.svg'
-import ig2 from '../../assets/placeholders/instagram-2.svg'
-import ig3 from '../../assets/placeholders/instagram-3.svg'
-import ig4 from '../../assets/placeholders/instagram-4.svg'
-import ig5 from '../../assets/placeholders/instagram-5.svg'
-import ig6 from '../../assets/placeholders/instagram-6.svg'
 import { site } from '../../config/site'
+import { images as pageImages } from '../../data/images'
 import Button from '../ui/Button'
+import Img from '../ui/Img'
 
-const images = [ig1, ig2, ig3, ig4, ig5, ig6]
+const images = pageImages.instagram
 // Three copies so the loop (translate −1/3) never shows a gap, even on very wide screens.
 const loop = [...images, ...images, ...images]
 
@@ -18,9 +14,9 @@ export default function InstagramStrip() {
     <section className="relative pt-16 md:pt-20 lg:pt-[100px]">
       <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,#000_12.5%,#000_87.5%,transparent_100%)]">
         <ul className="flex w-max animate-marquee motion-reduce:animate-none">
-          {loop.map((src, i) => (
+          {loop.map((image, i) => (
             <li key={i} aria-hidden={i >= images.length} className="h-[380px] w-[376px] shrink-0 pr-4">
-              <img src={src} alt="" width={720} height={960} decoding="async" className="size-full rounded-sm object-cover" />
+              <Img image={image} sizes="360px" alt={i >= images.length ? '' : undefined} className="size-full rounded-sm object-cover" />
             </li>
           ))}
         </ul>

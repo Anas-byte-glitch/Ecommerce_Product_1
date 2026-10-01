@@ -3,7 +3,7 @@ import { categories } from '../../config/site'
 import { cn } from '../../utils/cn'
 
 // "All · Hoodies · Shirts": plain Jost text links (20/18/16px, lh 1.6), 16px apart.
-// Active = black, others muted → black on hover. Links drop the ?sort param, like the reference.
+// Active = black, others muted → black on hover. Links drop the ?sort param.
 export default function CategoryTabs({ active }) {
   return (
     <nav aria-label="Categories" className="max-w-full overflow-x-auto">

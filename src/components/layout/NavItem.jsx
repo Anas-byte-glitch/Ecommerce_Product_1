@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { cn } from '../../utils/cn'
 
-// Nav link with the reference's hover effect: a 1px black underline that grows left → right.
+// Nav link with a hover effect: a 1px black underline that grows left → right.
 export default function NavItem({ to, children, onClick }) {
   return (
     <NavLink

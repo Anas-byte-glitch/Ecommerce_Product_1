@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 import { isValidEmail } from '../contact/validateContact'
 import Button from '../ui/Button'
 
-// Footer newsletter signup (DESIGN_NOTES §19.5). UI only: nothing is stored or sent. A valid email
+// Footer newsletter signup. UI only: nothing is stored or sent. A valid email
 // swaps the form for a 50px "thanks" row (same height, so the footer doesn't jump); an invalid one
 // shows an inline error under the form. Layout is unchanged while no message is shown.
 export default function NewsletterForm() {

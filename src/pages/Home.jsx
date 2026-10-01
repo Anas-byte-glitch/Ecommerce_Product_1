@@ -8,7 +8,7 @@ import NowTrending from '../components/home/NowTrending'
 import WhyCustomersLoveUs from '../components/home/WhyCustomersLoveUs'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// Section order matches the reference home page.
+// Home page sections, top to bottom.
 export default function Home() {
   useDocumentTitle()
   return (

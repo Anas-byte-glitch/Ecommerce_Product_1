@@ -8,7 +8,7 @@ import { getProductBySlug } from '../data/products'
 import NotFound from './NotFound'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-// /atlas/:slug (DESIGN_NOTES §17). Sections are 10px apart, as on the reference.
+// /product/:slug. Sections are 10px apart.
 export default function ProductDetail() {
   const { slug } = useParams()
   const product = getProductBySlug(slug)

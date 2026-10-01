@@ -1,8 +1,8 @@
 import ProductRow from './ProductRow'
 
-const slugs = ['fleece-hoodie-white', 'redatlas-tee', 'black-hoodie', 'cream-graphic-tee']
+const slugs = ['fleece-hoodie-white', 'red-studio-tee', 'black-hoodie', 'cream-crew-tee']
 
-// The reference shows no badges in this section.
+// No badges in this section.
 export default function NewThisSeason() {
   return (
     <ProductRow

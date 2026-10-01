@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
-// Variants measured on the reference — see docs/DESIGN_NOTES.md §9.
+// Button variants (see docs/04-design.md).
 const base =
   'group inline-flex shrink-0 items-center justify-center whitespace-nowrap transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50'
 
@@ -18,7 +18,7 @@ const variants = {
   // Outlined companion to `primary` (cart "View cart"): same 56px block, white, 1px black border.
   secondary:
     'h-14 gap-2 border border-black bg-white px-6 text-body font-normal text-black hover:bg-black/3',
-  // Cart-drawer empty state ("shop now" on the reference): white, no border, radius 4, Jost label.
+  // Cart-drawer empty state ("shop now"): white, no border, radius 4, Jost label.
   plain:
     'h-10 gap-2 rounded-sm bg-white px-5 font-jost text-body leading-[1.1] font-medium text-slate',
   // "Follow us on Instagram": small dark tag-like button.

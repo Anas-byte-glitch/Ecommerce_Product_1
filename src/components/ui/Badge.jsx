@@ -1,6 +1,6 @@
 import { cn } from '../../utils/cn'
 
-// "Sale" / "New in" label: black block, 10px/600 white text (DESIGN_NOTES §9).
+// "Sale" / "New in" label: black block, 10px/600 white text.
 export default function Badge({ children, className }) {
   if (!children) return null
   return (

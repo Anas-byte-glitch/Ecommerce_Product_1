@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens extracted from the reference (Atlas Framer template).
- * Source of truth for every value: docs/DESIGN_NOTES.md
+ * Design tokens: colours, fonts, type scale, radii and easing used across the store.
+ * How to change them: docs/04-design.md
  */
 @theme {
-  /* Breakpoints: Framer phone ≤809 / tablet 810–1199 / desktop ≥1200 */
+  /* Breakpoints: phone ≤809 / tablet 810–1199 / desktop ≥1200 */
   --breakpoint-*: initial;
   --breakpoint-md: 810px;
   --breakpoint-lg: 1200px;
@@ -25,7 +25,7 @@
   --color-surface-2: #f0f0f0;
   --color-line: #e6e6e6;
   --color-field: #3b3c3d;
-  /* Form errors (checkout) — no reference value; accessible red on white (5.9:1). */
+  /* Form errors (checkout) — accessible red on white (5.9:1). */
   --color-danger: #c62828;
 
   /* Radii */
@@ -38,7 +38,7 @@
 
   /* Layout */
   --container-site: 1600px;
-  /* Above 1600px the reference caps product/home sections' content at 1600 (box 1600 + 2×40). */
+  /* Above 1600px we cap product/home sections' content at 1600 (box 1600 + 2×40). */
   --container-site-wide: 1680px;
   --container-policy: 1000px;
 
@@ -129,7 +129,7 @@
   font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03';
 }
 
-/* Inter stylistic alternates the reference turns on for section headings (H2s, product title,
+/* Inter stylistic alternates used for section headings (H2s, product title,
    policy headings) and for badges. */
 @utility font-heading-alt {
   font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03';
@@ -149,7 +149,7 @@
 }
 
 /*
- * Scroll-linked image effects (DESIGN_NOTES §15), as CSS scroll-driven animations.
+ * Scroll-linked image effects, as CSS scroll-driven animations.
  * Browsers without support (or with reduced motion) simply show the image at rest.
  *
  * zoom-timeline / zoom-on-scroll: the image scales 1.2 → 1 while its frame travels from
@@ -158,7 +158,7 @@
  *
  * tilt-timeline / tilt-on-scroll: brand-story banner. perspective(2000px) scale 1.2 +
  * rotateX 10deg + opacity .8 settle to rest over the banner's whole pass through the viewport
- * (keyframes fitted to readings from the reference).
+ * (keyframes tuned by eye).
  */
 @utility zoom-timeline {
   view-timeline-name: --zoom;
