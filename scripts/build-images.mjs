@@ -79,3 +79,4 @@ for (const img of images) {
 
 writeFileSync(`${root}src/data/imageManifest.json`, `${JSON.stringify(manifest, null, 2)}\n`)
 console.log(`Manifest: ${Object.keys(manifest).length} of ${images.length} slots use photos.`)
+await import('./generate-credits.mjs')

@@ -1,0 +1,62 @@
+{
+  "Home@1440": {
+    "height": 7271,
+    "logo": 63.6
+  },
+  "Shop@1440": {
+    "height": 2809,
+    "logo": 63.6
+  },
+  "Product@1440": {
+    "height": 4436,
+    "logo": 63.6
+  },
+  "About@1440": {
+    "height": 4970,
+    "logo": 63.6
+  },
+  "Contact@1440": {
+    "height": 2304,
+    "logo": 63.6
+  },
+  "Home@1000": {
+    "height": 8513,
+    "logo": 63.6
+  },
+  "Shop@1000": {
+    "height": 4348,
+    "logo": 63.6
+  },
+  "Product@1000": {
+    "height": 7204,
+    "logo": 63.6
+  },
+  "About@1000": {
+    "height": 4243,
+    "logo": 63.6
+  },
+  "Contact@1000": {
+    "height": 2442,
+    "logo": 63.6
+  },
+  "Home@390": {
+    "height": 12359,
+    "logo": 50.9
+  },
+  "Shop@390": {
+    "height": 5899,
+    "logo": 50.9
+  },
+  "Product@390": {
+    "height": 7544,
+    "logo": 50.9
+  },
+  "About@390": {
+    "height": 5119,
+    "logo": 50.9
+  },
+  "Contact@390": {
+    "height": 2441,
+    "logo": 50.9
+  }
+}
