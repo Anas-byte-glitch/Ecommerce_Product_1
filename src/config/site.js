@@ -11,7 +11,10 @@ export const site = {
   // No taxes, no discount codes.
   freeShippingThreshold: 100,
   flatShipping: 8,
-  email: 'support@atlas.com',
+  contactEmail: 'support@atlas.com',
+  // One return window for the whole site (returns page, perks, product trust tile). The template
+  // says 14 days on the returns page but 30 elsewhere; we use 30 everywhere (DESIGN_NOTES §19.3).
+  returnWindowDays: 30,
 
   // The template renders no prices on product cards. We show a small muted price under the
   // name (deliberate deviation, see DESIGN_NOTES §14). Set to false for the template look.

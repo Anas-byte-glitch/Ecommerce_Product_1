@@ -12,8 +12,8 @@ placeholders.
 
 The build is split into 7 phases. Phase 1 (this foundation) is done:
 research → `docs/DESIGN_NOTES.md`, project setup, design tokens, routing, Navbar, MobileMenu,
-Footer, product data. Phases 2 (Home), 3 (Shop), 4 (Product page) and 5 (cart drawer, /cart, demo checkout) are done.
-Later phases: 6 About / Contact / Return policy, 7 polish & QA.
+Footer, product data. Phases 2 (Home), 3 (Shop), 4 (Product page), 5 (cart drawer, /cart, demo checkout) and 6 (About,
+Contact, Return policy, 404, newsletter) are done. Later phase: 7 polish & QA.
 
 ## No Shopify behaviour
 
@@ -46,14 +46,17 @@ npm run lint      # oxlint
 
 ```
 src/
-  config/site.js          brand name, year, nav + footer links, categories  (single source of truth)
+  config/site.js          brand name, year, nav + footer links, categories, contactEmail,
+                          returnWindowDays (30 — use it wherever a return window appears)
   data/                   products.js (+ query helpers incl. getProductsBySlugs, SORT_OPTIONS, sortProducts;
                           array order = Relevance; salesRank = Best Selling), perks.js, faqs.js,
-                          reviews.js (+ avatar placeholders), sizeGuide.js, team.js;
+                          reviews.js (+ avatar placeholders), sizeGuide.js, team.js (+ portraits),
+                          about.js (About paragraphs + mission blocks);
                           perks.js also exports productPerks (PDP trust tiles)
   components/layout/      Layout, Navbar, NavItem, MobileMenu, CartButton, Logo, Footer,
                           NewsletterForm, ScrollToTop, PagePlaceholder
   components/ui/          Container, Button, Badge, Accordion, Reveal, SectionHeader (centered title+subtitle),
+                          HeroImage (full-bleed hero image with the reference appear effect),
                           Drawer (right panel on native <dialog>: focus trap, Esc, backdrop click, scroll lock)
   components/product/     ProductCard (4:5 image, hover swap/zoom, badge, optional price),
                           ProductGrid (1-col grid, add md:/lg: columns via className; `gap` prop)
@@ -77,7 +80,9 @@ src/
   store/orderStore.js     lastOrder (memory only) + createOrderId() → "ATL-XXXXXX"
   components/cart/        CartDrawer, CartLine, OrderSummary, OrderLines, FreeShippingNote, EmptyCart
   components/checkout/    Field (label + input + inline error), validateCheckout
-  utils/                  formatPrice.js, cn.js
+  components/about/       AboutSection (6-col grid: label 2 cols, content 4)
+  components/contact/     ContactForm, validateContact (+ isValidEmail, also used by the newsletter)
+  utils/                  formatPrice.js, cn.js, motion.js (appearEase)
   index.css               Tailwind import + @theme tokens + base styles
 public/images/products/   placeholder SVGs: <slug>-1.svg (main), <slug>-2.svg (hover/alt), 4:5
 docs/DESIGN_NOTES.md      extracted design system (read before styling)
@@ -135,6 +140,11 @@ pathname change.
   cartStore helpers. Cart/checkout always show prices, whatever `site.showPrices` says.
 - Checkout is a demo: never add card-number fields.
 - ProductGrid/ProductCard accept `badge` to force a badge label (related items: "New in").
+- `Hero` (home) takes `image/title/subtitle/cta` and is reused by the 404 page.
+- `<main>` has no min height (matches the reference); short pages show the footer right after.
+- Section H2s use Inter alternates (`heading-2` includes them; `font-heading-alt` / `font-badge-alt`
+  elsewhere) — no-ops with the Google-hosted Inter, see DESIGN_NOTES §19.
+- Forms are demos: Contact and the newsletter validate and confirm but never send anything.
 - Home section vertical padding: `HomeSection` (64/80/120, or `compact` for 64/80/100).
 - Accessibility: real `<button>`/`<a>`, labels for inputs (`sr-only` if hidden), `aria-*` on toggles.
 - Small, meaningful commits; `npm run build` must pass before each commit.

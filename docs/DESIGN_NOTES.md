@@ -349,8 +349,8 @@ products render). No badges on shop cards.
 - Product counts: all 9, hoodies 4, shirts 5. Relevance order = reference /shop/all order:
   Classic comfort hoodie, Zipper hoodie, Fleece hoodie black, Chill vibes tee, Black atlas tee,
   White atlas graphic tee, Cream atlas graphic tee, Red atlas tee, Fleece hoodie white.
-- Page heights with prices off match the reference exactly (e.g. 1355 / 2301 / 2978 for shirts), except
-  /shop/hoodies at 1440×900: 900 vs 885px because our `<main>` has `min-h-screen`.
+- Page heights with prices off match the reference exactly (e.g. 1355 / 2301 / 2978 for shirts).
+  (Phase 6 removed `<main>`'s `min-h-screen`, which had made /shop/hoodies 900 instead of 885 at 1440×900.)
 
 ## 17. Product page `/atlas/:slug` (measured Phase 4)
 
@@ -432,7 +432,7 @@ no price. Descriptions are the reference copy (in `products.js`). `<main>` stack
 What the reference shows: clicking the navbar cart icon (home and product page) opens a **cart drawer**
 — same pattern as the Size Guide: 400px panel from the right (full width on phone), `rgba(0,0,0,.8)`
 backdrop, **no animation**, closes on the X, backdrop click and **Escape**. Only its **empty state** is
-observable (the template's cart is Shopify-backed). Everything else below has **no reference** and is
+observable (its cart has no real content in the template). Everything else below has **no reference** and is
 built from the tokens in this file.
 
 ### 18.1 Cart drawer (`CartDrawer`, on the shared `ui/Drawer`)
@@ -487,3 +487,73 @@ built from the tokens in this file.
   $99.99 → $8 · $100 → Free · $104 → Free, total $104 · $242 → Free. Unknown product lines are skipped.
 - Cart, drawer, checkout and success **always show prices**, regardless of `site.showPrices` (that flag
   only affects product cards / the product page).
+
+## 19. About, Contact, Return policy, 404, newsletter (measured Phase 6)
+
+General: `<main>` has **no minimum height** (as on the reference — on short pages the footer follows the
+content). `<title>`: only the returns page has its own ("Return & Exchange Policy - <site>"); About,
+Contact and 404 use the site title.
+
+**Inter stylistic alternates.** The reference renders section H2s (`heading-2`), the product title and the
+policy headings with `font-feature-settings: "cv01","cv05","cv09","cv11","ss03"`, and badges with
+`"ss01".."ss04"`. We set the same (`heading-2`, `font-heading-alt`, `font-badge-alt`), but the Google-hosted
+Inter we load doesn't contain these alternates, so they currently have **no effect**: headings render
+~0.5% narrower than the reference (e.g. "Non-Returnable Items" 427 vs 430px at 42px). Self-hosting the full
+Inter build would close the gap (rsms.me was not reachable from the build container).
+
+### 19.1 About `/about`
+- **Hero**: full-bleed image band, **594px at every width**; overlay
+  `linear-gradient(transparent 0%, rgba(0,0,0,.36) 72.44%, rgba(0,0,0,.6) 100%)`; title "The Story of
+  <site>" (`heading-1`) → 16px → subtitle (`lead`), white, **centered** both ways; padding 32 (24 on phone).
+  Appear: same as the Home hero (image 1.2 → 1 spring at 1s; title and subtitle fade-up 20px at 2s).
+- Sections "About us", "The team", "Mission": padding **100/80/64**; tablet/desktop a **6-column grid,
+  gap 24**: H2 (`heading-2`) in columns 1–2, content in 3–6 (899 / 616px); phone stacked, gap 32.
+- About us: three paragraphs, `lead` (Jost 20/18/16, lh 1.6) `slate`, **20px** apart.
+- Team: grid **2 columns** (tablet/desktop) / 1 (phone), gap 16. Portrait **1:1**, radius **12**, `surface-2`;
+  16px → name 18/25.2 w400 `slate` → 8px → role 14/19.6 w500 `muted` (normal tracking). No hover.
+- Mission: cards stacked, gap 24, **equal row heights** (shorter card gets empty space); card radius 4:
+  image frame **aspect 1.059** with the **scroll zoom 1.2 → 1** (same range as §15.3, measured on the card)
+  → 16px → title 26/22/20 lh 1.2 w500 `slate` → 8px → text 16/24 `slate`, max-width 550.
+  On the reference the zooming image isn't clipped to its frame (it slides under the text while scaled);
+  ours is clipped to the frame.
+- Heights match: 4501 / 3587 / 4372 (±1px).
+
+### 19.2 Contact `/contact`
+- Tablet/desktop: **100vh** image hero (same overlay as About), padding-top 70 / 60, with a centered white
+  card **700px, radius 12, padding 32, gap 24**. Phone: **no image**; content on white, padding 120 top /
+  64 bottom, 16px sides.
+- Card title block: H1 styled `heading-2` → 16px → text 16/24 `muted` (max 360px tablet, 420 desktop —
+  left-aligned on desktop, centered elsewhere); block padding 0 desktop / **24 tablet / 16 phone**.
+- Form: **550px** (full width on phone), fields **20px** apart. Label 16/24 `slate` → 10px → field:
+  **48px** (textarea min 100, vertical resize), radius 4, **1px `rgba(136,136,136,.1)`** border → **black on
+  focus**, padding 12, Inter 14/1.2 black (normal tracking), placeholders "Name*", "Email*",
+  "Your message*" in `muted`. Submit: **56px**, black, radius 4, 14/1.2 **w600** white; hover `slate`.
+- Behaviour: the reference uses native `required` validation and POSTs to a form service with no visible
+  result. Ours: inline errors (`danger`), `aria-invalid`/`aria-describedby`, focus on the first invalid
+  field, live re-validation after the first submit; a valid submit shows a grey confirmation box and resets
+  the form. **No message is actually sent** (demo).
+- Then the FAQ section exactly as on the product page (§17.3). Heights match: 1836 / 1787 / 1695 (±1).
+
+### 19.3 Return policy `/returns/return-exchange-policy`
+- Column **max 1000px**, padding **140 top**, 40/32/16 sides, bottom 100/80/64; H1 `heading-1` centered →
+  **64px (48 phone)** → grey `surface` card, padding **40 (16 phone)**, no radius.
+- Rich text: body 16/24 `slate`; H2 **42/38/32 bold black**, lh 1.1, **40px** above; lists **24px** above,
+  disc bullets (`slate`) with 20px indent, no gap between items; paragraphs after a heading/list **20px**
+  above. Inline emphasised phrases are *not* bold on the reference (plain text in ours). The email link
+  (`site.contactEmail`) is black and underlined.
+- **Deliberate fix:** the reference says **14 days** here but 30 days on Home and the product page. We use
+  `site.returnWindowDays` (**30**) on this page, the Home perk and the product trust tile.
+- Heights match at 1440/1000 (1575 / 1520); phone 1782 vs 1817 because "Non-Returnable Items" wraps on the
+  reference (stylistic-alternates width, see above).
+
+### 19.4 404
+- `/404` and any unknown URL (HTTP 404 on the reference) render the **Home hero layout** with "404" /
+  "Page Not Found" / outline pill "Go home" → `/`, same heights (100vh / 1.29667 aspect / 88vh,
+  min 700), gradients and appear timings; on tablet the copy sits at x = 40 (no extra 32px inset).
+  Matches exactly at all three widths (900 / 771 / 792).
+
+### 19.5 Footer newsletter
+- The reference uses native `type=email` validation and POSTs to a newsletter service with no visible
+  feedback. Ours: `noValidate` + inline error under the form (14px, `#ff8a80` on black, input outlined in the
+  same colour), focus stays in the input; a valid address replaces the form with a 50px "Thanks for
+  subscribing!" row, so the footer keeps its exact height (468px at 1440). **Nothing is stored or sent.**

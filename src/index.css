@@ -110,6 +110,17 @@
 
 @utility heading-2 {
   @apply text-[32px] leading-[1.1] font-medium md:text-[38px] lg:text-[42px];
+  font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03';
+}
+
+/* Inter stylistic alternates the reference turns on for section headings (H2s, product title,
+   policy headings) and for badges. */
+@utility font-heading-alt {
+  font-feature-settings: 'cv01', 'cv05', 'cv09', 'cv11', 'ss03';
+}
+
+@utility font-badge-alt {
+  font-feature-settings: 'ss01', 'ss02', 'ss03', 'ss04';
 }
 
 /* Collection tiles, brand-story banner: 32 / 30 / 24px, line-height 1.3, weight 500. */
